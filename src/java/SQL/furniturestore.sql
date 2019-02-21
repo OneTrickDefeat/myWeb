@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2019 at 12:34 PM
+-- Generation Time: Feb 21, 2019 at 01:00 PM
 -- Server version: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `address` (
 
 CREATE TABLE `category` (
   `catId` int(11) NOT NULL,
-  `catName` varchar(15) NOT NULL
+  `catName` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -55,9 +55,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`catId`, `catName`) VALUES
-(1, 'Chairs'),
-(4, 'Tables'),
-(5, 'Beds');
+(1, 'Bedroom'),
+(2, 'Living Room'),
+(3, 'Home Office'),
+(4, 'Game Room & Bar'),
+(5, 'Kitchen & Dinning'),
+(6, 'Home Entertainment');
 
 -- --------------------------------------------------------
 
@@ -85,13 +88,25 @@ CREATE TABLE `newsletter` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderproduct`
+--
+
+CREATE TABLE `orderproduct` (
+  `productId` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
   `orderId` int(11) NOT NULL,
   `userAddressId` int(11) NOT NULL,
-  `productId` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -104,7 +119,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `product` (
   `productId` int(11) NOT NULL,
   `catId` int(11) NOT NULL,
-  `name` varchar(40) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `colour` varchar(20) NOT NULL,
   `price` double(6,2) NOT NULL,
   `stockQuantity` int(3) NOT NULL,
@@ -117,12 +132,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productId`, `catId`, `name`, `colour`, `price`, `stockQuantity`, `image`, `description`) VALUES
-(1, 1, 'Percy Chair - Satchel Latte', 'Brown', 659.00, 15, NULL, 'Beautiful vintage leathers and warm fabrics are blended to give the distinctive textures and tones of this manufacturer\'s furniture. Projecting an image of desirability and class without compromising the key values of quality and comfort, this manufacturer\'s products really are as good as they look.'),
-(2, 1, 'Walter Chair', 'White', 449.00, 12, NULL, 'Scandinavian design heritage with an international twist is the distinctive appeal of this manufacturer, whose stylish products are made to match the trends of today\'s market. Marrying the eclectic sensibility of Nordic craft with a more restrained European style, these diverse designs will inflect the home with modernist masterpieces.'),
-(3, 1, 'Percy Chair - Satchel Nutmeg', 'Brown', 659.00, 9, NULL, 'Beautiful vintage leathers and warm fabrics are blended to give the distinctive textures and tones of this manufacturer\'s furniture. Projecting an image of desirability and class without compromising the key values of quality and comfort, this manufacturer\'s products really are as good as they look.'),
-(4, 1, 'Amuro Chair', 'Yellow', 599.00, 3, NULL, 'Lounge in style with the Amuro cahir. The dimple detail and the relaxed style of the chair give it an ultra modern feel. Finished with metal legs the Amuro chair is a perfect additon to any contmeporary home.'),
-(5, 1, 'Giorgia Arm Chair', 'Light Blue', 729.00, 8, NULL, 'One of the leading upholstery manufacturers. The very finest raw materials are sourced from around the world, to ensure consistency of supply. Leather is imported from the finest tanneries in Italy and Brazil. Timber is procured from Argentina, Australia and New Zealand. State of the art machinery is used during production and Durkopff Adler sewing machines ensure a consistently high standard of finish.'),
-(6, 4, 'Some Table', 'White', 200.00, 12, NULL, 'Very good table');
+(7, 4, 'Furniture Kingston Game Table', 'Black & Brown', 931.00, 2, NULL, 'The Kingston Game Set and Bar Stool are a distinguished addition to any home. The light cherry finished wood, black leather and felt, and nail-head trim give this grouping a stately presence. It\'s true grandness can be found in the ornate details on the table\'s base and felt. Not only is this set handsome but it is practical as well, with a reversible table top, casters on the chairs, and the stool swivels 360 degrees.'),
+(9, 4, 'Lavoie Furniture Mitchell 3 in 1 Game Table in Oak', 'Blue & Brown', 1139.99, 12, NULL, 'With highly functional and fun designs this three-in-one game table will make a great addition to your home. Relaxed style is demonstrated with delicate curves and charming carved detail in the pedestal base. The finished table top allows you to enjoy a casual meal or sip on your morning cup of coffee. Flip the top around and you will find a 42 inch dark green felt lined card table with cup holders and chip trays. If poker isn\'t your game, the piece transforms into bumper pool table and includes pool sticks and balls!Create a game room your guests will admire with the Mitchell collection. Featuring unique game tables comfortable game chairs, bars, and bar stools, this collection will establish a fun and inviting environment. With solid oak construction for durability, this group is available in either a Merlot or Amber finish to accommodate your stylistic needs.Create a game room your guests will admire with the Mitchell collection.The Chair are not included (sold separately). ');
 
 -- --------------------------------------------------------
 
@@ -145,7 +156,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `isAdmin`) VALUES
 ('ahmed@gmail.com', '$2a$12$poAs7GSphNN/KnXFyrndFer1UMDObvilyiCNzMddIvcA4.g4jBtMm', 'ahmed', 'khan', 0),
 ('audrius@gmail.com', '$2a$12$LQOo75r2y0amxd1mksKMgu/6./DsktqMSEObTq8hVdwYVA5XixFi2', 'audrius', 'senkus', 1),
-('test@gmail.com', '$2a$12$R9FqfJtkUMA0QFJICh6tzOekCd.5eVz8fufldmMmvTTLpKey0nE4i', 'Test', 'Project', 0);
+('test@gmail.com', '$2a$12$R9FqfJtkUMA0QFJICh6tzOekCd.5eVz8fufldmMmvTTLpKey0nE4i', '12', '12', 0);
 
 -- --------------------------------------------------------
 
@@ -182,12 +193,19 @@ ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orderproduct`
+--
+ALTER TABLE `orderproduct`
+  ADD KEY `productId` (`productId`,`orderId`,`email`),
+  ADD KEY `email` (`email`),
+  ADD KEY `orderId` (`orderId`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderId`),
-  ADD KEY `userAddressId` (`userAddressId`,`productId`),
-  ADD KEY `productId` (`productId`);
+  ADD KEY `userAddressId` (`userAddressId`);
 
 --
 -- Indexes for table `product`
@@ -223,7 +241,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
@@ -238,7 +256,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `useraddress`
 --
@@ -249,11 +267,18 @@ ALTER TABLE `useraddress`
 --
 
 --
+-- Constraints for table `orderproduct`
+--
+ALTER TABLE `orderproduct`
+  ADD CONSTRAINT `orderproduct_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
+  ADD CONSTRAINT `orderproduct_ibfk_2` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`),
+  ADD CONSTRAINT `orderproduct_ibfk_3` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userAddressId`) REFERENCES `useraddress` (`userAddressId`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userAddressId`) REFERENCES `useraddress` (`userAddressId`);
 
 --
 -- Constraints for table `product`
