@@ -23,13 +23,16 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.jsp">WebSiteName</a>
+                <a class="navbar-brand" href="index.jsp">Furniture Depot</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.jsp">home</a></li>
-                <li><a href="displayAllBooks.jsp">all books</a></li>
-                <li><a href="displayAllLoans.jsp">All loans</a></li>
-                <li><a href="displayActiveLoans.jsp">Active Loans</a></li>
+                <li class="active"><a href="index.jsp">Home</a></li>
+                <li><a href="displayAllBooks.jsp">Bedroom</a></li>
+                <li><a href="displayAllLoans.jsp">Living Room</a></li>
+                <li><a href="displayActiveLoans.jsp">Home Office</a></li>
+                <li><a href="displayActiveLoans.jsp">Game & Bar</a></li>
+                <li><a href="displayActiveLoans.jsp">Kitchen & Dining</a></li>
+                <li><a href="displayActiveLoans.jsp">Home Entertainment</a></li>
             </ul>
             
             <%
