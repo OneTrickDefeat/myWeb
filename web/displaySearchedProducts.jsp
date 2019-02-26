@@ -74,28 +74,28 @@
 
                 <article class="search-result row">
                     <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+                        <a href="viewProduct.jsp?prodId=<%=p.getProductId()%>" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-2">
                         <ul class="meta-search">
-                            <li><i class="glyphicon glyphicon-info-sign"></i> <span><%=p.getName()%></span></li>
-                            <li><i class="glyphicon glyphicon-list-alt"></i> <span><%=p.getStockQuantity()%></span></li>
-                            <li><i class="glyphicon glyphicon-eur"></i> <span><%=p.getPrice()%></span></li>
+                            <li><a href="viewProduct.jsp?prodId=<%=p.getProductId()%>"><i class="glyphicon glyphicon-info-sign"></i> <span><%=p.getName()%></span></li>
+                            <li><a href="viewProduct.jsp?prodId=<%=p.getProductId()%>"><i class="glyphicon glyphicon-list-alt"></i> <span><%=p.getStockQuantity()%></span></li>
+                            <li><a href="viewProduct.jsp?prodId=<%=p.getProductId()%>"><i class="glyphicon glyphicon-eur"></i> <span><%=p.getPrice()%></span></li>
                         </ul>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-                        <h3><a href="#" title=""><%=p.getName()%></a></h3>
+                        <h3><a href="viewProduct.jsp?prodId=<%=p.getProductId()%>" title=""><%=p.getName()%></a></h3>
                         <p><%=p.getDescription()%></p>						
-                        <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+                        <span class="plus"><a href="viewProduct.jsp?prodId=<%=p.getProductId()%>" title="Lorem ipsum"><i class="glyphicon glyphicon-chevron-right"></i></a></span>
                     </div>
                     <span class="clearfix borda"></span>
                 </article>
                 <%
                         // Close the loop
                     }
-                    // We have finished with the list of found books 
+                    // We have finished with the list of found products 
                     // so now we can remove the value from the session
-                    session.removeAttribute("foundBooks");
+                    session.removeAttribute("foundProducts");
                 %>
 
 

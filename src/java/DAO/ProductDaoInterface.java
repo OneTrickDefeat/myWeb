@@ -25,4 +25,8 @@ public interface ProductDaoInterface {
     //find first user with that user name
     public Product findProductByProductName(String pName);
     
+    //find product by product id
+    
+    public Product findProductByProductId(int pId);
+    
 }

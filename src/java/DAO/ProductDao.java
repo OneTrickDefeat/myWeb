@@ -154,4 +154,51 @@ public class ProductDao extends Dao implements ProductDaoInterface {
 
     }
 
+    @Override
+    public Product findProductByProductId(int pId) {
+    Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Product p = null;
+        try {
+            con = this.getConnection();
+
+            String query = "SELECT * FROM product WHERE productId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, pId);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int productId = rs.getInt("productId");
+                String name = rs.getString("name");
+                String colour = rs.getString("colour");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("stockQuantity");
+                String description = rs.getString("description");
+                int catId = rs.getInt("catId");
+                String image = rs.getString("image");
+                
+                p = new Product(productId, catId, quantity, name ,colour,image,description,price);
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findProductByProductName method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findProductByProductName method:\n" + e.getMessage());
+            }
+        }
+        return p;     // p may be null   
+    }
+
 }
