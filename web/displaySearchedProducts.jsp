@@ -100,9 +100,9 @@
             <% } else {%>
             <h2>Sorry , no products matched your search</h2>
             <%}%>
-            <%@ include file = "footer.jsp" %>
+           
         </div>
-
+        <%@ include file = "footer.jsp" %>
 
 
 
