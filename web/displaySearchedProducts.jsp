@@ -37,7 +37,8 @@
                     <tr>
                         <!-- Create a cell for each component of this customer's information and fill it with 
                              data in this customer's object -->
-                        <td><a href="viewBook.jsp?bookNum=<%=p.getImage()%>"><%=p.getName()%></a></td>
+                        <td><%=p.getImage()%></a></td>
+                        <td><%=p.getName()%></a></td>
                         <td><%=p.getPrice()%></td>
                         <td><%=p.getStockQuantity()%></td>
                         <!-- Line to generate a tailored link that will go to the view Customer page and pass it the id of the customer to be selected from the database -->
@@ -74,7 +75,7 @@
 
                 <article class="search-result row">
                     <div class="col-xs-12 col-sm-12 col-md-3">
-                        <a href="viewProduct.jsp?prodId=<%=p.getProductId()%>" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+                        <a href="viewProduct.jsp?prodId=<%=p.getProductId()%>" title="<%=p.getName()%>" class="thumbnail"><img src="img/<%=p.getImage()%>" alt="<%=p.getName()%>" /></a>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-2">
                         <ul class="meta-search">
@@ -97,8 +98,6 @@
                     // so now we can remove the value from the session
                     session.removeAttribute("foundProducts");
                 %>
-
-
             </section>
         </div>
 
