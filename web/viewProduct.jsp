@@ -86,19 +86,44 @@
 
                                 <div class="preview-pic tab-content">
                                     <div class="tab-pane active" id="pic-1"><img src="img/<%=b.getImage()%>" /></div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                             <div class="details col-md-6">
                                 <h3 class="product-title"><%=b.getName()%></h3>
-                                
+
                                 <p class="product-description"><%=b.getDescription()%></p>
-                                <h4 class="price">current price: <span><%=b.getPrice()%></span></h4>
-                               
+                                <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
+
+
+                                <div class="container"> 
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                        <span class="glyphicon glyphicon-minus"></span>
+                                                    </button>
+                                                </span>
+                                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
                                 <div class="action">
                                     <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                                    <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+
                                 </div>
                             </div>
                         </div>
