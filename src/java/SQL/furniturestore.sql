@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2019 at 06:30 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Feb 27, 2019 at 05:01 PM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,7 +36,22 @@ CREATE TABLE `address` (
   `town` varchar(60) NOT NULL,
   `county` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
-  `postcode` varchar(15) NOT NULL
+  `postcode` varchar(15) NOT NULL,
+  `email` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cartID` int(11) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `lastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -94,7 +109,6 @@ CREATE TABLE `newsletter` (
 CREATE TABLE `orderproduct` (
   `productId` int(11) NOT NULL,
   `orderId` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -107,7 +121,9 @@ CREATE TABLE `orderproduct` (
 CREATE TABLE `orders` (
   `orderId` int(11) NOT NULL,
   `userAddressId` int(11) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `OrderProductId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -144,10 +160,10 @@ INSERT INTO `product` (`productId`, `catId`, `name`, `colour`, `price`, `stockQu
 (18, 2, 'Stan Sofa\r\n', 'Cream', 1085.00, 3, 'stansofa.jpg', 'The Stan Collection is a beautiful, contemporary design. The deep luxurious high density foam seats offer sumptuous comfort with the support of high quality blown fibre and super soft foam filled arms. This stunning range is available in a wide selection of textures and colour ways.\r\n'),
 (19, 2, 'Sebastian Large Sofa\r\n', 'Cream', 1429.00, 7, 'sebastiansofa.jpg', 'The Sebastian Large Sofa is a stunning addition to add to your living space! In a beautiful plush fabric with a soft,comfortable seat, the clean lines of the Sebastian and compact shape allow the sofa to fit beautifully in both smaller and large, open living areas. \r\n\r\n'),
 (20, 2, 'Nevada Leather Sofa', 'Brown', 479.00, 6, 'nevadasofa.jpg', 'The Nevada sofas are part of our Luxe collection.\r\nIt comes in either leather of fabric with loads of different colors to choose from!\r\nPriced in fabric cat 20 and leather cat 10. Price varies depending on the grade of fabric chosen. '),
-(21, 3, 'Solano Desk Set\r\n', 'Brown', 349.99, 6, 'solanodesk.jpg', 'Need a space to pay bills, do homework, or work on your laptop, but you don\'t have the room? Hillsdale Furniture\'s Solano desk is the perfect solution for your living room, kitchen, bedroom or den. Utilizing a small corner of your home, this desk fits unobtrusively into your space to create an ideal small workspace. Available in a rich oak or deep cherry finish, the Solano desk doubles as a lamp table or display table. Composed of solids and wood composites. Some assembly required. \r\n'),
+(21, 3, 'Solano Desk Set\r\n', 'Brown', 349.99, 6, 'solanodesk.jpg', 'Need a space to pay bills, do homework, or work on your laptop, but you dont have the room? Hillsdale Furnitures Solano desk is the perfect solution for your living room, kitchen, bedroom or den. Utilizing a small corner of your home, this desk fits unobtrusively into your space to create an ideal small workspace. Available in a rich oak or deep cherry finish, the Solano desk doubles as a lamp table or display table. Composed of solids and wood composites. Some assembly required. \r\n'),
 (22, 3, 'MICKE  Desk', 'White', 199.99, 16, 'mickedesk.jpg', 'It’s easy to keep sockets and cables out of sight but close at hand with the cable outlet at the back.'),
 (23, 3, 'MALM  Desk with pull-out panel\r\n', 'Light Brown', 110.00, 21, 'malmdesk.jpg', 'The pull-out panel gives you an extra work surface.\r\nYou can collect cables and extension leads on the shelf under the table top, so they’re hidden but still close at hand.\r\nYou can mount the pull-out panel to the left or right according to your needs.\r\nCan be placed in the middle of a room because the back is finished.'),
-(24, 3, 'HEMNES  Storage combination w doors/drawers\r\n', 'Brown', 899.99, 14, 'hemnesstorage.jpg', 'Solid wood has a natural feel.\r\nThe concealed drawer runners ensure that drawers run smoothly even when heavily loaded.\r\nThe door\'s integrated dampers enable it to close slowly, silently and softly.\r\nThe shelves are adjustable so you can customise your storage as needed.\r\nThe small drawer is perfect for small items such as pens and cutlery.\r\nYou can hide multiple sockets under the removable bottom shelf, for instance.'),
+(24, 3, 'HEMNES  Storage combination w doors/drawers\r\n', 'Brown', 899.99, 14, 'hemnesstorage.jpg', 'Solid wood has a natural feel.\r\nThe concealed drawer runners ensure that drawers run smoothly even when heavily loaded.\r\nThe doors integrated dampers enable it to close slowly, silently and softly.\r\nThe shelves are adjustable so you can customise your storage as needed.\r\nThe small drawer is perfect for small items such as pens and cutlery.\r\nYou can hide multiple sockets under the removable bottom shelf, for instance.'),
 (30, 5, 'Danny Dining Set\r\n', 'Brown & Black', 999.99, 9, 'dannydining.jpg', 'The Danny Dining set is the perfect addition to any modern kitchen or dining room. The angular metal legs and hard wood top contributes to the contemporary look of the faux leather and suede mix of the dining chairs.\r\n\r\nThe extendable element of the Danny table is a great feature which allows you to remove the white panel seen in the photographs to reduce the full size of 200.5 CM X 90 CM to 160.5CM  X 90 CM.'),
 (31, 5, 'Monet Dining Table\r\n', 'Black', 1079.99, 23, 'monetdining.jpg', 'Turn your dinning into a truly elegant experience for all your guests, family and friends to enjoy with this real show stopper guaranteed to be a focal point in any dinning room. This table simply oozes character with its clean elegant lines, uniquely kidney shaped end design, natural warm rustic tones and beautifully crafted solid legs complete this table making for a real stunning centre piece in your dinning room..\r\n\r\n'),
 (32, 5, 'Twist Dining Table\r\n', 'Black', 879.99, 22, 'twistdining.jpg', 'This twist dining set features a modern take on a classic design that will never date and works in almost any space. Sturdy and durable, it is suitable for home and business use. Beautiful MDF top comes with a column of interwoven chrome steel wires set into a black lacquered base and four chairs.\r\n'),
@@ -180,18 +196,6 @@ INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `isAdmin`) VAL
 ('audrius@gmail.com', '$2a$12$LQOo75r2y0amxd1mksKMgu/6./DsktqMSEObTq8hVdwYVA5XixFi2', 'audrius', 'senkus', 1),
 ('test@gmail.com', '$2a$12$R9FqfJtkUMA0QFJICh6tzOekCd.5eVz8fufldmMmvTTLpKey0nE4i', '12', '12', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `useraddress`
---
-
-CREATE TABLE `useraddress` (
-  `userAddressId` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `addressId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Indexes for dumped tables
 --
@@ -200,7 +204,16 @@ CREATE TABLE `useraddress` (
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`addressId`);
+  ADD PRIMARY KEY (`addressId`),
+  ADD KEY `email` (`email`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartID`),
+  ADD KEY `email` (`email`,`productID`),
+  ADD KEY `productID` (`productID`);
 
 --
 -- Indexes for table `category`
@@ -218,8 +231,7 @@ ALTER TABLE `newsletter`
 -- Indexes for table `orderproduct`
 --
 ALTER TABLE `orderproduct`
-  ADD KEY `productId` (`productId`,`orderId`,`email`),
-  ADD KEY `email` (`email`),
+  ADD KEY `productId` (`productId`,`orderId`),
   ADD KEY `orderId` (`orderId`);
 
 --
@@ -227,7 +239,9 @@ ALTER TABLE `orderproduct`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderId`),
-  ADD KEY `userAddressId` (`userAddressId`);
+  ADD KEY `userAddressId` (`userAddressId`),
+  ADD KEY `email` (`email`),
+  ADD KEY `OrderProductId` (`OrderProductId`);
 
 --
 -- Indexes for table `product`
@@ -243,14 +257,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `useraddress`
---
-ALTER TABLE `useraddress`
-  ADD PRIMARY KEY (`userAddressId`),
-  ADD KEY `userId` (`email`,`addressId`),
-  ADD KEY `addressId` (`addressId`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -261,10 +267,16 @@ ALTER TABLE `address`
   MODIFY `addressId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `catId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
@@ -285,41 +297,40 @@ ALTER TABLE `product`
   MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `useraddress`
---
-ALTER TABLE `useraddress`
-  MODIFY `userAddressId` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `address`
+--
+ALTER TABLE `address`
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productId`);
 
 --
 -- Constraints for table `orderproduct`
 --
 ALTER TABLE `orderproduct`
-  ADD CONSTRAINT `orderproduct_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
-  ADD CONSTRAINT `orderproduct_ibfk_2` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`),
-  ADD CONSTRAINT `orderproduct_ibfk_3` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
+  ADD CONSTRAINT `orderproduct_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`),
+  ADD CONSTRAINT `orderproduct_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userAddressId`) REFERENCES `useraddress` (`userAddressId`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`catId`) REFERENCES `category` (`catId`);
-
---
--- Constraints for table `useraddress`
---
-ALTER TABLE `useraddress`
-  ADD CONSTRAINT `useraddress_ibfk_2` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`),
-  ADD CONSTRAINT `useraddress_ibfk_3` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
