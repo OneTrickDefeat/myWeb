@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : displaySearchedProducts
     Created on : 05-Feb-2019, 20:45:57
     Author     : Audrius

@@ -27,7 +27,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a></li>
-                <li><a href="displayAllBooks.jsp">Bedroom</a></li>
+                <li><a href="displayAllBedroom.jsp">Bedroom</a> </li>
                 <li><a href="displayAllLoans.jsp">Living Room</a></li>
                 <li><a href="displayActiveLoans.jsp">Home Office</a></li>
                 <li><a href="displayActiveLoans.jsp">Game & Bar</a></li>
@@ -38,6 +38,7 @@
             <%
                 CategoryDao catDao = new CategoryDao("furniturestore");
                 ArrayList<Category> catList = catDao.getListOfCategories();
+                
             %>
             <form class="navbar-form navbar-left" action="TheServlet" method="post"> 
                 <select name="searchOption">

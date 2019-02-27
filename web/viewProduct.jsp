@@ -76,27 +76,22 @@
             </form>
 
 
-            /////////////////////////////////////////////////////////////////////
-
+           
+            <!-- container for product details -->
             <div class="container">
                 <div class="card">
                     <div class="container-fliud">
                         <div class="wrapper row">
                             <div class="preview col-md-6">
-
-                                <div class="preview-pic tab-content">
+                                <div class="preview-pic tab-content"> <!-- product image -->
                                     <div class="tab-pane active" id="pic-1"><img src="img/<%=b.getImage()%>" /></div>
-
                                 </div>
-
                             </div>
-                            <div class="details col-md-6">
+                            <div class="details col-md-6"><!--  product details -->
                                 <h3 class="product-title"><%=b.getName()%></h3>
-
                                 <p class="product-description"><%=b.getDescription()%></p>
                                 <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
-
-
+                                <!--  Quantity buttons -->
                                 <div class="container"> 
                                     <div class="row">
                                         <div class="col-lg-2">
@@ -115,15 +110,10 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-
-
-
+                                <!--  add to cart button  -->
                                 <div class="action">
                                     <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-
                                 </div>
                             </div>
                         </div>
