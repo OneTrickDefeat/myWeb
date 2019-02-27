@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2019 at 05:01 PM
+-- Generation Time: Feb 27, 2019 at 09:10 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -49,8 +49,6 @@ CREATE TABLE `address` (
 CREATE TABLE `cart` (
   `cartID` int(11) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
   `lastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -176,6 +174,19 @@ INSERT INTO `product` (`productId`, `catId`, `name`, `colour`, `price`, `stockQu
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `productcart`
+--
+
+CREATE TABLE `productcart` (
+  `productCartID` int(11) NOT NULL,
+  `cartID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -212,8 +223,7 @@ ALTER TABLE `address`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cartID`),
-  ADD KEY `email` (`email`,`productID`),
-  ADD KEY `productID` (`productID`);
+  ADD KEY `email` (`email`);
 
 --
 -- Indexes for table `category`
@@ -249,6 +259,14 @@ ALTER TABLE `orders`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`productId`),
   ADD KEY `catId` (`catId`);
+
+--
+-- Indexes for table `productcart`
+--
+ALTER TABLE `productcart`
+  ADD PRIMARY KEY (`productCartID`),
+  ADD KEY `cartID` (`cartID`,`productID`),
+  ADD KEY `productID` (`productID`);
 
 --
 -- Indexes for table `user`
@@ -297,6 +315,12 @@ ALTER TABLE `product`
   MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
+-- AUTO_INCREMENT for table `productcart`
+--
+ALTER TABLE `productcart`
+  MODIFY `productCartID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -310,8 +334,7 @@ ALTER TABLE `address`
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productId`);
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
 
 --
 -- Constraints for table `orderproduct`
@@ -331,6 +354,13 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`catId`) REFERENCES `category` (`catId`);
+
+--
+-- Constraints for table `productcart`
+--
+ALTER TABLE `productcart`
+  ADD CONSTRAINT `productcart_ibfk_1` FOREIGN KEY (`cartID`) REFERENCES `cart` (`cartID`),
+  ADD CONSTRAINT `productcart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

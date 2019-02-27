@@ -23,6 +23,7 @@ import java.util.Objects;
 //            PRIMARY KEY (username)
 //        );
 // */
+
 public class User implements Comparable<User>
 {
     private String email;
@@ -45,7 +46,7 @@ public class User implements Comparable<User>
         this.lastName = lastName;
         this.isAdmin = isAdmin;
     }
-
+       
     public String getUsername()
     {
         return email;
