@@ -71,12 +71,12 @@ public class CartDao extends Dao implements CartDaoInterface {
         PreparedStatement ps = null;
         
         //check does cart already exist with related email
-        if (findCartByEmail(email) == null) {
-            try {
-                con = this.getConnection();
-                String query = "INSERT INTO cart (email,)";
-            }
-        }
+//        if (findCartByEmail(email) == null) {
+//            try {
+//                con = this.getConnection();
+//                String query = "INSERT INTO cart (email)";
+//            }
+//        }
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -87,4 +87,3 @@ public class CartDao extends Dao implements CartDaoInterface {
     }
     
 }
-sssss

@@ -5,13 +5,16 @@
  */
 package DAO;
 
+import Business.Cart;
+
 /**
  *
  * @author Audrius
  */
-public class CartDaoInterface {
-
-
-   
+public interface CartDaoInterface {
+    
+    public Cart findCartByEmail(String email);
+    public boolean createNewCart(String email);
+    public boolean updateCartEmail(String oldEmail);
     
 }
