@@ -7,6 +7,7 @@ package DAO;
 
 import Business.Product;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,5 +29,8 @@ public interface ProductDaoInterface {
     //find product by product id
     
     public Product findProductByProductId(int pId);
+    
+    public List<Product> findProductsByCategoryId(int cID);
+
     
 }

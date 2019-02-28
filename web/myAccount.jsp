@@ -22,7 +22,7 @@
         <p><%=dataBundle.getString("myAcc_secondName")%> : <%=loggedInUser.getLastName()%></p>
         <p><%=dataBundle.getString("myAcc_password")%> : <%=loggedInUser.getPassword()%></p>
         
-        <a href="updateAccount.jsp"><%=dataBundle.getString("myAcc_updateLink")%></a>
+        <a href="updateAccount.jsp"><%=dataBundle.getString("myAcc_updateLink")%></a><br>
         <a href="updatePassword.jsp">Update Password</a>
         
          <%

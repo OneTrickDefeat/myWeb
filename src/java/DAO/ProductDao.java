@@ -5,12 +5,15 @@
  */
 package DAO;
 
+import Business.Category;
 import Business.Product;
+import Business.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -156,7 +159,7 @@ public class ProductDao extends Dao implements ProductDaoInterface {
 
     @Override
     public Product findProductByProductId(int pId) {
-    Connection con = null;
+        Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Product p = null;
@@ -177,8 +180,8 @@ public class ProductDao extends Dao implements ProductDaoInterface {
                 String description = rs.getString("description");
                 int catId = rs.getInt("catId");
                 String image = rs.getString("image");
-                
-                p = new Product(productId, catId, quantity, name ,colour,image,description,price);
+
+                p = new Product(productId, catId, quantity, name, colour, image, description, price);
             }
         } catch (SQLException e) {
             System.err.println("\tA problem occurred during the findProductByProductName method:");
@@ -199,6 +202,56 @@ public class ProductDao extends Dao implements ProductDaoInterface {
             }
         }
         return p;     // p may be null   
+    }
+
+    @Override
+    public List<Product> findProductsByCategoryId(int cID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Product> p = new ArrayList();
+        try {
+            con = this.getConnection();
+
+            String query = "SELECT * FROM product WHERE catId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, cID);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("productId");
+                String name = rs.getString("name");
+                String colour = rs.getString("colour");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("stockQuantity");
+                String description = rs.getString("description");
+                int catId = rs.getInt("catId");
+                String image = rs.getString("image");
+                
+                p.add(new Product(productId, catId, quantity, name, colour, image, description, price));
+                
+            }
+
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findProductByCategotyId method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findProductByCategotyId method:\n" + e.getMessage());
+            }
+        }
+        
+        return p;
     }
 
 }

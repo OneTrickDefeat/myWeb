@@ -24,8 +24,6 @@
             <h1><%=dataBundle.getString("index_loggedInMsg")%></h1>
             <a href="myAccount.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
             <br>
-            <a href="reviewForm.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
-            <br>
             <a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a>
 
             <%
