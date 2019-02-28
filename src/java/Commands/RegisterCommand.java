@@ -41,6 +41,8 @@ public class RegisterCommand implements Command{
                 session.setAttribute("loggedInUser", u);
                 
                 forwardToJsp = "index.jsp";
+                
+                // CALL THE CART DAO TO CREATE A NEW CART USING THE USERS EMAIL.
             }else{
                 // The user couldn't be added to the database
                 // Send the user to the error page and inform them of this

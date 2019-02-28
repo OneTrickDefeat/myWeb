@@ -38,6 +38,9 @@ public class LoginCommand implements Command {
                 // (we can use this to track if the user has logged in -
                 // if it's there, they they have completed this process
                 // if it's not, then they haven't)
+                
+                 //CALL CART DAO TO CHECK FOR CART WITH USERS EMAIL
+                 // SET IN SESSION IF PRESENT
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInUser", u);
                 forwardToJsp = "index.jsp";
@@ -45,6 +48,8 @@ public class LoginCommand implements Command {
             else{
                 // The username and/or password didn't match someone in the database
                 // Send the user to the error page and inform them of this
+                
+                
                 String errorMessage = "No user found matching those details."
                         + "Please <a href='login.jsp'>go back</a> and try again.";
                 HttpSession session = request.getSession();
