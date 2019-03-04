@@ -13,7 +13,7 @@
         <div class="page-header">
             <%
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
-                //Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+                Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
                 
                 if (loggedInUser != null) {
             %>

@@ -25,6 +25,7 @@
                 String idVal = request.getParameter("prodId");
                 // Confirm that a number was supplied
                 if (idVal != null) {
+                    
                     // Parse the number from text into an int (remember, all request parameters are Strings)
                     int prodNum = 0;
                     try {

@@ -44,7 +44,7 @@
 
             <%
                 }
-                Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+                loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
                 if(loggedInUserCart != null) {
             %>
             <h4>Cart does exist</h4>
