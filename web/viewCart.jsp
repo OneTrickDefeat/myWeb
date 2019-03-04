@@ -4,6 +4,7 @@
     Author     : Audrius
 --%>
 
+<%@page import="DAO.ProductCartDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,9 @@
             
             try {
                 
-                
+                int cartID = loggedInUserCart.getCartID();
+                ProductCartDao pCartDao = new ProductCartDao("furniturestore");
+                ArrayList<ProductCart> cartList = pCartDao.
             }
             
             %>

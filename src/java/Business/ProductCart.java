@@ -18,7 +18,7 @@ public class ProductCart {
     public ProductCart() {
     }
 
-    public ProductCart(int cartId, int productId, int quantity, Date lastUpdate) {
+    public ProductCart(int cartId, int productId, int quantity) {
         this.cartId = cartId;
         this.productId = productId;
         this.quantity = quantity;
