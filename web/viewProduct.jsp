@@ -44,7 +44,7 @@
 
                     Product b = prodDao.findProductByProductId(prodNum);
                     Cart cart = cDao.findCartByEmail(loggedInUser.getUsername());
-
+                    
                     if (b != null) {
 
             %>  
@@ -91,11 +91,14 @@
                                 <form action="TheServlet" method="post">
                                 <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->
                                 <input type="number" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                                <input type="hidden" name="cartID" value="<%cart.getCartID();%>">
-                                <input type="hidden" name="productID" value="<%b.getProductId();%>">
+                                <input type="hidden" name="cartID" value="<%=cart.getCartID()%>">
+                                <input type="hidden" name="productID" value="<%=b.getProductId()%>">
                                 <input type="hidden" name="action" value="addToCart">
                                 <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" > 
                                 </form>
+                                
+                                <p class="product-description"><%=cart.getCartID()%></p>
+                                <p class="product-description"><%=b.getProductId()%></p>
 
                                 <!--   </div> -->
 

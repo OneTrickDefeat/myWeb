@@ -14,19 +14,15 @@ import javax.servlet.http.HttpSession;
  *
  * @author Audrius
  */
-public class AddToCartCommand implements Command {
-
-    public AddToCartCommand() {
-    }
+public class AddToCartCommand implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-
         String forwardToJsp = null;
         int result = 0;
         //get values submited from viewProduct.jsp form
-        int productID = Integer.parseInt(request.getParameter("productID"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
+        int productID = Integer.parseInt(request.getParameter("productID"));       
         int cartID = Integer.parseInt(request.getParameter("cartID"));
 
         //check was it passed and are not just empty fields
@@ -61,5 +57,7 @@ public class AddToCartCommand implements Command {
         }
         return forwardToJsp;
     }
-
+    
+    
+    
 }

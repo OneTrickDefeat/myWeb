@@ -3,6 +3,7 @@
     Created on : 30-Nov-2018, 14:23:34
     Author     : Tom
 --%>
+<%@page import="Business.Cart"%>
 <%@include file="internationalisationHeader.jsp" %>
 <%@page import="Business.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +13,8 @@
         <div class="page-header">
             <%
                 User loggedInUser = (User) session.getAttribute("loggedInUser");
+                //Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+                
                 if (loggedInUser != null) {
             %>
 
