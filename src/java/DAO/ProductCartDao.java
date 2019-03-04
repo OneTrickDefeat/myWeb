@@ -31,8 +31,7 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        ProductCart pc = null;
-        List<ProductCart> producCartList = null;
+        List<ProductCart> producCartList = new ArrayList();
 
         if (cartID > 0) {
             try {
