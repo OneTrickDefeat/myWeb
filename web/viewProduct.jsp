@@ -4,6 +4,7 @@
     Author     : Tom
 --%>
 
+<%@page import="Business.Cart"%>
 <%@page import="DAO.CartDao"%>
 <%@page import="Business.Product"%>
 <%@page import="DAO.ProductDao"%>
@@ -39,12 +40,15 @@
                     // If everything is appropriate, 
                     // get the specific Customer from the database and display it
                     ProductDao prodDao = new ProductDao("furniturestore");
+                    CartDao cDao = new CartDao("furniturestore");
+
                     Product b = prodDao.findProductByProductId(prodNum);
+                    Cart cart = cDao.findCartByEmail(loggedInUser.getUsername());
 
                     if (b != null) {
 
             %>  
-          
+
             <!-- container for product details -->
             <div class="container">
                 <div class="card">
@@ -61,7 +65,7 @@
                                 <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
 
                                 <!--  add to cart button logic -->
-                                <form action="TheServlet" method="post">
+
                                 <!--    <div class="action">
 
                                           Quantity buttons 
@@ -84,18 +88,17 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                        <%if (loggedInUser != null) {%>
-                                        <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->
-                                        <% CartDao cDao = new CartDao("furniturestore"); %>
-                                        <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                                        <input type="hidden" name="cartID" value="<%cDao.findCartByEmail(loggedInUser.getUsername()).getCartID();%>">
-                                        <input type="hidden" name="productID" value="<%b.getProductId();%>" />
-                                        <input type="hidden" name="action" value="addToCart">
-                                        <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" /> 
-                                        <% }%>
-
-                                 <!--   </div> -->
+                                <form action="TheServlet" method="post">
+                                <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->
+                                <input type="number" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                                <input type="hidden" name="cartID" value="<%cart.getCartID();%>">
+                                <input type="hidden" name="productID" value="<%b.getProductId();%>">
+                                <input type="hidden" name="action" value="addToCart">
+                                <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" > 
                                 </form>
+
+                                <!--   </div> -->
+
                             </div>
                         </div>
                     </div>
