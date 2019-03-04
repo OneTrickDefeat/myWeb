@@ -4,6 +4,7 @@
     Author     : Tom
 --%>
 
+<%@page import="DAO.CartDao"%>
 <%@page import="Business.Product"%>
 <%@page import="DAO.ProductDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,40 +44,7 @@
                     if (b != null) {
 
             %>  
-            <form action="TheServlet" method="post">
-                <!-- set up table structure -->
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-
-                            <th>name</th>
-                            <th>colour</th>
-                            <th>price</th>
-
-                        </tr>
-                    </thead>
-                    <!-- Create a row for this customer -->
-                    <tbody>
-                        <tr>
-                            <!-- Create a cell for each component of this customer's information and fill it with 
-                                 data in this customer's object -->
-                            <td><%=b.getName()%></td>
-                            <td><%=b.getColour()%></td>
-                            <td><%=b.getPrice()%></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-                <%if (loggedInUser != null) {%>
-                <input type="submit" value="Loan a book" />
-                <!-- Include a hidden field to identify what the user wants to do -->
-                <input type="hidden" name ="isbn" value="<%=b.getProductId()%>" />  
-                <input type="hidden" name ="action" value="loanBook" />  
-                <% }%>
-            </form>
-
-
-           
+          
             <!-- container for product details -->
             <div class="container">
                 <div class="card">
@@ -91,30 +59,43 @@
                                 <h3 class="product-title"><%=b.getName()%></h3>
                                 <p class="product-description"><%=b.getDescription()%></p>
                                 <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
-                                <!--  Quantity buttons -->
-                                <div class="container"> 
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                                        <span class="glyphicon glyphicon-minus"></span>
-                                                    </button>
-                                                </span>
-                                                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                    </button>
-                                                </span>
+
+                                <!--  add to cart button logic -->
+                                <form action="TheServlet" method="post">
+                                <!--    <div class="action">
+
+                                          Quantity buttons 
+                                        <div class="container"> 
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                                <span class="glyphicon glyphicon-minus"></span>
+                                                            </button>
+                                                        </span>
+                                                        <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                                <span class="glyphicon glyphicon-plus"></span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--  add to cart button  -->
-                                <div class="action">
-                                    <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                                </div>
+                                        </div> -->
+                                        <%if (loggedInUser != null) {%>
+                                        <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->
+                                        <% CartDao cDao = new CartDao("furniturestore"); %>
+                                        <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                                        <input type="hidden" name="cartID" value="<%cDao.findCartByEmail(loggedInUser.getUsername()).getCartID();%>">
+                                        <input type="hidden" name="productID" value="<%b.getProductId();%>" />
+                                        <input type="hidden" name="action" value="addToCart">
+                                        <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" /> 
+                                        <% }%>
+
+                                 <!--   </div> -->
+                                </form>
                             </div>
                         </div>
                     </div>

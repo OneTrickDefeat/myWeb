@@ -105,12 +105,4 @@ public class CartDao extends Dao implements CartDaoInterface {
         }
         return confirmation;
     }
-
-    public static void main(String[] args) {
-        CartDao cDao = new CartDao("furniturestore");
-        String email = "audrius@gmail.com";
-        Cart check = cDao.findCartByEmail(email);
-        System.out.println(check);
-
-    }
 }

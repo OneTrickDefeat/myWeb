@@ -58,6 +58,9 @@ public class CommandFactory {
                 case "updatePassword":
                     c = new updatePasswordCommand();
                     break;
+                case "addToCart":
+                    c = new AddToCartCommand();
+                    break;    
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

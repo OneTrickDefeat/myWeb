@@ -29,11 +29,16 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         PreparedStatement ps = null;
         Product product = getProductByProductID(productID);
         if (product != null){
-//           try {
+        //   try {
+//          	productCartID       cartID      productID       quantity
+//                                  int cartId  int productId   int quantity
 //               con = this.getConnection();
 //               
-//               String query = "INSERT";
-//           } 
+//               String query = "INSERT INTO productcart (cartID, productID, quantity) "
+//                       + "VALUES (?, ?, ?)";
+//               ps = con.prepareStatement(query);
+//               ps.setString(1, product.);
+         //  } 
             
         }  
         
@@ -46,7 +51,9 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
     }
 
     @Override
-    public void addToCart(Product product) {
+    public int addToCart(int cartID, int productID, int quantity) {
+        
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -54,5 +61,11 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
     public void removeProductByPID(int productID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public static void main(String[] args) {
+        CartDao cDao = new CartDao("furniturestore");
+        
 
+    }
+    
 }

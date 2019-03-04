@@ -17,7 +17,7 @@ public interface ProductCartDaoInterface {
     
     public Product getProductByProductID(int productID);
     
-    public void addToCart(Product product);
+    public int addToCart(int cartID, int productID, int quantity);
     
     public void removeProductByPID(int productID);
  
