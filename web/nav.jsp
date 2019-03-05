@@ -4,6 +4,7 @@
     Author     : Tom
 --%>
 
+<%@page import="Business.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Business.Category"%>
 <%@page import="DAO.CategoryDao"%>
@@ -28,12 +29,18 @@
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a> </li>
-                <li><a href="displayAllBedroom.jsp?cID=1"> Bedroom</a>  </li>
+                <li><a href="displayAllBedroom.jsp?cID=1"> Bedroom</a></li>
                 <li><a href="displayAllLoans.jsp">Living Room</a></li>
                 <li><a href="displayActiveLoans.jsp">Home Office</a></li>
                 <li><a href="displayActiveLoans.jsp">Game & Bar</a></li>
                 <li><a href="displayActiveLoans.jsp">Kitchen & Dining</a></li>
                 <li><a href="displayActiveLoans.jsp">Home Entertainment</a></li>
+                <%
+                User loggedInUser2 = (User) session.getAttribute("loggedInUser");
+                if (loggedInUser2 != null) { %>
+                <li><a href="viewCart.jsp">Cart</a></li>
+                <% }
+                %>
             </ul>
 
             <%
