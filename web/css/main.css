@@ -1,5 +1,4 @@
 
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -23,18 +22,26 @@
 
 
 nav {
-  font-family: 'open sans';
+    font-family: 'open sans';
 }
 #descrip{
     text-align: justify;
 }
 
+.lead{margin-left: 14px;}
+.lead2{margin-left: 14px;}
 
 
+hr.style {
+    background-color: #248DC1;
+    height: 3px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
 
-
-
-
+#catTitle{
+    font-family: 'open sans';
+}
 
 
 
