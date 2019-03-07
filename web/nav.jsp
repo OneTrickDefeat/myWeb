@@ -28,12 +28,12 @@
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a> </li>
-                <li><a href="displayAllBedroom.jsp?cID=1"> Bedroom</a>  </li>
-                <li><a href="displayAllLoans.jsp">Living Room</a></li>
-                <li><a href="displayActiveLoans.jsp">Home Office</a></li>
-                <li><a href="displayActiveLoans.jsp">Game & Bar</a></li>
-                <li><a href="displayActiveLoans.jsp">Kitchen & Dining</a></li>
-                <li><a href="displayActiveLoans.jsp">Home Entertainment</a></li>
+                <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
+                <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
+                <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
+                <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
+                <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
+                <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
             </ul>
 
             <%
@@ -51,7 +51,7 @@
 
                 </select>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="product">
+                    <input type="text" class="form-control" placeholder="Search" name="product" id="mySearch">
                 </div>
                 <input type="hidden" name ="action" value="searchProduct" />
                 <button type="submit" class="btn btn-default">Submit</button>
