@@ -254,4 +254,9 @@ public class ProductDao extends Dao implements ProductDaoInterface {
         return p;
     }
 
+    @Override
+    public void increaseProductQuantity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

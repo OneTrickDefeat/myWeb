@@ -24,37 +24,7 @@
                 ArrayList<ProductCart> cartProducts = (ArrayList<ProductCart>) pCartDao.getItemsByCartId(cartID);
             %>
             <h1>Cart</h1>
-            <table id="allProducts">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%  //going through the list of user product cart                      
-                        for (ProductCart p : cartProducts) {
 
-                            //creating a new object of product, using productID
-                            //details from cartProduct ArrayList
-                            Product product = productDao.findProductByProductId(p.getProductId());
-                    %>
-                    <!-- Create a row for this customer -->
-                    <tr>
-                        <!-- Create a cell for each component of this product information and fill it with 
-                             data in this product object -->
-                        <td><%=product.getName()%></td>
-                        <td><%=product.getPrice()%></td>
-                        <td><%=p.getQuantity()%></td>
-                        <!-- Line to generate a tailored link that will go to the view cart page and pass it the id of the customer to be selected from the database -->
-                    </tr>
-                    <%
-                            // Close the loop
-                        }
-                    %>
-                </tbody>
-            </table> 
 
 
 
@@ -82,10 +52,10 @@
                         <tr>
                             <td data-th="Product">
                                 <div class="row">
-                                    <div class="col-sm-2 hidden-xs"><img src="<%=product.getImage()%>" alt="..." class="img-responsive"/></div>
+                                    <div class="col-sm-2 hidden-xs"><img src="img/<%=product.getImage()%>" alt="..." class="img-responsive"/></div>
                                     <div class="col-sm-10">
                                         <h4 class="nomargin"><%=product.getName()%></h4>
-                                        <p><%=product.getDescription()%></p>
+
                                     </div>
                                 </div>
                             </td>
@@ -93,7 +63,7 @@
                             <td data-th="Quantity">
                                 <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
                             </td>
-                            <td data-th="Subtotal" class="text-center">Need help getting total here</td>
+                            <td data-th="Subtotal" class="text-center"><%=product.getPrice() * p.getQuantity()%></td>
                             <td class="actions" data-th="">
                                 <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
                                 <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								

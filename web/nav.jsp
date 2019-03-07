@@ -35,6 +35,14 @@
                 <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
                 <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
                 <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
+                
+                <% 
+                    User loggedInUser2 = (User) session.getAttribute("loggedInUser");
+                    if(loggedInUser2 != null){ %>
+                        <li><a href="viewCart.jsp">Cart</a></li>
+                    <%}
+                %>
+                
             </ul>
 
             <%

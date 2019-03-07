@@ -28,7 +28,12 @@ public class AddToCartCommand implements Command{
         //check was it passed and are not just empty fields
         if ((quantity > 0 || quantity <= 10) && cartID > 0 && productID > 0) {
             ProductCartDao pCartDao = new ProductCartDao("furniturestore");
-
+            
+            //checking does that item already exist inside productCart table
+//            if(){
+//                
+//            }
+            
             //create new ProductCart record
             result = pCartDao.addToCart(cartID, productID, quantity);
 

@@ -26,9 +26,11 @@ public interface ProductDaoInterface {
     //find first user with that user name
     public Product findProductByProductName(String pName);
     
-    //find product by product id
-    
+    //find cart record by product id
     public Product findProductByProductId(int pId);
+    
+    //increase quantity by 1 for product in productCart table
+    public void increaseProductQuantity();
     
     public List<Product> findProductsByCategoryId(int cID);
 
