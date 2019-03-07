@@ -29,6 +29,7 @@ public class AddToCartCommand implements Command{
         if ((quantity > 0 || quantity <= 10) && cartID > 0 && productID > 0) {
             ProductCartDao pCartDao = new ProductCartDao("furniturestore");
             
+            
             //checking does that item already exist inside productCart table
 //            if(){
 //                

@@ -73,7 +73,7 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
                 }
             }
         }
-        
+
         return producCartList;
 
     }
@@ -111,6 +111,11 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         int result = 0;
         Connection con = null;
         PreparedStatement ps = null;
+        
+        ProductCart productCart = getProductByCartIdAndProductId(productID, cartID);
+        if(productCart != null){
+            
+        }
 
         try {
 
@@ -179,11 +184,56 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         return result;
       }
 
-    public static void main(String[] args) {
-        CartDao cDao = new CartDao("furniturestore");
-        ProductCartDao pa = new ProductCartDao("furniturestore");
-        System.out.println(pa.getItemsByCartId(4));
-        
+    @Override
+    public ProductCart getProductByCartIdAndProductId(int productID, int cartID) {
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ProductCart productCart = null;
+
+        try {
+            con = this.getConnection();
+            String query = "SELECT * FROM productcart "
+                    + "WHERE productId = ? AND cartId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, productID);
+            ps.setInt(2, cartID);
+            rs = ps.executeQuery();
+
+            //if data was found create a new productCart object
+            if (rs.next()) {
+                int foundCartID = rs.getInt("cartID");
+                int foundProductID = rs.getInt("productID");
+                int foundQuantity = rs.getInt("quantity");
+
+                productCart = new ProductCart(foundCartID, foundProductID, foundQuantity);
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the getProductByCartIdAndProductId method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the getProductByCartIdAndProductId method:\n" + e.getMessage());
+            }
+        }
+        return productCart;     // productCart may be null  
     }
+    
+//    public static void main(String[] args) {
+//        ProductCartDao pa = new ProductCartDao("furniturestore");
+//        System.out.println(pa.getProductByCartIdAndProductId(9, 1));
+
+    //}
 
 }

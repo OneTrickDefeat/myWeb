@@ -84,6 +84,9 @@ public class ProductDao extends Dao implements ProductDaoInterface {
             try {
                 con = this.getConnection();
 
+                //method to check does this product already exist in ProductCart table
+                //if it does call another method called increaseQuantity() by 1
+                
                 String query = "INSERT INTO product( catId, name, colour, price , stockQuantity , description) VALUES ( ? , ? , ? , ? , ? , ?)";
                 ps = con.prepareStatement(query);
                 ps.setInt(1, c.getCatId());
