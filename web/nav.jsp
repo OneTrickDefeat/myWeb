@@ -4,6 +4,7 @@
     Author     : Tom
 --%>
 
+<%@page import="Business.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Business.Category"%>
 <%@page import="DAO.CategoryDao"%>

@@ -6,7 +6,6 @@
 package Business;
 
 import java.sql.Date;
-import java.util.Objects;
 
 /**
  *
@@ -15,17 +14,19 @@ import java.util.Objects;
 public class ProductCart {
 
     private int cartId, productId, quantity;
-    private String email;
-    private Date lastUpdate;
 
     public ProductCart() {
     }
 
-    public ProductCart(int productId, int quantity, String email, Date lastUpdate) {
+    public ProductCart(int cartId, int productId, int quantity) {
+        this.cartId = cartId;
         this.productId = productId;
         this.quantity = quantity;
-        this.email = email;
-        this.lastUpdate = lastUpdate;
+    }
+
+    public ProductCart(int productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
     }
 
     public int getCartId() {
@@ -52,27 +53,24 @@ public class ProductCart {
         this.quantity = quantity;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
+//    public String getEmail() {
+//        return email;
+//    }
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//    public Date getLastUpdate() {
+//        return lastUpdate;
+//    }
+//
+//    public void setLastUpdate(Date lastUpdate) {
+//        this.lastUpdate = lastUpdate;
+//    }
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.cartId;
-        hash = 97 * hash + Objects.hashCode(this.email);
+        hash = 23 * hash + this.cartId;
+        hash = 23 * hash + this.productId;
         return hash;
     }
 
@@ -88,16 +86,14 @@ public class ProductCart {
             return false;
         }
         final ProductCart other = (ProductCart) obj;
-        if (this.productId != other.productId) {
+        if (this.cartId != other.cartId) {
             return false;
         }
-        return true;
+        return this.productId == other.productId;
     }
-
-    
 
     @Override
     public String toString() {
-        return "Cart{" + "cartId=" + cartId + ", productId=" + productId + ", quantity=" + quantity + ", email=" + email + ", lastUpdate=" + lastUpdate + '}';
+        return "Cart{" + "cartId=" + cartId + ", productId=" + productId + ", quantity=" + quantity + '}';
     }
 }

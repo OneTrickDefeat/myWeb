@@ -4,6 +4,7 @@
     Author     : Tom
 --%>
 
+<%@page import="Business.Cart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,8 +44,11 @@
 
             <%
                 }
+                loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+                if(loggedInUserCart != null) {
             %>
-
+            <h4>Cart does exist</h4>
+            <% }%>
 
             <%
                 //end of what happens if theyre logged in

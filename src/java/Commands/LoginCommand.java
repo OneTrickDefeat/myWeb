@@ -5,7 +5,9 @@
  */
 package Commands;
 
+import Business.Cart;
 import Business.User;
+import DAO.CartDao;
 import DAO.UserDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +44,16 @@ public class LoginCommand implements Command {
                  //CALL CART DAO TO CHECK FOR CART WITH USERS EMAIL
                  // SET IN SESSION IF PRESENT
                 HttpSession session = request.getSession();
+                CartDao cDao = new CartDao("furniturestore");
+                Cart userCart = cDao.findCartByEmail(email);
+                if(userCart != null){
+                    session.setAttribute("loggedInUserCart", userCart);
+                } else {
+                    cDao.createNewCart(email);
+                    userCart = cDao.findCartByEmail(email);
+                    session.setAttribute("loggedInUserCart", userCart);
+                }
+                
                 session.setAttribute("loggedInUser", u);
                 forwardToJsp = "index.jsp";
             }
