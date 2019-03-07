@@ -143,9 +143,41 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
     }
 
     @Override
-    public void removeProductByPID(int productID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int removeProductByPID(int productID, int cartID) {
+        int result = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+
+            con = this.getConnection();
+            String query = "DELETE FROM productcart WHERE"
+                    + "WHERE cartID = ?"
+                    + "AND productID= ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, cartID);
+            ps.setInt(2, productID);
+            
+            result = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the removeProductByPID method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the removeProductByPID method:\n" + e.getMessage());
+            }
+        }
+
+        return result;
+      }
 
     public static void main(String[] args) {
         CartDao cDao = new CartDao("furniturestore");

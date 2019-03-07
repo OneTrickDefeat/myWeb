@@ -42,7 +42,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%  //going through the list of user product cart                      
+
+                        <%  double total = 0;
+                        int idForContinue = 0;
+                            
+
+                            //going through the list of user product cart                      
                             for (ProductCart p : cartProducts) {
 
                                 //creating a new object of product, using productID
@@ -60,28 +65,51 @@
                                 </div>
                             </td>
                             <td data-th="Price">€<%=product.getPrice()%></td>
-                            <td data-th="Quantity">
-                                <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
-                            </td>
-                            <td data-th="Subtotal" class="text-center"><%=product.getPrice() * p.getQuantity()%></td>
-                            <td class="actions" data-th="">
-                                <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
-                            </td>
+                            <!--  update  button -->
+                    <form action="TheServlet" method="post">
+
+                        <td data-th="Quantity">
+                            <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
+                        </td>
+                        <%
+                            double sub = product.getPrice() * p.getQuantity();
+                        %>
+                        <td data-th="Subtotal" class="text-center"><%=sub%></td>
+                        <%
+
+                            total = total + sub;
+                        %>
+
+                        <td class="actions" data-th=""> <!--  remove button -->
+
+                            <input type="hidden" name="productID" value="<%=p.getProductId()%>">
+                            <input type="hidden" name="action" value="updateCartQuantity">
+                            <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
+                    </form>
+
+                    <form action="TheServlet" method="post">
+                        <input type="hidden" name="productID" value="<%=p.getProductId()%>">
+                        <input type="hidden" name="action" value="removeFromCart">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
+                    </form>
+                    </td>
+                    <td>
                         </tr>
-                    </tbody>
-                    <%
-                            // Close the loop
-                        }
-                    %>
+                        </tbody>
+                        <%
+                                // Close the loop
+                               idForContinue = product.getCatId();
+                            }
+                            
+                        %>
                     <tfoot>
                         <tr class="visible-xs">
                             <td class="text-center"><strong>Total 1.99</strong></td>
                         </tr>
                         <tr>
-                            <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                            <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                             <td colspan="2" class="hidden-xs"></td>
-                            <td class="hidden-xs text-center"><strong>Need help getting total here</strong></td>
+                            <td class="hidden-xs text-center"><strong><%=total%></strong></td>
                             <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
