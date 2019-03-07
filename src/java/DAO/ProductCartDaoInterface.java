@@ -6,6 +6,7 @@
 package DAO;
 
 import Business.Product;
+import Business.ProductCart;
 
 /**
  *
@@ -20,5 +21,7 @@ public interface ProductCartDaoInterface {
     public int addToCart(int cartID, int productID, int quantity);
     
     public void removeProductByPID(int productID);
+    
+    public ProductCart getProductByCartIdAndProductId(int productID, int cartID);
  
 }
