@@ -51,12 +51,15 @@
                 <h4>Newsletter</h4>
                 <p>Sign up for our newsletter</p>
                 <p>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter your email">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
-                    </span>
-                </div><!-- /input-group -->
+                <form action="TheServlet" method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter your email" name="addEmail2">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-envelope"></span></button>
+                        </span>
+                        <input type="hidden" name ="action" value="addNewsletter" />
+                    </div><!-- /input-group -->
+                </form>
                 </p>
             </div>
         </div>

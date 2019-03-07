@@ -60,7 +60,10 @@ public class CommandFactory {
                     break;
                 case "addToCart":
                     c = new AddToCartCommand();
-                    break;    
+                    break; 
+                case "addNewsletter":
+                    c = new NewsletterCommand();
+                    break; 
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
