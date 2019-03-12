@@ -28,9 +28,12 @@
         <link rel="stylesheet" href="css/viewProductPage.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cart.css">
+        <link rel="stylesheet" href="css/sidebar.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="js/quantitySelector.js"></script>
+        <script src="js/sidebar.js"></script>
+        
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

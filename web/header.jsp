@@ -11,13 +11,12 @@
 <html>
     <div class="container">
         <div class="page-header">
-            <%
-                User loggedInUser = (User) session.getAttribute("loggedInUser");
+            <%                User loggedInUser = (User) session.getAttribute("loggedInUser");
                 Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
-                
+
                 if (loggedInUser != null) {
             %>
-
+            
             <div>
                 <h2><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getUsername()%></h2>
             </div>

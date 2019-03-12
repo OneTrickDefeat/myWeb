@@ -66,7 +66,7 @@
                             </td>
                             <td data-th="Price">€<%=product.getPrice()%></td>
                             <!--  update  button -->
-                    <form action="TheServlet" method="post">
+                   
 
                         <td data-th="Quantity">
                             <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
@@ -81,7 +81,7 @@
                         %>
 
                         <td class="actions" data-th=""> <!--  remove button -->
-
+                            <form action="TheServlet" method="post">
                             <input type="hidden" name="productID" value="<%=p.getProductId()%>">
                             <input type="hidden" name="action" value="updateCartQuantity">
                             <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 

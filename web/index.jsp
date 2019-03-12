@@ -15,12 +15,45 @@
     <%@ include file = "header.jsp" %>
 
 
-
     <body>
+        <%            if (loggedInUser != null) {
+            %>
+        <!-- start of sidebar --> 
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="myAccount.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
+            <a href="viewCart.jsp"><%=dataBundle.getString("index_myCartMsg")%></a>
+            <a href="#">BLAH</a>
+            <a href="#">BLAH</a>
+            <%
+                if (loggedInUser.isAdmin()) {
+
+            %>
+            <h4>Admin Functions</h4>
+            <a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a>
+            <a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a>
+            <a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a>
+            <a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a>
+            <% }%>
+            <a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a>
+            
+        </div>
+
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">☰ User Functions</button>  
+            
+        </div>
+        <!-- end of sidebar -->
+        
+        <%
+                }
+            %>
+        
         <div class="container">
             <%            if (loggedInUser != null) {
             %>
-
+            
+         
 
             <h1><%=dataBundle.getString("index_loggedInMsg")%></h1>
             <a href="myAccount.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
@@ -45,7 +78,7 @@
             <%
                 }
                 loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
-                if(loggedInUserCart != null) {
+                if (loggedInUserCart != null) {
             %>
             <h4>Cart does exist</h4>
             <% }%>
