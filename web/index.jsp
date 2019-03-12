@@ -29,7 +29,7 @@
                 if (loggedInUser.isAdmin()) {
 
             %>
-            <h4>Admin Functions</h4>
+            <hr>
             <a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a>
             <a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a>
             <a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a>
