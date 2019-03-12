@@ -50,7 +50,7 @@
             <div class="col-md-3 footer-ns animated fadeInRight">
                 <h4>Newsletter</h4>
                 <p>Sign up for our newsletter</p>
-                <p>
+
                 <form action="TheServlet" method="post">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enter your email" name="addEmail2">
@@ -58,9 +58,21 @@
                             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-envelope"></span></button>
                         </span>
                         <input type="hidden" name ="action" value="addNewsletter" />
-                    </div><!-- /input-group -->
+                        
+                    </div>
+                    <%
+                            Object msg2 = session.getAttribute("newsletter");
+                            String success = (String) msg2;
+                            if (success != null) {
+                        %>
+
+                        <div> <%=success%> </div>
+                        <%
+                            }
+                            session.removeAttribute("newsletter");
+                        %> 
                 </form>
-                </p>
+
             </div>
         </div>
     </footer>

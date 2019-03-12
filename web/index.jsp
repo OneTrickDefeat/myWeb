@@ -45,7 +45,7 @@
             <%
                 }
                 loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
-                if(loggedInUserCart != null) {
+                if (loggedInUserCart != null) {
             %>
             <h4>Cart does exist</h4>
             <% }%>
@@ -63,6 +63,7 @@
             <%
                 }
             %>
+
         </div>
     </body>
 

@@ -10,7 +10,6 @@ import DAO.NewsletterDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,25 +31,25 @@ public class NewsletterCommand implements Command {
 
             if (isAdded != false) {
 
-                forwardToJsp = "index.jsp";
-                JOptionPane.showMessageDialog(null, "Success! , You Have Been Added");
-                
+                String newsletter = "Success! You have been Added";
+                HttpSession session = request.getSession();
+                session.setAttribute("newsletter", newsletter);
 
-                
+                forwardToJsp = "index.jsp";
 
             } else {
 
-                String errorMessage = "Could not add you to the newsletter";
+                String newsletter = "ERROR! Duplicate Entry";
                 HttpSession session = request.getSession();
-                session.setAttribute("errorMessage", errorMessage);
-                forwardToJsp = "error.jsp";
+                session.setAttribute("newsletter", newsletter);
+                forwardToJsp = "index.jsp";
             }
         } else {
 
-            String errorMessage = "field were missing. Please <a href='index.jsp'>go back</a> and try again.";
+            String newsletter = "Field Was Missing!!";
             HttpSession session = request.getSession();
-            session.setAttribute("errorMessage", errorMessage);
-            forwardToJsp = "error.jsp";
+            session.setAttribute("newsletter", newsletter);
+            forwardToJsp = "index.jsp";
         }
 
         return forwardToJsp;

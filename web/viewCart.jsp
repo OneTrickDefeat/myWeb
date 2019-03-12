@@ -44,8 +44,8 @@
                     <tbody>
 
                         <%  double total = 0;
-                        int idForContinue = 0;
-                            
+                            int idForContinue = 0;
+                            String nameForcontinue = "";
 
                             //going through the list of user product cart                      
                             for (ProductCart p : cartProducts) {
@@ -66,48 +66,49 @@
                             </td>
                             <td data-th="Price">€<%=product.getPrice()%></td>
                             <!--  update  button -->
-                    <form action="TheServlet" method="post">
 
-                        <td data-th="Quantity">
-                            <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
-                        </td>
-                        <%
-                            double sub = product.getPrice() * p.getQuantity();
-                        %>
-                        <td data-th="Subtotal" class="text-center"><%=sub%></td>
-                        <%
 
-                            total = total + sub;
-                        %>
+                            <td data-th="Quantity">
+                                <input type="number" class="form-control text-center" value="<%=p.getQuantity()%>">
+                            </td>
+                            <%
+                                double sub = product.getPrice() * p.getQuantity();
+                            %>
+                            <td data-th="Subtotal" class="text-center"><%=sub%></td>
+                            <%
 
-                        <td class="actions" data-th=""> <!--  remove button -->
+                                total = total + sub;
+                            %>
 
-                            <input type="hidden" name="productID" value="<%=p.getProductId()%>">
-                            <input type="hidden" name="action" value="updateCartQuantity">
-                            <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
-                    </form>
+                            <td class="actions" data-th=""> <!--  remove button -->
+                                <form action="TheServlet" method="post">
+                                    <input type="hidden" name="productID" value="<%=p.getProductId()%>">
+                                    <input type="hidden" name="action" value="updateCartQuantity">
+                                    <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
+                                </form>
 
-                    <form action="TheServlet" method="post">
-                        <input type="hidden" name="productID" value="<%=p.getProductId()%>">
-                        <input type="hidden" name="action" value="removeFromCart">
-                        <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
-                    </form>
-                    </td>
-                    <td>
+                                <form action="TheServlet" method="post">
+                                    <input type="hidden" name="productID" value="<%=p.getProductId()%>">
+                                    <input type="hidden" name="action" value="removeFromCart">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
+                                </form>
+                            </td>
+                            <td>
                         </tr>
-                        </tbody>
-                        <%
-                                // Close the loop
-                               idForContinue = product.getCatId();
-                            }
-                            
-                        %>
+                    </tbody>
+                    <%
+                            // Close the loop
+                            idForContinue = product.getCatId();
+                            //nameForcontinue = product.getCatId;
+                        }
+
+                    %>
                     <tfoot>
                         <tr class="visible-xs">
                             <td class="text-center"><strong>Total 1.99</strong></td>
                         </tr>
                         <tr>
-                            <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                            <td><a href="displayItems.jsp?cID=<%=idForContinue%>&name=Continue Shopping" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong><%=total%></strong></td>
                             <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
