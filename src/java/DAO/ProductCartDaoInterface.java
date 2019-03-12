@@ -20,7 +20,9 @@ public interface ProductCartDaoInterface {
     
     public int addToCart(int cartID, int productID, int quantity);
     
-    public int removeProductByPID(int productID, int cartID);
+    public boolean removeProductByPID(int productID, int cartID);
+   
+    public boolean updateQuantity(int cartID, int productID, int quantity);
     
     public ProductCart getProductByCartIdAndProductId(int productID, int cartID);
 }

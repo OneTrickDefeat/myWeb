@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -148,22 +149,25 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
     }
 
     @Override
-    public int removeProductByPID(int productID, int cartID) {
+    public boolean removeProductByPID(int productID, int cartID) {
         int result = 0;
         Connection con = null;
         PreparedStatement ps = null;
-
+        boolean confirmation = false;
         try {
 
             con = this.getConnection();
-            String query = "DELETE FROM productcart WHERE"
-                    + "WHERE cartID = ?"
-                    + "AND productID= ?";
+            String query = "DELETE FROM productcart "
+                    + "WHERE cartID = ? "
+                    + "AND productID = ? ";
             ps = con.prepareStatement(query);
             ps.setInt(1, cartID);
             ps.setInt(2, productID);
             
             result = ps.executeUpdate();
+            if(result == 1){
+                confirmation = true;
+            } 
 
         } catch (SQLException e) {
             System.err.println("\tA problem occurred during the removeProductByPID method:");
@@ -181,7 +185,7 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
             }
         }
 
-        return result;
+        return confirmation;
       }
 
     @Override
@@ -235,5 +239,45 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
 //        System.out.println(pa.getProductByCartIdAndProductId(9, 1));
 
     //}
+
+    @Override
+    public boolean updateQuantity(int cartID, int productID, int quantity) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean updated = false;
+        try {
+            con = this.getConnection();
+            String query = "UPDATE productcart "
+                    + "SET quantity = ? "
+                    + "WHERE cartID = ? AND productID = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, quantity);
+            ps.setInt(2, cartID);
+            ps.setInt(3, productID);
+            
+            int rowsAffected = ps.executeUpdate();
+            if(rowsAffected != 0){
+                updated = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the updateQuantity method:");
+            System.err.println("\t" + e.getMessage());
+            updated = false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the updateQuantity method:\n" + e.getMessage());
+            }
+        }
+        
+        return updated;
+    }
 
 }

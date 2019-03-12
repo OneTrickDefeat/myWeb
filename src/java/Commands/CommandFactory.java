@@ -64,6 +64,13 @@ public class CommandFactory {
                 case "addNewsletter":
                     c = new NewsletterCommand();
                     break; 
+                case "updateCartQuantity":
+                    c = new UpdateCartQuantity();
+                    break;
+                case "removeFromCart":
+                    c = new RemoveProductFromCart();
+                    break;    
+                    
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
