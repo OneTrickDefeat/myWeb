@@ -14,6 +14,7 @@
 
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>
+    <%@ include file = "header.jsp" %>
 
     <body>
         <%            

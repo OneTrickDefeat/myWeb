@@ -34,7 +34,7 @@ public class RemoveProductFromCart implements Command {
             } else {
                 //user input did not match any product title
                 //send the user to error page and inform of this
-                String errorMessage = "No products was deleted from your cart."
+                String errorMessage = "No products were deleted from your cart."
                         + " Please try again.";
                 session.setAttribute("errorMessage", errorMessage);
                 forwardToJsp = "error.jsp";
