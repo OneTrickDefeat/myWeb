@@ -11,9 +11,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
+    <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>
+    
 
     <body>
         <%            
