@@ -63,13 +63,13 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=7"><img class="card-img-top" src="img/kingstontable.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item One</a>
+                                <a href="viewProduct.jsp?prodId=7">Kingston Game Table</a>
                             </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <h5>€931.00</h5>
+                            <p class="card-text">The Kingston Game Set and Bar Stool </p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -79,13 +79,13 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=9"><img class="card-img-top" src="img/lavoietable.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item Two</a>
+                                <a href="viewProduct.jsp?prodId=9">3 in 1 Game Table</a>
                             </h4>
-                            <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                            <h5>€1139.99</h5>
+                            <p class="card-text">Lavoie Furniture Mitchell 3 in 1 Game Table</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -95,13 +95,13 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=11"><img class="card-img-top" src="img/nassautable.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item Three</a>
+                                <a href="viewProduct.jsp?prodId=11">Nassau Game Table</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">The Nassau game set is distinguished and regal. </p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -112,13 +112,13 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=12"><img class="card-img-top" src="img/palmspringstable.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item Four</a>
+                                <a href="viewProduct.jsp?prodId=12">Palm Springs Game Table</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">Add panche to your game room!</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -128,13 +128,13 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=17"><img class="card-img-top" src="img/tynonsofa.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item Five</a>
+                                <a href="viewProduct.jsp?prodId=17">Tynon Sofa</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                            <p class="card-text"> The Tynon sofabed is compact enough for any livingroom.</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -144,13 +144,13 @@
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="viewProduct.jsp?prodId=22"><img class="card-img-top" src="img/mickedesk.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Item Six</a>
+                                <a href="viewProduct.jsp?prodId=22">MICKE desk</a>
                             </h4>
                             <h5>$24.99</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                            <p class="card-text">makes it easy to keep sockets and cables out of sight !</p>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
