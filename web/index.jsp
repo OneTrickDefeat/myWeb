@@ -16,13 +16,7 @@
     
   <body>
 
-        <%            if (loggedInUser != null) {
-        %>
-        <%@ include file = "sidebar.jsp" %>
-
-        <%
-            }
-        %>
+        
         
         <div class="container">
             <!-- jumbotron for sliding images -->

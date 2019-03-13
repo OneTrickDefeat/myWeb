@@ -35,9 +35,9 @@
                 <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
                 <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
                 <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
-                
-                
-                
+
+
+
             </ul>
 
             <%
@@ -60,23 +60,32 @@
                 <input type="hidden" name ="action" value="searchProduct" />
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-                    <%
-                        
-                 if (loggedInUser != null)         {
-                                %>
+            <%
+                if (loggedInUser != null) {
+            %>
             <!-- welcome note -->
             <div class="pull-right">
                 <ul class="nav pull-right">
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getFirstName()%> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
-                            <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
+                            <li><a href="myAccount.jsp"><i class="icon-cog"></i> My Account</a></li>
+                            <li><a href="viewCart.jsp"><i class="icon-envelope"></i> My Cart</a></li>
+                                <%
+                                    if (loggedInUser.isAdmin()) {
+
+                                %>
                             <li class="divider"></li>
-                            <li><a href="/auth/logout"><i class="icon-off"></i> Logout</a></li>
+                            <li><a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a></li>
+                            <li><a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a></li>
+                            <li><a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a></li>
+                            <li><a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a></li>
+                                <%}%>
+                            <li class="divider"></li>
+                            <li><a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a></li>
                         </ul>
                     </li>
                 </ul>
-              </div>
+            </div>
             <!-- end of welcome note -->
             <%}%>
 
