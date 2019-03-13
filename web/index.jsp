@@ -163,53 +163,7 @@
             <!-- end of special offers -->
 
 
-            <%            if (loggedInUser != null) {
-            %>
-
-
-
-            <h1><%=dataBundle.getString("index_loggedInMsg")%></h1>
-            <a href="myAccount.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
-            <br>
-            <a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a>
-
-            <%
-                if (loggedInUser.isAdmin()) {
-
-            %>
-
-            <h2>Admin functions</h2>
-            <br>
-            <a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a>
-            <br>
-            <a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a>
-            <br>
-            <a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a>
-            <br>
-            <a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a>
-
-            <%
-                }
-                loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
-                if (loggedInUserCart != null) {
-            %>
-            <h4>Cart does exist</h4>
-            <% }%>
-
-            <%
-                //end of what happens if theyre logged in
-            } else {
-            %>
-
-
-            <h1><%=dataBundle.getString("index_LogInCheckMsg")%></h1>
-
-
-
-            <%
-                }
-            %>
-
+            
         </div>
     </body>
 
