@@ -114,7 +114,7 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         PreparedStatement ps = null;
 
         ProductCart productCart = getProductByCartIdAndProductId(productID, cartID);
-        if (productCart != null) {
+        if (productCart == null) {
             try {
 
                 con = this.getConnection();
