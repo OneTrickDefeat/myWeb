@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Audrius
  */
-public class AddToCartCommand implements Command{
+public class AddToCartCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -22,21 +22,21 @@ public class AddToCartCommand implements Command{
         int result = 0;
         //get values submited from viewProduct.jsp form
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        int productID = Integer.parseInt(request.getParameter("productID"));       
+        int productID = Integer.parseInt(request.getParameter("productID"));
         int cartID = Integer.parseInt(request.getParameter("cartID"));
 
         //check was it passed and are not just empty fields
         if ((quantity > 0 || quantity <= 10) && cartID > 0 && productID > 0) {
             ProductCartDao pCartDao = new ProductCartDao("furniturestore");
-            
-            
+
             //checking does that item already exist inside productCart table
-//            if(){
-//                
-//            }
-            
-            //create new ProductCart record
-            result = pCartDao.addToCart(cartID, productID, quantity);
+            if (pCartDao.doesProductCartRowExist(productID, cartID)) {
+                pCartDao.incrementQuantityByOne(productID, cartID);
+                result = 1;
+            } else {
+                //create new ProductCart record
+                result = pCartDao.addToCart(cartID, productID, quantity);
+            }
 
             //if result equals to 1, operations was comleted.
             //Otherwise let user to know
@@ -63,7 +63,5 @@ public class AddToCartCommand implements Command{
         }
         return forwardToJsp;
     }
-    
-    
-    
+
 }
