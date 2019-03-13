@@ -11,9 +11,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%@ include file = "header.jsp" %>
     <%@ include file = "nav.jsp" %>
     <%@ include file = "head.jsp" %>
-    <%@ include file = "header.jsp" %>
+    
 
     <body>
 
@@ -74,8 +75,7 @@
                                 <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" > 
                                 </form>
                                 
-                                <p class="product-description"><%=cart.getCartID()%></p>
-                                <p class="product-description"><%=b.getProductId()%></p>
+                             
 
                                 <!--   </div> -->
 

@@ -9,10 +9,11 @@
 <!DOCTYPE html>
 <html>
 
-
+    <%@ include file = "header.jsp" %>
     <%@ include file = "nav.jsp" %>
     <%@ include file = "head.jsp" %>
-    <%@ include file = "header.jsp" %>
+    
+    
   <body>
 
         <%            if (loggedInUser != null) {

@@ -62,12 +62,12 @@
             </form>
                     <%
                         
-                         {
+                 if (loggedInUser != null)         {
                                 %>
-            <!-- welcome note 
+            <!-- welcome note -->
             <div class="pull-right">
                 <ul class="nav pull-right">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getFirstName()%> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
                             <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
