@@ -64,7 +64,7 @@
                             <div class="details col-md-6"><!--  product details -->
                                 <h3 class="product-title"><%=b.getName()%></h3>
                                 <p class="product-description"><%=b.getDescription()%></p>
-                                <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
+                                <h4 class="price"><%=dataBundle.getString("searchResult_price")%>: €<span><%=b.getPrice()%></span></h4>
 
                                 <form action="TheServlet" method="post">
                                 <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->

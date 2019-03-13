@@ -59,7 +59,7 @@ Author     : Audrius
                         }
                         // We have finished with the list of found products 
                         // so now we can remove the value from the session
-                        session.removeAttribute("foundProducts");
+                        //session.removeAttribute("foundProducts");
                     %>
                 </section>
             </div>
