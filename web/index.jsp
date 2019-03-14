@@ -60,6 +60,7 @@
 
             <!-- special offers -->
             <div class="row">
+               
 
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
@@ -100,7 +101,7 @@
                             <h4 class="card-title">
                                 <a href="viewProduct.jsp?prodId=11">Nassau Game Table</a>
                             </h4>
-                            <h5>$24.99</h5>
+                            <h5>€599.99</h5>
                             <p class="card-text">The Nassau game set is distinguished and regal. </p>
                         </div>
                         <div class="card-footer">
@@ -117,7 +118,7 @@
                             <h4 class="card-title">
                                 <a href="viewProduct.jsp?prodId=12">Palm Springs Game Table</a>
                             </h4>
-                            <h5>$24.99</h5>
+                            <h5>€789.99</h5>
                             <p class="card-text">Add panche to your game room!</p>
                         </div>
                         <div class="card-footer">
@@ -133,7 +134,7 @@
                             <h4 class="card-title">
                                 <a href="viewProduct.jsp?prodId=17">Tynon Sofa</a>
                             </h4>
-                            <h5>$24.99</h5>
+                            <h5>€999.99</h5>
                             <p class="card-text"> The Tynon sofabed is compact enough for any livingroom.</p>
                         </div>
                         <div class="card-footer">
@@ -149,7 +150,7 @@
                             <h4 class="card-title">
                                 <a href="viewProduct.jsp?prodId=22">MICKE desk</a>
                             </h4>
-                            <h5>$24.99</h5>
+                            <h5>€199.99</h5>
                             <p class="card-text">makes it easy to keep sockets and cables out of sight !</p>
                         </div>
                         <div class="card-footer">
