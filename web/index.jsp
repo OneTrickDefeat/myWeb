@@ -11,6 +11,11 @@
     <%@ include file = "nav.jsp" %>
     <%@ include file = "head.jsp" %>
 
+
+    <body>
+
+
+
     <body>
         <div class="container">
 

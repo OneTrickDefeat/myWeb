@@ -43,9 +43,12 @@
                     // get the specific Customer from the database and display it
                     ProductDao prodDao = new ProductDao("furniturestore");
                     CartDao cDao = new CartDao("furniturestore");
-
+                    Cart cart = null;
+                    if(loggedInUser != null){
+                        cart = cDao.findCartByEmail(loggedInUser.getUsername());
+                    }
+                    
                     Product b = prodDao.findProductByProductId(prodNum);
-                    Cart cart = cDao.findCartByEmail(loggedInUser.getUsername());
 
                     if (b != null) {
 
@@ -64,16 +67,19 @@
                             <div class="details col-md-6"><!--  product details -->
                                 <h3 class="product-title"><%=b.getName()%></h3>
                                 <p class="product-description"><%=b.getDescription()%></p>
-                                <h4 class="price">current price: €<span><%=b.getPrice()%></span></h4>
-
+                                <h4 class="price"><%=dataBundle.getString("searchResult_price")%>: €<span><%=b.getPrice()%></span></h4>
+                                
+                                <!-- is there is no user logged in, addToCart button wont be displayed -->
+                                <% if(loggedInUser != null) { %>
                                 <form action="TheServlet" method="post">
                                     <!-- Include a hidden field to identify what the user wants to do //onclick="window.location.href = 'displayCart.jsp'"-->
                                     <input type="number" name="quantity" class="form-control input-number" value="1" min="1" max="10">
                                     <input type="hidden" name="cartID" value="<%=cart.getCartID()%>">
                                     <input type="hidden" name="productID" value="<%=b.getProductId()%>">
-                                    <input type="hidden" name="action" value="addToCart"><br>
+                                    <input type="hidden" name="action" value="addToCart">
                                     <input class="add-to-cart btn btn-default" type="submit" value="Add to cart" > 
                                 </form>
+                                    <% } %>
 
 
                                 <!--   </div> -->

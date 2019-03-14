@@ -112,36 +112,34 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         int result = 0;
         Connection con = null;
         PreparedStatement ps = null;
-        
+
         ProductCart productCart = getProductByCartIdAndProductId(productID, cartID);
-        if(productCart != null){
-            
-        }
-
-        try {
-
-            con = this.getConnection();
-            String query = "INSERT INTO productcart (cartID, productID, quantity) "
-                    + "VALUES (?, ?, ?)";
-            ps = con.prepareStatement(query);
-            ps.setInt(1, cartID);
-            ps.setInt(2, productID);
-            ps.setInt(3, quantity);
-            result = ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.err.println("\tA problem occurred during the addToCart method:");
-            System.err.println("\t" + e.getMessage());
-        } finally {
+        if (productCart == null) {
             try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    freeConnection(con);
-                }
+
+                con = this.getConnection();
+                String query = "INSERT INTO productcart (cartID, productID, quantity) "
+                        + "VALUES (?, ?, ?)";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, cartID);
+                ps.setInt(2, productID);
+                ps.setInt(3, quantity);
+                result = ps.executeUpdate();
+
             } catch (SQLException e) {
-                System.err.println("A problem occurred when closing down the addProduct method:\n" + e.getMessage());
+                System.err.println("\tA problem occurred during the addToCart method:");
+                System.err.println("\t" + e.getMessage());
+            } finally {
+                try {
+                    if (ps != null) {
+                        ps.close();
+                    }
+                    if (con != null) {
+                        freeConnection(con);
+                    }
+                } catch (SQLException e) {
+                    System.err.println("A problem occurred when closing down the addProduct method:\n" + e.getMessage());
+                }
             }
         }
 
@@ -163,11 +161,11 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
             ps = con.prepareStatement(query);
             ps.setInt(1, cartID);
             ps.setInt(2, productID);
-            
+
             result = ps.executeUpdate();
-            if(result == 1){
+            if (result == 1) {
                 confirmation = true;
-            } 
+            }
 
         } catch (SQLException e) {
             System.err.println("\tA problem occurred during the removeProductByPID method:");
@@ -186,7 +184,76 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         }
 
         return confirmation;
-      }
+    }
+
+    public void incrementQuantityByOne(int productID, int cartID){
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = this.getConnection();
+            String query = "UPDATE productcart "
+                    + "SET quantity = quantity + 1 "
+                    + "WHERE cartID = ? AND productID = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, cartID);
+            ps.setInt(2, productID);
+            ps.executeUpdate();         
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the updateQuantity method:");
+            System.err.println("\t" + e.getMessage());          
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the updateQuantity method:\n" + e.getMessage());
+            }
+        }  
+    }
+    
+    public boolean doesProductCartRowExist(int productID, int cartID) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean result = false;
+
+        try {
+            con = this.getConnection();
+            String query = "SELECT * FROM productcart "
+                    + "WHERE productId = ? AND cartId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, productID);
+            ps.setInt(2, cartID);
+            rs = ps.executeQuery();
+
+            //if row was found change result variable to true
+            if (rs.next()) {
+                result = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the doesProductCartRowExist method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the doesProductCartRowExist method:\n" + e.getMessage());
+            }
+        }
+        return result;
+    }
 
     @Override
     public ProductCart getProductByCartIdAndProductId(int productID, int cartID) {
@@ -233,12 +300,6 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         }
         return productCart;     // productCart may be null  
     }
-    
-//    public static void main(String[] args) {
-//        ProductCartDao pa = new ProductCartDao("furniturestore");
-//        System.out.println(pa.getProductByCartIdAndProductId(9, 1));
-
-    //}
 
     @Override
     public boolean updateQuantity(int cartID, int productID, int quantity) {
@@ -255,9 +316,9 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
             ps.setInt(1, quantity);
             ps.setInt(2, cartID);
             ps.setInt(3, productID);
-            
+
             int rowsAffected = ps.executeUpdate();
-            if(rowsAffected != 0){
+            if (rowsAffected != 0) {
                 updated = true;
             }
         } catch (SQLException e) {
@@ -276,7 +337,6 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
                 System.err.println("A problem occurred when closing down the updateQuantity method:\n" + e.getMessage());
             }
         }
-        
         return updated;
     }
 

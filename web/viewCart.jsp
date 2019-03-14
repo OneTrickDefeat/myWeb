@@ -4,6 +4,8 @@
     Author     : Audrius
 --%>
 
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="DAO.ProductDao"%>
 <%@page import="Business.ProductCart"%>
 <%@page import="Business.Product"%>
@@ -14,7 +16,7 @@
     <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>
-    
+
 
     <body>
         <div class="container">
@@ -23,6 +25,9 @@
                 int cartID = loggedInUserCart.getCartID();
                 //getting list of products in user cart
                 ArrayList<ProductCart> cartProducts = (ArrayList<ProductCart>) pCartDao.getItemsByCartId(cartID);
+
+                NumberFormat formatter = new DecimalFormat("#0.00");
+                
             %>
             <h1>Cart</h1>
 
@@ -103,13 +108,11 @@
 
                     %>
                     <tfoot>
-                        <tr class="visible-xs">
-                            <td class="text-center"><strong>Total 1.99</strong></td>
-                        </tr>
+
                         <tr>
                             <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                             <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
-                            <td class="hidden-xs text-center"><strong><%=total%></strong></td>
+                            <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
                             <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
