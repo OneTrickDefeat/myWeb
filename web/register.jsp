@@ -10,35 +10,41 @@
     <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>
-    
-    <body>
-        <div class="container">
-        <div>
-            <p>Please fill in your details to register</p>
+
+    <body><br>
+    <center>
+        <div class="con">
+            <h2 id="sign">Register</h2>
+            <hr style="border: 1px solid lightgrey;"/>
             <form action="TheServlet" method="post">
                 <table>
                     <tr>
-                        <td> email  : </td><td> <input name="email" required size=20 type="text" /> </td> 
+                    <input name="email" required size=20 type="text" placeholder="Email"/> 
                     </tr>
                     <tr>
-                        <td> Password  : </td><td> <input name="password" required size=50 type="password" /> </td> 
+                    <input name="password" required size=50 type="password"  placeholder="Password"/> 
                     </tr>
                     <tr>
-                        <td> First Name  : </td><td> <input name="firstName" required size=20 type="text" /> </td> 
+                    <input name="firstName" required size=20 type="text"  placeholder="First Name"/>
                     </tr>
                     <tr>
-                        <td> Last Name  : </td><td> <input name="lastName" size=40 type="text" /> </td> 
+                    <input name="lastName" size=40 type="text"  placeholder="Last Name"/> 
                     </tr>
-                    
+
                 </table>
-                <input type="submit" value="Register" />
+                <hr style="border: 1px solid lightgrey;"/>
+                <button id="button" type="submit" value="Register">&nbsp; Register</button><br><br>
                 <!-- Include a hidden field to identify what the user wants to do -->
                 <input type="hidden" name ="action" value="register" />
+
+                <label id="signup">Already Registered? &nbsp;<a id="account" href="index.jsp">Login Here!</a></label>
+
+
             </form>
-        </div>
-        
-        <!-- Include a footer so that there is always a link back to the home page! -->
-        <%@ include file = "footer.jsp" %>
-        </div>
-    </body>
+        </div><br><br><br>
+    </center>
+
+    <!-- Include a footer so that there is always a link back to the home page! -->
+    <%@ include file = "footer.jsp" %>
+</body>
 </html>

@@ -45,7 +45,7 @@ public class updateUserCommand implements Command {
                 // The user couldn't be added to the database
                 // Send the user to the error page and inform them of this
                 String errorMessage = "User couldn't be added to the database at this time"
-                        + "Please <a href='register.jsp'>go back</a> and try again.<br/>Try a different username!";
+                        + "Please <a href='myAccount.jsp'>go back</a> and try again.<br/>Try a different username!";
                 session = request.getSession();
                 session.setAttribute("errorMessage", errorMessage);
                 forwardToJsp = "error.jsp";
@@ -53,7 +53,7 @@ public class updateUserCommand implements Command {
         } else {
             // One or more fields were missing
             // Send the user to the error page and inform them of this
-            String errorMessage = "One or more fields were missing. Please <a href='register.jsp'>go back</a> and try again.";
+            String errorMessage = "One or more fields were missing. Please <a href='myAccount.jsp'>go back</a> and try again.";
             session = request.getSession();
             session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";

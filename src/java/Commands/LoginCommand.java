@@ -63,7 +63,7 @@ public class LoginCommand implements Command {
                 
                 
                 String errorMessage = "No user found matching those details."
-                        + "Please <a href='login.jsp'>go back</a> and try again.";
+                        + "Please <a href='index.jsp'>go back</a> and try again.";
                 HttpSession session = request.getSession();
                 session.setAttribute("errorMessage", errorMessage);
                 forwardToJsp = "error.jsp";

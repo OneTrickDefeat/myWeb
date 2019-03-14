@@ -10,40 +10,41 @@
 <!DOCTYPE html>
 <html>
     <div class="container">
-       
-            <%                User loggedInUser = (User) session.getAttribute("loggedInUser");
-                Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
 
-                if (loggedInUser != null) {
-            %>
-          <!--  
-            <div>
-                <h2><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getUsername()%></h2>
-            </div>
-          -->
-            <%
-            } else {
-            %>     
-            <form action="TheServlet" method="post">
-                <table>
-                    <tr>
-                        <td> <%=dataBundle.getString("logInForm_username")%>  : </td><td> <input name="email" required size=20 type="text" /> </td> 
-                    </tr>
-                    <tr>
-                        <td> <%=dataBundle.getString("logInForm_password")%>  : </td><td> <input name="password" required size=50 type="password" /> </td> 
-                    </tr>
-                </table>
-                <input type="submit" value=<%=dataBundle.getString("logInForm_button")%> />
-                <!-- Include a hidden field to identify what the user wants to do -->
-                <input type="hidden" name ="action" value="login" />
-            </form>
+        <%                User loggedInUser = (User) session.getAttribute("loggedInUser");
+            Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+
+            if (loggedInUser != null) {
+        %>
+        <!--  
+          <div>
+              <h2><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getUsername()%></h2>
+          </div>
+        -->
+        <%
+        } else {
+        %>  
+        <center>
+            <div class="con">
+                <h3 id="sign">Login</h3>
+                <form action="TheServlet" method="post">
+                    <table>
+                        <tr>
+                        <input name="email" required size=20 type="text" placeholder="<%=dataBundle.getString("logInForm_username")%>"/>  
+                        </tr>
+                        <tr>
+                        <input name="password" required size=50 type="password" placeholder="<%=dataBundle.getString("logInForm_password")%>"/>  
+                        </tr>
+                    </table>
+
+                    <input id="button" type="submit" value=<%=dataBundle.getString("logInForm_button")%> />
+                    <!-- Include a hidden field to identify what the user wants to do -->
+                    <input type="hidden" name ="action" value="login" />
+                </form>
 
 
-            <div>
-                <p>
-                    <%=dataBundle.getString("logInForm_notRegMsg")%><br/>
-                    <a href="register.jsp"><%=dataBundle.getString("logInForm_notRegLink")%></a>
-                </p>
+                <label id="signup"><%=dataBundle.getString("logInForm_notRegMsg")%> &nbsp;<a id="account" href="register.jsp"><%=dataBundle.getString("logInForm_notRegLink")%></a></label>
+
             </div>
 
             <%
@@ -51,7 +52,7 @@
             %>
 
 
-       
+        </center>
 
     </div>
 </html>

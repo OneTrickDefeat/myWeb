@@ -3,108 +3,78 @@
     Created on : 30-Nov-2018, 14:20:53
     Author     : Tom
 --%>
-
 <%@page import="Business.Cart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <%@ include file = "header.jsp" %>
     <%@ include file = "nav.jsp" %>
     <%@ include file = "head.jsp" %>
-    
-    
-  <body>
 
-        
-        
+    <body>
         <div class="container">
-            <!-- jumbotron for sliding images -->
-           
-                
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="img/amberbed.jpg" alt="Los Angeles" style="width:100%;">
-                        </div>
+            <div class="wrap-slide">
+                <a href="#" class="bln" id="bln-left"><<</a>
+                <a href="#" class="bln" id="bln-right">>></a>
+                <ul class="slideshow">
+                    <li class="current" ><img src="img/churchillbed.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/casseltonbed.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/kingstontable.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/lavoietable.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/nassautable.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/palmspringstable.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/robbiedining.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/sanctuaryHF.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/solanodesk.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/sorellaHF.jpg" alt="" width="1000" height="600"/></li>
+                    <li><img src="img/twistdining.jpg" alt="" width="1000" height="600"/></li>
+                </ul>
+            </div><br><br><br>
 
-                        <div class="item">
-                            <img src="img/colebed.jpg" alt="Chicago" style="width:100%;">
-                        </div>
+            <script>
+                var slideCount = $('.slideshow li').length;
+                var slideWidth = $('.slideshow li').width();
+                var slideHeight = $('.slideshow li').height();
+                var slideULwidth = slideCount * slideWidth;
 
-                        <div class="item">
-                            <img src="img/malmdesk.jpg" alt="New york" style="width:100%;">
-                        </div>
-                    </div>
+                $('.wrap-slide').css({width: slideWidth, height: slideHeight});
+                $('.slideshow').css({width: slideULwidth, marginLeft: -slideWidth});
+                $('.slideshow li:last-child').prependTo($('.slideshow'));
 
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-           
-            <!-- end of jumbotron --> 
-            
-            
-            <%            if (loggedInUser != null) {
-            %>
-
-
-
-            <h1><%=dataBundle.getString("index_loggedInMsg")%></h1>
-            <a href="myAccount.jsp"><%=dataBundle.getString("index_accountMsg")%></a>
-            <br>
-            <a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a>
-
-            <%
-                if (loggedInUser.isAdmin()) {
-
-            %>
-
-            <h2>Admin functions</h2>
-            <br>
-            <a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a>
-            <br>
-            <a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a>
-            <br>
-            <a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a>
-            <br>
-            <a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a>
-
-            <%
+                function moveLeft() {
+                    $('.slideshow').animate({
+                        left: +slideWidth
+                    }, 600, function () {
+                        $('.slideshow li:last-child').prependTo('.slideshow');
+                        $('.slideshow').css('left', '');
+                    });
                 }
-                loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
-                if (loggedInUserCart != null) {
-            %>
-            <h4>Cart does exist</h4>
-            <% }%>
+                ;
 
-            <%
-                //end of what happens if theyre logged in
-            } else {
-            %>
-
-
-            <h1><%=dataBundle.getString("index_LogInCheckMsg")%></h1>
-
-
-
-            <%
+                function moveRight() {
+                    $('.slideshow').animate({
+                        left: -slideWidth
+                    }, 600, function () {
+                        $('.slideshow li:first-child').appendTo('.slideshow');
+                        $('.slideshow').css('left', '');
+                    });
                 }
-            %>
+                ;
+                var idset = setInterval('moveRight()', 4000);
+                $('#bln-left').click(function () {
+                    clearInterval(idset);
+                    moveLeft();
+                    idset = setInterval('moveRight()', 4000);
+                });
+                $('#bln-right').click(function () {
+                    clearInterval(idset);
+                    moveRight();
+                    idset = setInterval('moveRight()', 4000);
+                });
+
+            </script>
+
 
         </div>
     </body>
