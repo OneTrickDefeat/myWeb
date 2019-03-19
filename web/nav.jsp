@@ -68,8 +68,8 @@
                 <ul class="nav pull-right">
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=dataBundle.getString("logInForm_greeting")%>  <%=loggedInUser.getFirstName()%> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="myAccount.jsp"><i class="icon-cog"></i> My Account</a></li>
-                            <li><a href="viewCart.jsp"><i class="icon-envelope"></i> My Cart</a></li>
+                            <li><a href="myAccount.jsp"><i class="icon-cog"></i> <%=dataBundle.getString("index_accountMsg")%></a></li>
+                            <li><a href="viewCart.jsp"><i class="icon-envelope"></i> <%=dataBundle.getString("index_myCartMsg")%></a></li>
                                 <%
                                     if (loggedInUser.isAdmin()) {
 

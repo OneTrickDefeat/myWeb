@@ -28,7 +28,7 @@ public class UpdateCartQuantity implements Command {
         int cartID = loggedInUserCart.getCartID();
         int productID = Integer.parseInt(request.getParameter("productID"));
             
-        if(cartID > 0 && productID > 0){
+        if(cartID > 0 && productID > 0 && quantity > 0){
             ProductCartDao pcDao = new ProductCartDao("furniturestore");
             boolean updated = pcDao.updateQuantity(cartID, productID, quantity);
             
