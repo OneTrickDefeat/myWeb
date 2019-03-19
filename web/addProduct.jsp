@@ -34,7 +34,7 @@
                         </tr>
 
                         <tr>
-                            <td> Product Image  : </td><td> I DONT KNOW HOW TO ADD IMAGE, NEED TO FIX THIS TOMORROW </td> 
+                            <td> Product Image  : </td><td>  </td> 
                         </tr>
 
                         <tr>
