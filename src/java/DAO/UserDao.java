@@ -80,49 +80,49 @@ public class UserDao extends Dao implements UserDaoInterface {
      * If no match is found for the supplied information, then the object will
      * be null.
      */
-    @Override
-    public User findUserByUsernamePassword(String uname, String pword) {
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        User u = null;
-        try {
-            con = this.getConnection();
-            
-            String query = "SELECT * FROM user WHERE email = ? AND password = ?";
-            ps = con.prepareStatement(query);
-            ps.setString(1, uname);
-            ps.setString(2, pword);
-
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                String firstname = rs.getString("firstName");
-                String lastname = rs.getString("lastName");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                boolean isAdmin = rs.getBoolean("isAdmin");
-                u = new User(username, password, firstname, lastname, isAdmin);
-            }
-        } catch (SQLException e) {
-            System.err.println("\tA problem occurred during the findUserByUsernamePassword method:");
-            System.err.println("\t" + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    freeConnection(con);
-                }
-            } catch (SQLException e) {
-                System.err.println("A problem occurred when closing down the findUserByUsernamePassword method:\n" + e.getMessage());
-            }
-        }
-        return u;     // u may be null 
-    }
+//    @Override
+//    public User findUserByUsernamePassword(String uname, String pword) {
+//        Connection con = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        User u = null;
+//        try {
+//            con = this.getConnection();
+//            
+//            String query = "SELECT * FROM user WHERE email = ? AND password = ?";
+//            ps = con.prepareStatement(query);
+//            ps.setString(1, uname);
+//            ps.setString(2, pword);
+//
+//            rs = ps.executeQuery();
+//            if (rs.next()) {
+//                String firstname = rs.getString("firstName");
+//                String lastname = rs.getString("lastName");
+//                String username = rs.getString("username");
+//                String password = rs.getString("password");
+//                boolean isAdmin = rs.getBoolean("isAdmin");
+//                u = new User(username, password, firstname, lastname, isAdmin);
+//            }
+//        } catch (SQLException e) {
+//            System.err.println("\tA problem occurred during the findUserByUsernamePassword method:");
+//            System.err.println("\t" + e.getMessage());
+//        } finally {
+//            try {
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//                if (con != null) {
+//                    freeConnection(con);
+//                }
+//            } catch (SQLException e) {
+//                System.err.println("A problem occurred when closing down the findUserByUsernamePassword method:\n" + e.getMessage());
+//            }
+//        }
+//        return u;     // u may be null 
+//    }
 
     /**
      * Find the first <code>User</code> matching a specified username. If more
@@ -150,10 +150,10 @@ public class UserDao extends Dao implements UserDaoInterface {
             if (rs.next()) {
                 String firstname = rs.getString("firstName");
                 String lastname = rs.getString("lastName");
-                String username = rs.getString("username");
+                String email = rs.getString("email");
                 String password = rs.getString("password");
                 boolean isAdmin = rs.getBoolean("isAdmin");
-                u = new User(username, password, firstname, lastname, isAdmin);
+                u = new User(email, password, firstname, lastname, isAdmin);
             }
         } catch (SQLException e) {
             System.err.println("\tA problem occurred during the findUserByUsername method:");
@@ -193,7 +193,7 @@ public class UserDao extends Dao implements UserDaoInterface {
         try {
             con = this.getConnection();
 
-            String query = "SELECT * FROM users WHERE USERNAME = ? AND isAdmin = TRUE";
+            String query = "SELECT * FROM user WHERE email = ? AND isAdmin = TRUE";
             ps = con.prepareStatement(query);
             ps.setString(1, uname);
 
@@ -293,7 +293,7 @@ public class UserDao extends Dao implements UserDaoInterface {
         try {
             con = this.getConnection();
 
-            String query = "DELETE FROM users WHERE username = ?";
+            String query = "DELETE FROM user WHERE email = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, u.getUsername());
 
@@ -435,53 +435,4 @@ public class UserDao extends Dao implements UserDaoInterface {
         // Return whether or not results were updated
         return rowsUpdated;
     }
-
-    // Sample code showing these methods in use.
-    public static void main(String[] args) {
-        UserDao uDAO = new UserDao("MyBlog");
-        try {
-            // Try to find an existing user
-            User u = uDAO.findUserByUsernamePassword("Steph", "password");
-            System.out.println(u);
-
-            // Try to find a user that doesn't exist
-            u = uDAO.findUserByUsernamePassword("zzzzzzzzz", "password");
-            System.out.println(u);
-
-            u = new User("alexis", "password", "Michelle", "Addison", false);
-            uDAO.addUser(u);
-
-            u = uDAO.findUserByUsername("alexis");
-            System.out.println(u);
-
-            u = uDAO.findUserByUsername("Charles");
-            System.out.println(u);
-
-            //check if user can be updated 
-            System.out.println("check user updated");
-            User s = new User("test", "password", "test", "test", false);
-            System.out.println(s.toString());
-            User s2 = new User("test", "password", "it", "worked", false);
-            boolean updated = uDAO.updateUser(s2);
-            System.out.println(s2.toString());
-
-            // Check if a User is an admin
-            boolean isAdmin = uDAO.checkIfUserIsAdmin("Michelle");
-            System.out.println("Michelle is an admin: " + isAdmin);
-            isAdmin = uDAO.checkIfUserIsAdmin("Charles");
-            System.out.println("Charles is an admin: " + isAdmin);
-
-            // Try to remove a user that doesn't exist
-            User noUser = new User("Hannah", "pass", "Hannah", "Abbott", false);
-            boolean removed = uDAO.removeUser(noUser);
-            if (removed) {
-                System.out.println("User " + noUser.getUsername() + " was removed successfully.");
-            } else {
-                System.out.println("User " + noUser.getUsername() + " could not be removed.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

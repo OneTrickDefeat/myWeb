@@ -17,9 +17,6 @@ public interface UserDaoInterface
      public int updateUserPassword(String oldPassword, String newPassword, String email);
     
     // Find User based on username and password
-    public User findUserByUsernamePassword(String uname, String pword);
-    
-    // Find User based on username and password
     public User findUserByEmailPassword(String email, String pword);
     
     // Find first user with that username

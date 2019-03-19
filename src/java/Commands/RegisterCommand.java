@@ -21,21 +21,21 @@ public class RegisterCommand implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = null;
         
-        String username = request.getParameter("email");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String first = request.getParameter("firstName");
         String last = request.getParameter("lastName");
         
         boolean adminLevel = false;
         
-        if(username != null && !username.equals("") && password != null && !password.equals("") && first != null && !first.equals("")){
+        if(email != null && !email.equals("") && password != null && !password.equals("") && first != null && !first.equals("")){
             UserDao uDao = new UserDao("furniturestore");
-            User toAdd = new User (username,password,first,last,adminLevel);
+            User toAdd = new User (email,password,first,last,adminLevel);
             boolean added = uDao.addUser(toAdd);
             
             if(added != false){
                 // Registration was successful, log the user in!
-                User u = uDao.findUserByUsernamePassword(username, password);
+                User u = uDao.findUserByEmailPassword(email, password);
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInUser", u);
