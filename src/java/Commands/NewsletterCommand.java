@@ -26,7 +26,9 @@ public class NewsletterCommand implements Command {
 
         if (newletterEmail != null && !newletterEmail.equals("")) {
             NewsletterDao news = new NewsletterDao("furniturestore");
+            
             Newsletter newRecord = new Newsletter(newletterEmail);
+            
             boolean isAdded = news.addToNewsletter(newRecord);
 
             if (isAdded != false) {

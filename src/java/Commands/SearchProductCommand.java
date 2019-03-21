@@ -26,7 +26,7 @@ public class SearchProductCommand implements Command {
         String searchProduct = request.getParameter("product");		
         int category = Integer.parseInt(request.getParameter("searchOption"));
         
-        if(searchProduct != null && !searchProduct.equals("")){
+        if(searchProduct != null){
             ProductDao pDao = new ProductDao("furniturestore");
             ArrayList<Product> p = new ArrayList();
             
