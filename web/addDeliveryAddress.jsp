@@ -20,7 +20,7 @@
                         <h2 id="sign2"></h2><hr style="border: 2px dotted white;"/>
 
                         <label>House Number</label>&nbsp;&nbsp;
-                        <input name="houseNumber" required type="text" placeholder="Enter House Number"/><br>
+                        <input name="houseNumber" required type="number"  placeholder="Enter House Number" min=1 max=9999/><br>
 
                         <label>Street Line 1</label>&nbsp;&nbsp;
                         <input name="streetLine1" required type="text" placeholder="Street line 1"/><br>
