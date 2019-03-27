@@ -32,12 +32,13 @@ CREATE TABLE `address` (
   `addressId` int(11) NOT NULL,
   `houseNo` int(11) NOT NULL,
   `street line 1` varchar(60) NOT NULL,
-  `street ine 2` varchar(60) NOT NULL,
+  `street line 2` varchar(60) NOT NULL,
   `town` varchar(60) NOT NULL,
   `county` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
   `postcode` varchar(15) NOT NULL,
-  `email` varchar(40) NOT NULL
+  `email` varchar(40) NOT NULL,
+  `default` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

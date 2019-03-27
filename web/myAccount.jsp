@@ -24,7 +24,7 @@
 
             <a href="updateAccount.jsp"><%=dataBundle.getString("myAcc_updateLink")%></a><br>
             <a href="updatePassword.jsp">Update Password</a><br>
-            <a href="#">Add Delivery Address</a><br>
+            <a href="addDeliveryAddress.jsp">Add Delivery Address</a><br>
 
 
 

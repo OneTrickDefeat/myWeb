@@ -43,9 +43,13 @@ public class LoginCommand implements Command {
                 
                  //CALL CART DAO TO CHECK FOR CART WITH USERS EMAIL
                  // SET IN SESSION IF PRESENT
+                 
                 HttpSession session = request.getSession();
                 CartDao cDao = new CartDao("furniturestore");
                 Cart userCart = cDao.findCartByEmail(email);
+                //create address bussines class and addressDao
+                //store address details for particular user inside thi session 
+                
                 if(userCart != null){
                     session.setAttribute("loggedInUserCart", userCart);
                 } else {

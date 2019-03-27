@@ -26,7 +26,7 @@
                         <input name="streetLine1" required type="text" placeholder="Street line 1"/><br>
                         
                         <label>Street Line 2</label>&nbsp;&nbsp;
-                        <input name="streetLine2" required type="text" placeholder="Street line 2"/><br>
+                        <input name="streetLine2" type="text" placeholder="Street line 2"/><br>
                         
                         <label>Town / City</label>&nbsp;&nbsp;
                         <input name="town" required type="text" placeholder="Town or City"/><br>   
@@ -38,13 +38,14 @@
                         <input name="country" required type="text" placeholder="Country"/><br>   
                         
                         <label>Postcode</label>&nbsp;&nbsp;
-                        <input name="postcode" required type="text" placeholder="Postcode"/><br>   
+                        <input name="postcode" type="text" placeholder="Postcode"/><br>   
                         
 
                         <button  type="submit" value="update">SUBMIT</button><br><br>
 
                         <!-- Include a hidden field to identify what the user wants to do -->
 
+                        
                         <input type="hidden" name ="action" value="addAddress" />
                     </div>
 
