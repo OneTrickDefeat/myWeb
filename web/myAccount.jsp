@@ -25,12 +25,17 @@
             <a href="updateAccount.jsp"><%=dataBundle.getString("myAcc_updateLink")%></a><br>
             <a href="updatePassword.jsp">Update Password</a><br>
             <a href="addDeliveryAddress.jsp">Add Delivery Address</a><br>
-
-
-
-
-
+            
             <%
+                if (loggedInUserAddress !=null) { %>
+                <p><%=loggedInUserAddress.getHouseNo()%></p>
+                <p><%=loggedInUserAddress.getStreetLine1()%></p>
+                <p><%=loggedInUserAddress.getStreetLine2()%></p>
+                <p><%=loggedInUserAddress.getTown()%></p>
+                <p><%=loggedInUserAddress.getCounty()%></p>
+                <p><%=loggedInUserAddress.getCountry()%></p>
+                <p><%=loggedInUserAddress.getPostcode()%></p> <%
+                } 
                 //end of what happens if theyre logged in
             } else {
             %>

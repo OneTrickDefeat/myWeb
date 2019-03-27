@@ -3,6 +3,7 @@
     Created on : 30-Nov-2018, 14:23:34
     Author     : Tom
 --%>
+<%@page import="Business.Address"%>
 <%@page import="Business.Cart"%>
 <%@include file="internationalisationHeader.jsp" %>
 <%@page import="Business.User"%>
@@ -13,6 +14,7 @@
 
         <%                User loggedInUser = (User) session.getAttribute("loggedInUser");
             Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
+            Address loggedInUserAddress = (Address) session.getAttribute("loggedInUserAddress");
 
             if (loggedInUser != null) {
         %>

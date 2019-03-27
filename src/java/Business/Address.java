@@ -5,6 +5,8 @@
  */
 package Business;
 
+import java.util.Objects;
+
 /**
  *
  * @author Audrius
@@ -17,7 +19,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(int houseNo, String streetLine1, String streetLine2, String town, String county, String country, String postcode, String email) {
+    public Address(int houseNo, String streetLine1, String streetLine2, String town, String county, String country, String postcode) {
         this.houseNo = houseNo;
         this.streetLine1 = streetLine1;
         this.streetLine2 = streetLine2;
@@ -111,11 +113,19 @@ public class Address {
             return false;
         }
         final Address other = (Address) obj;
-        if (this.addressId != other.addressId) {
+        if (this.houseNo != other.houseNo) {
+            return false;
+        }
+        if (!Objects.equals(this.streetLine1, other.streetLine1)) {
+            return false;
+        }
+        if (!Objects.equals(this.town, other.town)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

@@ -41,12 +41,15 @@ public class AddDeliveryAddress implements Command{
             AddressDao addressDao = new AddressDao("furniturestore");
             
             Address newAddress = new Address(houseNumber, streetLine1, streetLine2, 
-                            town, county, country, postcode, email);
+                            town, county, country, postcode);
             
             boolean conformation = addressDao.addNewAddress(newAddress);
+            if(conformation){
+                session.setAttribute("loggedInUserAddress", newAddress);
+                forwardToJsp = "myAccount.jsp";
+            }
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return forwardToJsp;
     }
     
     

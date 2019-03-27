@@ -70,7 +70,9 @@ public class CommandFactory {
                 case "removeFromCart":
                     c = new RemoveProductFromCart();
                     break;    
-                    
+                case "addAddress":
+                    c = new AddDeliveryAddress();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
