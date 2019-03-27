@@ -5,10 +5,14 @@
  */
 package DAO;
 
+import Business.Address;
+
 /**
  *
  * @author Audrius
  */
 public interface AddressDaoInterface {
+    
+    public boolean addNewAddress(Address newAddress);
     
 }

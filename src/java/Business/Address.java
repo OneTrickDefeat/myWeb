@@ -12,13 +12,12 @@ package Business;
 public class Address {
     
     private int addressId, houseNo;
-    private String streetLine1, streetLine2, town, county, country, postcode, email;
-    private boolean defaultAddress;
+    private String streetLine1, streetLine2, town, county, country, postcode;
 
     public Address() {
     }
 
-    public Address(int houseNo, String streetLine1, String streetLine2, String town, String county, String country, String postcode, String email, boolean defaultAddress) {
+    public Address(int houseNo, String streetLine1, String streetLine2, String town, String county, String country, String postcode, String email) {
         this.houseNo = houseNo;
         this.streetLine1 = streetLine1;
         this.streetLine2 = streetLine2;
@@ -26,8 +25,6 @@ public class Address {
         this.county = county;
         this.country = country;
         this.postcode = postcode;
-        this.email = email;
-        this.defaultAddress = defaultAddress;
     }
 
     public int getAddressId() {
@@ -94,21 +91,6 @@ public class Address {
         this.postcode = postcode;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isDefaultAddress() {
-        return defaultAddress;
-    }
-
-    public void setDefaultAddress(boolean defaultAddress) {
-        this.defaultAddress = defaultAddress;
-    }
 
     @Override
     public int hashCode() {
@@ -137,7 +119,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" + "addressId=" + addressId + ", houseNo=" + houseNo + ", streetLine1=" + streetLine1 + ", streetLine2=" + streetLine2 + ", town=" + town + ", county=" + county + ", country=" + country + ", postcode=" + postcode + ", email=" + email + ", defaultAddress=" + defaultAddress + '}';
+        return "Address{" + "addressId=" + addressId + ", houseNo=" + houseNo + ", streetLine1=" + streetLine1 + ", streetLine2=" + streetLine2 + ", town=" + town + ", county=" + county + ", country=" + country + ", postcode=" + postcode + '}';
     }
     
     

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2019 at 09:10 PM
+-- Generation Time: Mar 27, 2019 at 09:39 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -30,15 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `addressId` int(11) NOT NULL,
-  `houseNo` int(11) NOT NULL,
+  `houseNo` int(11) DEFAULT NULL,
   `street line 1` varchar(60) NOT NULL,
-  `street line 2` varchar(60) NOT NULL,
+  `street line 2` varchar(60) DEFAULT NULL,
   `town` varchar(60) NOT NULL,
   `county` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
-  `postcode` varchar(15) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `default` tinyint NOT NULL
+  `postcode` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -52,6 +50,13 @@ CREATE TABLE `cart` (
   `email` varchar(40) NOT NULL,
   `lastUpdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartID`, `email`, `lastUpdate`) VALUES
+(1, 'audrius@gmail.com', '2019-03-27 19:38:55');
 
 -- --------------------------------------------------------
 
@@ -208,6 +213,19 @@ INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `isAdmin`) VAL
 ('audrius@gmail.com', '$2a$12$LQOo75r2y0amxd1mksKMgu/6./DsktqMSEObTq8hVdwYVA5XixFi2', 'audrius', 'senkus', 1),
 ('test@gmail.com', '$2a$12$R9FqfJtkUMA0QFJICh6tzOekCd.5eVz8fufldmMmvTTLpKey0nE4i', '12', '12', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `useraddress`
+--
+
+CREATE TABLE `useraddress` (
+  `userAddressId` int(11) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `addressId` int(11) NOT NULL,
+  `defaultAddress` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -216,8 +234,7 @@ INSERT INTO `user` (`email`, `password`, `firstname`, `lastname`, `isAdmin`) VAL
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`addressId`),
-  ADD KEY `email` (`email`);
+  ADD PRIMARY KEY (`addressId`);
 
 --
 -- Indexes for table `cart`
@@ -276,6 +293,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `useraddress`
+--
+ALTER TABLE `useraddress`
+  ADD PRIMARY KEY (`userAddressId`),
+  ADD KEY `email` (`email`,`addressId`),
+  ADD KEY `addressId` (`addressId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -289,7 +314,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -322,14 +347,14 @@ ALTER TABLE `productcart`
   MODIFY `productCartID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `useraddress`
 --
+ALTER TABLE `useraddress`
+  MODIFY `userAddressId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for table `address`
+-- Constraints for dumped tables
 --
-ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`);
 
 --
 -- Constraints for table `cart`
@@ -362,6 +387,13 @@ ALTER TABLE `product`
 ALTER TABLE `productcart`
   ADD CONSTRAINT `productcart_ibfk_1` FOREIGN KEY (`cartID`) REFERENCES `cart` (`cartID`),
   ADD CONSTRAINT `productcart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `product` (`productId`);
+
+--
+-- Constraints for table `useraddress`
+--
+ALTER TABLE `useraddress`
+  ADD CONSTRAINT `useraddress_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`),
+  ADD CONSTRAINT `useraddress_ibfk_2` FOREIGN KEY (`addressId`) REFERENCES `address` (`addressId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
