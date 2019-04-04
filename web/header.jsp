@@ -3,6 +3,7 @@
     Created on : 30-Nov-2018, 14:23:34
     Author     : Tom
 --%>
+<%@page import="Business.UserAddress"%>
 <%@page import="Business.Address"%>
 <%@page import="Business.Cart"%>
 <%@include file="internationalisationHeader.jsp" %>

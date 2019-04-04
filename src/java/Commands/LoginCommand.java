@@ -5,9 +5,13 @@
  */
 package Commands;
 
+import Business.Address;
 import Business.Cart;
 import Business.User;
+import Business.UserAddress;
+import DAO.AddressDao;
 import DAO.CartDao;
+import DAO.UserAddressDao;
 import DAO.UserDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +51,20 @@ public class LoginCommand implements Command {
                 HttpSession session = request.getSession();
                 CartDao cDao = new CartDao("furniturestore");
                 Cart userCart = cDao.findCartByEmail(email);
+                
                 //create address bussines class and addressDao
                 //store address details for particular user inside thi session 
+                UserAddressDao userAddress = new UserAddressDao("furniturestore");
+                AddressDao addressDao = new AddressDao("furniturestore");
+                Address foundAddress = null;
+                UserAddress uAddress = userAddress.retrieveDefaultUseraddress(email);
+                if(uAddress != null){
+                     foundAddress = addressDao.findAddressByID(uAddress.getAddressId());
+                }
+
+                if(uAddress != null){
+                    session.setAttribute("loggedInUserAddress", foundAddress);
+                }
                 
                 if(userCart != null){
                     session.setAttribute("loggedInUserCart", userCart);

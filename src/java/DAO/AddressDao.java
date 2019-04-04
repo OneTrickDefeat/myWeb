@@ -21,6 +21,87 @@ public class AddressDao extends Dao implements AddressDaoInterface {
         super(databaseName);
     }
 
+    public Address findAddressByID(int id){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Address foundAddress = null;
+        
+        try {
+            con = this.getConnection();
+            String query = "SELECT * FROM address "
+                    + "WHERE addressId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);;
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                foundAddress = new Address(rs.getInt("houseNo"), rs.getString("streetLine1"), 
+                    rs.getString("streetLine2"), rs.getString("town"), 
+                    rs.getString("county"), rs.getString("country"), 
+                    rs.getString("postcode"));
+            }   
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findAddressId method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findAddressId method:\n" + e.getMessage());
+            }
+        }
+        return foundAddress;
+    }
+    
+    public int findAddressId(int houseNo, String line1, String town){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int foundAddressID = 0;
+        
+        try {
+            con = this.getConnection();
+            String query = "SELECT addressId FROM address "
+                    + "WHERE houseNo = ? AND streetline1 = ? AND town = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, houseNo);
+            ps.setString(2, line1);
+            ps.setString(3, town);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                foundAddressID = rs.getInt("addressId");
+            }   
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findAddressId method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findAddressId method:\n" + e.getMessage());
+            }
+        }
+        return foundAddressID;
+    }
+    
     @Override
     public boolean addNewAddress(Address newAddress) {
 
@@ -46,8 +127,10 @@ public class AddressDao extends Dao implements AddressDaoInterface {
                 ps.setString(6, newAddress.getCountry());
                 ps.setString(7, newAddress.getPostcode());
 
-                ps.execute();
-
+                int insertedRows = ps.executeUpdate();
+                if(insertedRows == 1){
+                    confirmation = true;
+                }
             } catch (SQLException e) {
                 System.err.println("\tA problem occurred during the addNewAddress method:");
                 System.err.println("\t" + e.getMessage());
@@ -63,7 +146,7 @@ public class AddressDao extends Dao implements AddressDaoInterface {
                     System.err.println("A problem occurred when closing down the addNewAddress method:\n" + e.getMessage());
                 }
             }
-            confirmation = true;
+            
         }
 
         return confirmation;
@@ -86,8 +169,9 @@ public class AddressDao extends Dao implements AddressDaoInterface {
             ps.setInt(1, houseNumber);
             ps.setString(2, line1);
             ps.setString(3, town);
-
+             
             rs = ps.executeQuery();
+            
             if (rs.next()) {
 
                 int houseNo = rs.getInt("houseNo");

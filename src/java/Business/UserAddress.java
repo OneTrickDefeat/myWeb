@@ -13,15 +13,37 @@ import java.util.Objects;
  */
 public class UserAddress {
     
-    private int addressId;
+    private int userAddressId, addressId;
     private String email;
+    private boolean defaultAddress; 
 
     public UserAddress() {
     }
 
+    public UserAddress(int userAddressId, int addressId, String email, boolean defaultAddress) {
+        this.userAddressId = userAddressId;
+        this.addressId = addressId;
+        this.email = email;
+        this.defaultAddress = defaultAddress;
+    }
+
+    public UserAddress(int addressId, String email, boolean defaultAddress) {
+        this.addressId = addressId;
+        this.email = email;
+        this.defaultAddress = defaultAddress;
+    }
+    
     public UserAddress(int addressId, String email) {
         this.addressId = addressId;
         this.email = email;
+    }
+
+    public int getUserAddressId() {
+        return userAddressId;
+    }
+
+    public void setUserAddressId(int userAddressId) {
+        this.userAddressId = userAddressId;
     }
 
     public int getAddressId() {
@@ -40,9 +62,17 @@ public class UserAddress {
         this.email = email;
     }
 
+    public boolean isDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(boolean defaultAddress) {
+        this.defaultAddress = defaultAddress;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         hash = 53 * hash + this.addressId;
         hash = 53 * hash + Objects.hashCode(this.email);
         return hash;
@@ -71,9 +101,8 @@ public class UserAddress {
 
     @Override
     public String toString() {
-        return "UserAddress{" + "addressId=" + addressId + ", email=" + email + '}';
+        return "UserAddress{" + "userAddressId=" + userAddressId + ", addressId=" + addressId + ", email=" + email + ", defaultAddress=" + defaultAddress + '}';
     }
-    
     
     
 }
