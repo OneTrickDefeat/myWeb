@@ -16,7 +16,7 @@
     <body>
         <br><br>
     <center>
-        <h1>Success!</h1>
+        <h1>Your Payment was Successful!</h1>
         <%
             // Get the error message variable out of the session
             String transId = (String)session.getAttribute("transactionID");
