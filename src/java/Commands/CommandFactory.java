@@ -10,16 +10,16 @@ package Commands;
  * @author Tom
  */
 public class CommandFactory {
-    
-    private CommandFactory(){
-        
+
+    private CommandFactory() {
+
     }
-    
-    public static Command createCommand(String action){
+
+    public static Command createCommand(String action) {
         Command c = null;
         // If there was an action provided, choose which method should run and where the user should go next
-        if(action != null){
-            switch(action){
+        if (action != null) {
+            switch (action) {
                 case "login":
                     // Handle where the user wants to login
                     c = new LoginCommand();
@@ -46,7 +46,7 @@ public class CommandFactory {
                 case "addCategory":
                     // Do all logic for logging out user
                     c = new AddCategoryCommand();
-                    break; 
+                    break;
                 case "deleteCategory":
                     // Do all logic for logging out user
                     c = new DeleteCategoryCommand();
@@ -54,34 +54,41 @@ public class CommandFactory {
                 case "addProduct":
                     // Do all logic for logging out user
                     c = new AddProductCommand();
-                    break; 
+                    break;
                 case "updatePassword":
                     c = new updatePasswordCommand();
                     break;
                 case "addToCart":
                     c = new AddToCartCommand();
-                    break; 
+                    break;
                 case "addNewsletter":
                     c = new NewsletterCommand();
-                    break; 
+                    break;
                 case "updateCartQuantity":
                     c = new UpdateCartQuantity();
                     break;
                 case "removeFromCart":
                     c = new RemoveProductFromCart();
-                    break;    
+                    break;
                 case "addAddress":
                     c = new AddDeliveryAddress();
                     break;
+                case "generateClientToken":
+                    c = new GenerateClientToken();
+                    break;
+                case "completeTransaction":
+                    c = new completeTransaction();
+                    break;
+                    
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();
                     break;
             }
-        }else{
+        } else {
             c = new NoActionSuppliedCommand();
         }
-        
+
         return c;
-    }    
+    }
 }

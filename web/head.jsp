@@ -30,9 +30,39 @@
         <link rel="stylesheet" href="css/cart.css">
         <link rel="stylesheet" href="css/sidebar.css">
 
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://js.braintreegateway.com/web/dropin/1.9.1/js/dropin.min.js"></script>
         <script src="js/quantitySelector.js"></script>
+        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="js/sidebar.js"></script>
+        <script>
+
+        $(document).ready(function() {
+        $.ajax({
+                type: 'POST',
+                url: 'TheServlet',
+                data: {
+                        action : 'generateClientToken'
+                        },
+                success: function(msg)
+                {
+                //window.alert("Success");
+                        var token = '<%=(String) session.getAttribute("clienttoken")%>';
+                        //window.alert(token);
+                        console.log("token:" + token);
+                },
+                error: function(error)
+                {
+
+                        console.log(error);
+                        //window.alert("Error"); 
+                        //window.alert(error);                        
+                }
+                //window.alert("this " + token);
+        });
+        });
+    </script>
         
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
