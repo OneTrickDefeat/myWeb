@@ -113,7 +113,7 @@
                             <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                             <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
                             <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
-                            <td><a href="displayCheckout.jsp?totalPrice=<%=total%>" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                            <td><a href="displayCheckout.jsp" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
                 </table>

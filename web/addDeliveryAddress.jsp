@@ -52,6 +52,7 @@
 
             </form>
         </div>
+        <%@include file="chatwindow.jsp" %>
         <%@ include file = "footer.jsp" %>
     </body>
 </html>

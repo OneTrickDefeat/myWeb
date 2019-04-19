@@ -45,6 +45,7 @@
     </center>
 
     <!-- Include a footer so that there is always a link back to the home page! -->
+    <%@include file="chatwindow.jsp" %>
     <%@ include file = "footer.jsp" %>
 </body>
 </html>

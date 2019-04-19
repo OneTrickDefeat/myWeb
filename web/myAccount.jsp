@@ -49,5 +49,6 @@
                 }
             %>
         </div>
+        <%@include file="chatwindow.jsp" %>
     </body>
 </html>

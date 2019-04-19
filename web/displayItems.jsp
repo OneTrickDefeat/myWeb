@@ -80,6 +80,7 @@
         <%}%>
 
     </div>
+    <%@include file="chatwindow.jsp" %>
     <%@ include file = "footer.jsp" %>
 
 

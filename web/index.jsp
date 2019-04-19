@@ -190,6 +190,7 @@
             
         </div>
     </body>
+    <%@include file="chatwindow.jsp" %>
 
     <%@ include file = "footer.jsp" %>
 
