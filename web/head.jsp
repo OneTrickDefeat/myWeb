@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cart.css">
         <link rel="stylesheet" href="css/sidebar.css">
+        
 
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

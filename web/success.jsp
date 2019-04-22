@@ -19,14 +19,19 @@
         <h1>Your Payment was Successful!</h1>
         <%
             // Get the error message variable out of the session
-            String transId = (String)session.getAttribute("transactionID");
-            
+            String transId = (String) session.getAttribute("transactionID");
+
             if (transId != null) {
                 // Display the message
-%>
+        %>
 
         <div><h3>your transaction ID is :  <%=transId%> </h3></div>
+        <% } else {
 
+        %>
+        <div><h3> there is no transaction id</h3></div>
+        <% }
+        %>
     </center>
     <br><br>
     <!-- Include a footer so that there is always a link back to the home page! -->

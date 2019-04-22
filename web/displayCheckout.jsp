@@ -16,7 +16,7 @@
     <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>  
-    
+
     <body>
         <%
             ProductCartDao pCartDao = new ProductCartDao("furniturestore");
@@ -29,46 +29,8 @@
             double total = 0;
         %>
         <div class="container">
-            <div class="row">
-                <form action="TheServlet" id="TheServlet" method="post">
 
-                    <input type="text" name="firstName" value="<%=loggedInUser.getFirstName()%>">
-                    <input type="text" name="lastName" value="<%=loggedInUser.getLastName()%>">
-                    <input type="text" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>">
-                    <input type="text" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>">
-                    <input type="text" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>">
-                    <input type="text" name="town" value="<%=loggedInUserAddress.getTown()%>">
-                    <input type="text" name="county" value="<%=loggedInUserAddress.getCounty()%>">
-                    <input type="text" name="country" value="<%=loggedInUserAddress.getCountry()%>">
-                    <input type="text" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>">
-                    <input type="hidden" id="nonce" name="nonce" value="">
-                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
-                    <input type="hidden" id="total" name="total" value="<%=total%>">
-                    <input type="hidden" name="action" value="completeTransaction">
-
-                </form>
-                    
-                    <button id="submit_button">"Complete transaction"</button>
-
-                <div id="dropin-container">
-
-                </div>
-                <!--                            <div class="col-sm-10">
-                                                <h3>USER</h3>
-                                                <h4 class="nomargin"><%=loggedInUser.getFirstName()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUser.getLastName()%></h4>
-                                                <h3>ADDRESS</h3>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getHouseNo()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine1()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine2()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getTown()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCounty()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCountry()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getPostcode()%></h4>
-                
-                                            </div>-->
-            </div>
-            <h3>PRODUCTS</h3>
+            <h3>Your Items</h3>
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
                     <tr>
@@ -82,7 +44,7 @@
                 </thead>
                 <tbody>
 
-                    <%  
+                    <%
                         int idForContinue = 0;
 
                         //going through the list of user product cart                      
@@ -153,97 +115,170 @@
                     </tr>
                 </tfoot>
             </table>
+
+            <h3>Your Delivery Information</h3>
+            <div class="container">
+                <form action="TheServlet" id="TheServlet" method="post">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" value="<%=loggedInUser.getFirstName()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" value="<%=loggedInUser.getLastName()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="houseNo">House Number</label>
+                        <input type="text" class="form-control" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="streetLine1">Street Line 1</label>
+                        <input type="text" class="form-control" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="streetLine2">Street Line 2</label>
+                        <input type="text" class="form-control" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="town">Town</label>
+                        <input type="text" class="form-control" name="town" value="<%=loggedInUserAddress.getTown()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <input type="text" class="form-control" name="county" value="<%=loggedInUserAddress.getCounty()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" name="country" value="<%=loggedInUserAddress.getCountry()%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">Post Code</label>
+                        <input type="text" class="form-control" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>">
+                    </div>
+
+                    <input type="hidden" id="nonce" name="nonce" value="">
+                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
+                    <input type="hidden" id="total" name="total" value="<%=total%>">
+                    
+                    <input type="hidden" name="action" value="completeTransaction">
+
+                </form>
+
+                
+
+                <div id="dropin-container">
+
+                </div>
+                <div class="col-md-12 text-center">   
+                <button type="button" class="btn btn-success"  id="submit_button">Complete transaction</button>
+                </div>
+                <!--                            <div class="col-sm-10">
+                                                <h3>USER</h3>
+                                                <h4 class="nomargin"><%=loggedInUser.getFirstName()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUser.getLastName()%></h4>
+                                                <h3>ADDRESS</h3>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getHouseNo()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine1()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine2()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getTown()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getCounty()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getCountry()%></h4>
+                                                <h4 class="nomargin"><%=loggedInUserAddress.getPostcode()%></h4>
+                
+                                            </div>-->
+            </div>
+
+
+
         </div>
     </body>
-   
-    
+
+
     <script>
         var button1 = document.querySelector('#submit_button');
-        
-        braintree.dropin.create({
-        authorization: '<%= (String) session.getAttribute("clientToken")%>',
-                container: '#dropin-container',
-                
-                //STYLING
-                //            card: {
-                //        overrides: {
-                //          styles: {
-                //            input: {
-                //              color: 'blue',
-                //              'font-size': '18px'
-                //            },
-                //            '.number': {
-                //              'font-family': 'monospace',
-                //               placeholder: 'Card Number'
-                //            },
-                //            '.invalid': {
-                //              color: 'red'
-                //            },
-                //            '.expirationDate': {
-                //                color:'blue',
-                //                'font-size': '18px'
-                //            }
-                //          }
-                //        }
-                //      },
 
-        paypal: {
-        flow:'checkout',
+        braintree.dropin.create({
+            authorization: '<%= (String) session.getAttribute("clientToken")%>',
+            container: '#dropin-container',
+
+            //STYLING
+            //            card: {
+            //        overrides: {
+            //          styles: {
+            //            input: {
+            //              color: 'blue',
+            //              'font-size': '18px'
+            //            },
+            //            '.number': {
+            //              'font-family': 'monospace',
+            //               placeholder: 'Card Number'
+            //            },
+            //            '.invalid': {
+            //              color: 'red'
+            //            },
+            //            '.expirationDate': {
+            //                color:'blue',
+            //                'font-size': '18px'
+            //            }
+            //          }
+            //        }
+            //      },
+
+            paypal: {
+                flow: 'checkout',
                 amount:<%=total%>,
                 currency: 'EUR',
-                commit:true,
-                buttonStyle:{
-                colour:'blue',
-                        shape:'rect',
-                        size:'medium',
-                        label:'pay'
+                commit: true,
+                buttonStyle: {
+                    colour: 'blue',
+                    shape: 'rect',
+                    size: 'medium',
+                    label: 'pay'
                 }
 
-        },
-                
-        threeDSecure: {
-        amount:<%=total%>
+            },
 
-        }
+            threeDSecure: {
+                amount:<%=total%>
 
-        }, function(createErr, instance){
-    
-                if (createErr){
-                    console.error(createErr);
-                    //location.reload(true);
-                    return;
-                }
+            }
 
-            button1.addEventListener('click', function (e){
+        }, function (createErr, instance) {
+
+            if (createErr) {
+                console.error(createErr);
+                //location.reload(true);
+                return;
+            }
+
+            button1.addEventListener('click', function (e) {
                 e.preventDefault();
-                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload){
-                if (requestPaymentMethodErr){
-                    console.error(requestPaymentMethodErr)
-                    return;
-                }
-                
-                
-                if (payload.liabilityShifted || payload.type !== 'CreditCard'){
-
-                    document.getElementById("nonce").value = payload.nonce;
-                    console.log(payload.nonce);
-                    document.getElementById("paymentMethod").value = payload.type;
-                    document.getElementById("total").value= <%=total%>;
-                    if(!document.getElementById("nonce").value === "")
-                    {
-                        //must enter card details properly
+                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+                    if (requestPaymentMethodErr) {
+                        console.error(requestPaymentMethodErr)
+                        return;
                     }
-                    else
-                    {
-                        document.getElementById("TheServlet").submit();
-                        document.getElementById("submit_button").disabled = true;
 
+
+                    if (payload.liabilityShifted || payload.type !== 'CreditCard') {
+
+                        document.getElementById("nonce").value = payload.nonce;
+                        console.log(payload.nonce);
+                        document.getElementById("paymentMethod").value = payload.type;
+                        document.getElementById("total").value = <%=total%>;
+                        if (!document.getElementById("nonce").value === "")
+                        {
+                            //must enter card details properly
+                        } else
+                        {
+                            document.getElementById("TheServlet").submit();
+                            document.getElementById("submit_button").disabled = true;
+
+                        }
+
+                    } else {
+                        dropinInstance.clearSelectedPaymentMethod();
                     }
-                
-                }
-        else{
-            dropinInstance.clearSelectedPaymentMethod();
-        }
 
 
 
@@ -251,13 +286,18 @@
                 });
 
 
-               
-                });
-                
-               
-                });
-                
-                
+
+            });
+
+
+        });
+
+
 
     </script>
+    <%@include file="chatwindow.jsp" %>
+    <br><br>
+    <div class="container">
+    <%@ include file = "footer.jsp" %>
+    </div>
 </html>
