@@ -4,6 +4,7 @@
     Author     : D00197085
 --%>
 
+<%@page import="java.math.RoundingMode"%>
 <%@page import="Business.Product"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -71,7 +72,10 @@
                         <td data-th="Subtotal" class="text-center"><%=sub%></td>
                         <td data-th="Subtotal" class="text-center"><%=p.getQuantity()%></td>
                         <%
-                            total = total + sub;
+                            total = (total + sub);
+//                            formatter.setRoundingMode(RoundingMode.UP);
+//                            String t = formatter.format(total);
+//                            total = Double.parseDouble(t);
                         %>
 
                     </tr>
@@ -134,8 +138,8 @@
                         <input type="text" class="form-control" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>" required>
                     </div>
 
+                    <!--nonce will populate this value representing the customer's payment method -->
                     <input type="hidden" id="nonce" name="nonce" value="">
-                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
                     <input type="hidden" id="total" name="total" value="<%=total%>">
 
                     <input type="hidden" name="action" value="completeTransaction">
@@ -143,7 +147,7 @@
                 </form>
 
 
-
+                 <!-- this will drop in the options for payment , paypal or card-->
                 <div id="dropin-container">
 
                 </div>
@@ -160,9 +164,12 @@
 
 
     <script>
+//      Reference to submit button
         var button1 = document.querySelector('#submit_button');
-
+        
+//        initiates the drop in flow
         braintree.dropin.create({
+//            gives authorisation to access the braintree API using the client token generated earlier in the head.jsp
             authorization: '<%= (String) session.getAttribute("clientToken")%>',
             container: '#dropin-container',
 
@@ -188,11 +195,14 @@
             //          }
             //        }
             //      },
-
+            //      
+//            set up paypal
             paypal: {
+                //can be checkout(single payment) of vault(storing the card and customer info)
                 flow: 'checkout',
                 amount:<%=total%>,
                 currency: 'EUR',
+                //commit true - pay straight away, false would finish the payment later
                 commit: true,
                 buttonStyle: {
                     colour: 'blue',
@@ -202,59 +212,52 @@
                 }
 
             },
-
+             
+            //present security question challenege from bank provider
             threeDSecure: {
                 amount:<%=total%>
 
             }
 
         }, function (createErr, instance) {
-
+            // if any errors  occur , log them to the console
             if (createErr) {
                 console.error(createErr);
                 //location.reload(true);
                 return;
             }
-
+         
+//            button listens for click 
             button1.addEventListener('click', function (e) {
+                //stops button from submitting form 
                 e.preventDefault();
+//                submit payment information and get a payload representing this 
                 instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
                     if (requestPaymentMethodErr) {
+//                        print any errors to the console
                         console.error(requestPaymentMethodErr)
                         return;
                     }
 
-
-                    if (payload.liabilityShifted || payload.type !== 'CreditCard') {
-
+//                    if bank has accepted transaction 
+                    if (payload.liabilityShifted) {
+//                        get nonce from the payload and populate into form 
                         document.getElementById("nonce").value = payload.nonce;
-                        console.log(payload.nonce);
-                        document.getElementById("paymentMethod").value = payload.type;
+                       // console.log(payload.nonce);
+                       //populate total into the form field before making the request 
                         document.getElementById("total").value = <%=total%>;
-                        if (!document.getElementById("nonce").value === "")
-                        {
-                            //must enter card details properly
-                        } else
-                        {
-                            document.getElementById("TheServlet").submit();
-                            document.getElementById("submit_button").disabled = true;
-
-                        }
+                        
+//                        submit the form 
+                        document.getElementById("TheServlet").submit();
+                        
+                        //document.getElementById("submit_button").disabled = true;
 
                     } else {
                         dropinInstance.clearSelectedPaymentMethod();
                     }
 
-
-
-
                 });
-
-
-
             });
-
-
         });
 
 
