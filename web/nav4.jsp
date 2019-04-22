@@ -1,8 +1,10 @@
 <%-- 
-    Document   : nav
-    Created on : 30-Nov-2018, 15:02:07
+    Document   : nav3
+    Created on : 22-Apr-2019, 04:50:11
     Author     : Tom
 --%>
+
+
 
 <%@page import="Business.User"%>
 <%@page import="java.util.ArrayList"%>
@@ -15,7 +17,7 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,42 +27,44 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
                 <a class="navbar-brand" href="index.jsp">Furniture Depot</a>
             </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.jsp">Home</a> </li>
+                    <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
+                    <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
+                    <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
+                    <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
+                    <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
+                    <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
+                </ul>
 
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.jsp">Home</a> </li>
-                <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
-                <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
-                <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
-                <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
-                <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
-                <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
+                <%
+                    CategoryDao catDao = new CategoryDao("furniturestore");
+                    ArrayList<Category> catList = catDao.getListOfCategories();
 
+                %>
+                <form class="navbar-form navbar-left" action="TheServlet" method="post"> 
+                    <select name="searchOption">
+                        <option value="0" >All</option>
+                        <%                        for (int i = 0; i < catList.size(); i++) {%>
+                        <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
+                            }
+                        %>
 
-
-            </ul>
-
-            <%
-                CategoryDao catDao = new CategoryDao("furniturestore");
-                ArrayList<Category> catList = catDao.getListOfCategories();
-
-            %>
-            <form class="navbar-form navbar-left" action="TheServlet" method="post"> 
-                <select name="searchOption">
-                    <option value="0" >All</option>
-                    <%                        for (int i = 0; i < catList.size(); i++) {%>
-                    <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
-                        }
-                    %>
-
-                </select>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="product" id="mySearch">
-                </div>
-                <input type="hidden" name ="action" value="searchProduct" />
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                    </select>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" name="product" id="mySearch">
+                    </div>
+                    <input type="hidden" name ="action" value="searchProduct" />
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             <%
                 if (loggedInUser != null) {
             %>
@@ -92,6 +96,7 @@
             <!-- end of welcome note -->
             <% } %>
 
+            </div>
         </div>
     </nav>
 

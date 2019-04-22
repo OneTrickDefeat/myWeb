@@ -1,8 +1,10 @@
 <%-- 
-    Document   : nav
-    Created on : 30-Nov-2018, 15:02:07
+    Document   : nav3
+    Created on : 22-Apr-2019, 04:50:11
     Author     : Tom
 --%>
+
+
 
 <%@page import="Business.User"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,48 +24,47 @@
     </head>
 
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.jsp">Furniture Depot</a>
-            </div>
+    <nav class="navbar navbar-dark bg-dark">
 
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.jsp">Home</a> </li>
-                <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
-                <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
-                <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
-                <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
-                <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
-                <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
-
-
-
-            </ul>
-
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=1&name=Bedroom">Bedroom</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=2&name=Living Room">Living Room</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=3&name=Home Office">Home Office</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a>
+        </li>
             <%
                 CategoryDao catDao = new CategoryDao("furniturestore");
                 ArrayList<Category> catList = catDao.getListOfCategories();
 
             %>
-            <form class="navbar-form navbar-left" action="TheServlet" method="post"> 
-                <select name="searchOption">
-                    <option value="0" >All</option>
-                    <%                        for (int i = 0; i < catList.size(); i++) {%>
-                    <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
-                        }
-                    %>
+        <form class="form-inline my-2 my-lg-0" action="TheServlet" method="post">
+            <select name="searchOption">
+                <option value="0" >All</option>
+                <%                        for (int i = 0; i < catList.size(); i++) {%>
+                <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
+                    }
+                %>
 
-                </select>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" name="product" id="mySearch">
-                </div>
-                <input type="hidden" name ="action" value="searchProduct" />
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <%
+            </select>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="product" id="mySearch">
+            <input type="hidden" name ="action" value="searchProduct" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+             <%
                 if (loggedInUser != null) {
-            %>
+            %>       
             <!-- welcome note -->
             <div class="pull-right">
                 <ul class="nav pull-right">
@@ -90,9 +91,8 @@
                 </ul>
             </div>
             <!-- end of welcome note -->
-            <% } %>
+            <% } %>               
 
-        </div>
     </nav>
 
 

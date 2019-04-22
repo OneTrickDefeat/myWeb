@@ -60,12 +60,10 @@
                                 <div class="col-sm-2 hidden-xs"><img src="img/<%=product.getImage()%>" alt="..." class="img-responsive"/></div>
                                 <div class="col-sm-10">
                                     <h4 class="nomargin"><%=product.getName()%></h4>
-
                                 </div>
                             </div>
                         </td>
                         <td data-th="Price" id = "Price">€<%=product.getPrice()%></td>
-
 
                         <%
                             double sub = product.getPrice() * p.getQuantity();
@@ -76,26 +74,7 @@
                             total = total + sub;
                         %>
 
-                        <td class="actions" data-th="">
-
-                            <!--  update  button 
-                            <form action="TheServlet" method="post">
-                                <input type="number" name="productQuantity" class="form-control text-center" value="//p.getQuantity()%>">
-                                <input type="hidden" name="productID" value="//p.getProductId()%>">
-                                <input type="hidden" name="action" value="updateCartQuantity">
-                                <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
-                            </form>
-
-                            <!--  remove button 
-                            <form action="TheServlet" method="post">
-                                <input type="hidden" name="productID" value="//p.getProductId()%>">
-                                <input type="hidden" name="action" value="removeFromCart">
-                                <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
-                            </form>-->
-                        </td>
-
                     </tr>
-
                 </tbody>
 
 
@@ -108,84 +87,70 @@
                 <tfoot>
 
                     <tr>
-                        <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                        
                         <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
                         <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
-                        <td><a href="displayCheckout.jsp?totalPrice=<%=total%>" class="btn btn-success btn-block">Pay <i class="fa fa-angle-right"></i></a></td>
                     </tr>
                 </tfoot>
-            </table>
+            </table><br>
 
             <h3>Your Delivery Information</h3>
             <div class="container">
                 <form action="TheServlet" id="TheServlet" method="post">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" name="firstName" value="<%=loggedInUser.getFirstName()%>">
+                        <input type="text" class="form-control" name="firstName" value="<%=loggedInUser.getFirstName()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" name="lastName" value="<%=loggedInUser.getLastName()%>">
+                        <input type="text" class="form-control" name="lastName" value="<%=loggedInUser.getLastName()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="houseNo">House Number</label>
-                        <input type="text" class="form-control" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>">
+                        <input type="text" class="form-control" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="streetLine1">Street Line 1</label>
-                        <input type="text" class="form-control" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>">
+                        <input type="text" class="form-control" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="streetLine2">Street Line 2</label>
-                        <input type="text" class="form-control" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>">
+                        <input type="text" class="form-control" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="town">Town</label>
-                        <input type="text" class="form-control" name="town" value="<%=loggedInUserAddress.getTown()%>">
+                        <input type="text" class="form-control" name="town" value="<%=loggedInUserAddress.getTown()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="county">County</label>
-                        <input type="text" class="form-control" name="county" value="<%=loggedInUserAddress.getCounty()%>">
+                        <input type="text" class="form-control" name="county" value="<%=loggedInUserAddress.getCounty()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <input type="text" class="form-control" name="country" value="<%=loggedInUserAddress.getCountry()%>">
+                        <input type="text" class="form-control" name="country" value="<%=loggedInUserAddress.getCountry()%>" required>
                     </div>
                     <div class="form-group">
                         <label for="firstName">Post Code</label>
-                        <input type="text" class="form-control" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>">
+                        <input type="text" class="form-control" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>" required>
                     </div>
 
                     <input type="hidden" id="nonce" name="nonce" value="">
                     <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
                     <input type="hidden" id="total" name="total" value="<%=total%>">
-                    
+
                     <input type="hidden" name="action" value="completeTransaction">
 
                 </form>
 
-                
+
 
                 <div id="dropin-container">
 
                 </div>
                 <div class="col-md-12 text-center">   
-                <button type="button" class="btn btn-success"  id="submit_button">Complete transaction</button>
+                    <button type="button" class="btn btn-success"  id="submit_button">Complete transaction</button>
                 </div>
-                <!--                            <div class="col-sm-10">
-                                                <h3>USER</h3>
-                                                <h4 class="nomargin"><%=loggedInUser.getFirstName()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUser.getLastName()%></h4>
-                                                <h3>ADDRESS</h3>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getHouseNo()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine1()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine2()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getTown()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCounty()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCountry()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getPostcode()%></h4>
-                
-                                            </div>-->
+
             </div>
 
 
@@ -298,6 +263,6 @@
     <%@include file="chatwindow.jsp" %>
     <br><br>
     <div class="container">
-    <%@ include file = "footer.jsp" %>
+        <%@ include file = "footer.jsp" %>
     </div>
 </html>

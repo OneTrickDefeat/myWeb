@@ -129,4 +129,9 @@
 
         </div>
     </body>
+        <%@include file="chatwindow.jsp" %>
+    <br><br>
+    <div class="container">
+        <%@ include file = "footer.jsp" %>
+    </div>
 </html>
