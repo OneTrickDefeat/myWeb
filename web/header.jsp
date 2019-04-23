@@ -6,7 +6,7 @@
 <%@page import="Business.UserAddress"%>
 <%@page import="Business.Address"%>
 <%@page import="Business.Cart"%>
-<%@include file="internationalisationHeader.jsp" %>
+
 <%@page import="Business.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

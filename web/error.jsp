@@ -7,9 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%@include file="internationalisationHeader.jsp" %>
     <%@ include file = "header.jsp" %>
     <%@ include file = "nav.jsp" %>
-    <%@ include file = "head.jsp" %>
+    <%@ include file = "head4.jsp" %>
 
     <body>
         <br><br>

@@ -9,9 +9,10 @@ Author     : Audrius
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%@include file="internationalisationHeader.jsp" %>
     <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
-    <%@ include file = "nav.jsp" %>
+    <%@ include file = "nav4.jsp" %>
     <!--include header temp deleted... -->
 
     <body>
