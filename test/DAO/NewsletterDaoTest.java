@@ -9,16 +9,24 @@ import Business.Newsletter;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
  * @author Tom
  */
 public class NewsletterDaoTest {
-    
+
+    private NewsletterDao nDao;
+
     public NewsletterDaoTest() {
+        nDao = new NewsletterDao("furniturestoretest");
     }
-    
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
     @AfterClass
     public static void tearDownClass() {
     }
@@ -30,16 +38,15 @@ public class NewsletterDaoTest {
     public void testAddToNewsletter() {
         System.out.println("addToNewsletter");
         Newsletter n = new Newsletter("test@test.com");
-        NewsletterDao instance = new NewsletterDao("furniturestoretest");
-        boolean expResult = true;
-        boolean result = instance.addToNewsletter(n);
-        assertFalse(result);
-        
-        if(!result){
-            System.out.println("result successful"); 
-            assertEquals(result,false);
+        boolean result = nDao.addToNewsletter(n);
+        assertTrue(result);
+
+        if (result) {
+            System.out.println("result successful");
+            boolean deleteTheRow = nDao.deleteFromNewsletter(n);
+            assertEquals(deleteTheRow, true);
         }
-        
+
     }
 
     /**
@@ -48,13 +55,13 @@ public class NewsletterDaoTest {
     @Test
     public void testFindNewsletterEmails() {
         System.out.println("findNewsletterEmails");
-        String email = "test@test.com";
+        String email = "ahmed.khan11@gmail.com";
         NewsletterDao instance = new NewsletterDao("furniturestoretest");
-        Newsletter found = new Newsletter(3,"test@test.com");
+        Newsletter found = new Newsletter(29, "ahmed.khan11@gmail.com");
         Newsletter expResult = found;
         Newsletter result = instance.findNewsletterEmails(email);
         assertEquals(expResult, result);
-       
+
     }
-    
+
 }

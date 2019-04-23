@@ -20,8 +20,6 @@
                     <tr>
                         <td> Category Name  : </td><td> <input name="categoryName" required size=15 type="text" /> </td> 
                     </tr>
-                   
-                    
                 </table>
                 <input type="submit" value="Add category" />
                 <!-- Include a hidden field to identify what the user wants to do -->

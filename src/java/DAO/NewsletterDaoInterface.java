@@ -17,4 +17,5 @@ public interface NewsletterDaoInterface {
 
     public Newsletter findNewsletterEmails(String email);
 
+    public boolean deleteFromNewsletter(Newsletter email);
 }

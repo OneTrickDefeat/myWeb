@@ -6,6 +6,7 @@
 package DAO;
 
 import Business.Newsletter;
+import Business.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -95,5 +96,42 @@ public class NewsletterDao extends Dao implements NewsletterDaoInterface {
         }
         return c;
 
+    }
+    
+    
+    
+    @Override
+    public boolean deleteFromNewsletter(Newsletter n) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean deleted = false;
+        try {
+            con = this.getConnection();
+
+            String query = "DELETE FROM newsletter WHERE email = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, n.getEmail());
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 0) {
+                deleted = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the deleteFromNewsletter method:");
+            System.err.println("\t" + e.getMessage());
+            deleted = false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the deleteFromNewsletter method:\n" + e.getMessage());
+            }
+        }
+        return deleted;
     }
 }
