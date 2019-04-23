@@ -31,6 +31,15 @@ nav {
 .lead{margin-left: 14px;}
 .lead2{margin-left: 14px;}
 
+.label {
+  display: inline-blcok;
+  padding: 2px 5px;
+  font-size: 13px; }
+  .label.label-default {
+    background: #eee; }
+  .label.label-success {
+    background: #5cb85c;
+    color: #fff; }
 
 hr.style {
     background-color: #248DC1;

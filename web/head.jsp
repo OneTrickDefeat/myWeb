@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -29,42 +29,44 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cart.css">
         <link rel="stylesheet" href="css/sidebar.css">
+        <link rel="stylesheet" href="css/topnav.css">
 
-        
+
+        //import the jQuery library
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        //import the braintree library
         <script src="https://js.braintreegateway.com/web/dropin/1.9.1/js/dropin.min.js"></script>
         <script src="js/quantitySelector.js"></script>
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
 
-        $(document).ready(function() {
-        $.ajax({
-                type: 'POST',
-                url: 'TheServlet',
-                data: {
-                        action : 'generateClientToken'
-                        },
-                success: function(msg)
-                {
-                //window.alert("Success");
+//when the document is ready 
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'TheServlet',
+//  specify data to be sent with the ajax request
+                    data: {
+                        action: 'generateClientToken'
+                    },
+//    if successful , pull the token from the session 
+                    success: function (msg)
+                    {
                         var token = '<%=(String) session.getAttribute("clienttoken")%>';
-                        //window.alert(token);
-                        console.log("token:" + token);
-                },
-                error: function(error)
-                {
 
+                    },
+//                        if it fails , log the errors to the console 
+                    error: function (error)
+                    {
                         console.log(error);
-                        //window.alert("Error"); 
-                        //window.alert(error);                        
-                }
-                //window.alert("this " + token);
-        });
-        });
-    </script>
-        
-        
+                    }
+
+                });
+            });
+        </script>
+
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     </head>

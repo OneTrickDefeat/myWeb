@@ -4,6 +4,7 @@
     Author     : D00197085
 --%>
 
+<%@page import="java.math.RoundingMode"%>
 <%@page import="Business.Product"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -16,7 +17,7 @@
     <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
     <%@ include file = "nav.jsp" %>  
-    
+
     <body>
         <%
             ProductCartDao pCartDao = new ProductCartDao("furniturestore");
@@ -29,46 +30,8 @@
             double total = 0;
         %>
         <div class="container">
-            <div class="row">
-                <form action="TheServlet" id="TheServlet" method="post">
 
-                    <input type="text" name="firstName" value="<%=loggedInUser.getFirstName()%>">
-                    <input type="text" name="lastName" value="<%=loggedInUser.getLastName()%>">
-                    <input type="text" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>">
-                    <input type="text" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>">
-                    <input type="text" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>">
-                    <input type="text" name="town" value="<%=loggedInUserAddress.getTown()%>">
-                    <input type="text" name="county" value="<%=loggedInUserAddress.getCounty()%>">
-                    <input type="text" name="country" value="<%=loggedInUserAddress.getCountry()%>">
-                    <input type="text" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>">
-                    <input type="hidden" id="nonce" name="nonce" value="">
-                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
-                    <input type="hidden" id="total" name="total" value="<%=total%>">
-                    <input type="hidden" name="action" value="completeTransaction">
-
-                </form>
-                    
-                    <button id="submit_button">"Complete transaction"</button>
-
-                <div id="dropin-container">
-
-                </div>
-                <!--                            <div class="col-sm-10">
-                                                <h3>USER</h3>
-                                                <h4 class="nomargin"><%=loggedInUser.getFirstName()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUser.getLastName()%></h4>
-                                                <h3>ADDRESS</h3>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getHouseNo()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine1()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getStreetLine2()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getTown()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCounty()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getCountry()%></h4>
-                                                <h4 class="nomargin"><%=loggedInUserAddress.getPostcode()%></h4>
-                
-                                            </div>-->
-            </div>
-            <h3>PRODUCTS</h3>
+            <h3>Your Items</h3>
             <table id="cart" class="table table-hover table-condensed">
                 <thead>
                     <tr>
@@ -82,7 +45,7 @@
                 </thead>
                 <tbody>
 
-                    <%  
+                    <%
                         int idForContinue = 0;
 
                         //going through the list of user product cart                      
@@ -98,12 +61,10 @@
                                 <div class="col-sm-2 hidden-xs"><img src="img/<%=product.getImage()%>" alt="..." class="img-responsive"/></div>
                                 <div class="col-sm-10">
                                     <h4 class="nomargin"><%=product.getName()%></h4>
-
                                 </div>
                             </div>
                         </td>
                         <td data-th="Price" id = "Price">€<%=product.getPrice()%></td>
-
 
                         <%
                             double sub = product.getPrice() * p.getQuantity();
@@ -111,29 +72,13 @@
                         <td data-th="Subtotal" class="text-center"><%=sub%></td>
                         <td data-th="Subtotal" class="text-center"><%=p.getQuantity()%></td>
                         <%
-                            total = total + sub;
+                            total = (total + sub);
+//                            formatter.setRoundingMode(RoundingMode.UP);
+//                            String t = formatter.format(total);
+//                            total = Double.parseDouble(t);
                         %>
 
-                        <td class="actions" data-th="">
-
-                            <!--  update  button 
-                            <form action="TheServlet" method="post">
-                                <input type="number" name="productQuantity" class="form-control text-center" value="//p.getQuantity()%>">
-                                <input type="hidden" name="productID" value="//p.getProductId()%>">
-                                <input type="hidden" name="action" value="updateCartQuantity">
-                                <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
-                            </form>
-
-                            <!--  remove button 
-                            <form action="TheServlet" method="post">
-                                <input type="hidden" name="productID" value="//p.getProductId()%>">
-                                <input type="hidden" name="action" value="removeFromCart">
-                                <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
-                            </form>-->
-                        </td>
-
                     </tr>
-
                 </tbody>
 
 
@@ -146,118 +91,181 @@
                 <tfoot>
 
                     <tr>
-                        <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                        
                         <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
                         <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
-                        <td><a href="displayCheckout.jsp?totalPrice=<%=total%>" class="btn btn-success btn-block">Pay <i class="fa fa-angle-right"></i></a></td>
                     </tr>
                 </tfoot>
-            </table>
+            </table><br>
+
+            <h3>Your Delivery Information</h3>
+            <div class="container">
+                <form action="TheServlet" id="TheServlet" method="post">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" value="<%=loggedInUser.getFirstName()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" value="<%=loggedInUser.getLastName()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="houseNo">House Number</label>
+                        <input type="text" class="form-control" name="houseNo" value="<%=loggedInUserAddress.getHouseNo()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="streetLine1">Street Line 1</label>
+                        <input type="text" class="form-control" name="streetLine1" value="<%=loggedInUserAddress.getStreetLine1()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="streetLine2">Street Line 2</label>
+                        <input type="text" class="form-control" name="streetLine2" value="<%=loggedInUserAddress.getStreetLine2()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="town">Town</label>
+                        <input type="text" class="form-control" name="town" value="<%=loggedInUserAddress.getTown()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <input type="text" class="form-control" name="county" value="<%=loggedInUserAddress.getCounty()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" name="country" value="<%=loggedInUserAddress.getCountry()%>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">Post Code</label>
+                        <input type="text" class="form-control" name="postCode" value="<%=loggedInUserAddress.getPostcode()%>" required>
+                    </div>
+
+                    <!--nonce will populate this value representing the customer's payment method -->
+                    <input type="hidden" id="nonce" name="nonce" value="">
+                    <input type="hidden" id="total" name="total" value="<%=total%>">
+
+                    <input type="hidden" name="action" value="completeTransaction">
+
+                </form>
+
+
+                 <!-- this will drop in the options for payment , paypal or card-->
+                <div id="dropin-container">
+
+                </div>
+                <div class="col-md-12 text-center">   
+                    <button type="button" class="btn btn-success"  id="submit_button">Complete transaction</button>
+                </div>
+
+            </div>
+
+
+
         </div>
     </body>
-   
-    
+
+
     <script>
+//      Reference to submit button
         var button1 = document.querySelector('#submit_button');
         
+//        initiates the drop in flow
         braintree.dropin.create({
-        authorization: '<%= (String) session.getAttribute("clientToken")%>',
-                container: '#dropin-container',
-                
-                //STYLING
-                //            card: {
-                //        overrides: {
-                //          styles: {
-                //            input: {
-                //              color: 'blue',
-                //              'font-size': '18px'
-                //            },
-                //            '.number': {
-                //              'font-family': 'monospace',
-                //               placeholder: 'Card Number'
-                //            },
-                //            '.invalid': {
-                //              color: 'red'
-                //            },
-                //            '.expirationDate': {
-                //                color:'blue',
-                //                'font-size': '18px'
-                //            }
-                //          }
-                //        }
-                //      },
+//            gives authorisation to access the braintree API using the client token generated earlier in the head.jsp
+            authorization: '<%= (String) session.getAttribute("clientToken")%>',
+            container: '#dropin-container',
 
-        paypal: {
-        flow:'checkout',
+            //STYLING
+            //            card: {
+            //        overrides: {
+            //          styles: {
+            //            input: {
+            //              color: 'blue',
+            //              'font-size': '18px'
+            //            },
+            //            '.number': {
+            //              'font-family': 'monospace',
+            //               placeholder: 'Card Number'
+            //            },
+            //            '.invalid': {
+            //              color: 'red'
+            //            },
+            //            '.expirationDate': {
+            //                color:'blue',
+            //                'font-size': '18px'
+            //            }
+            //          }
+            //        }
+            //      },
+            //      
+//            set up paypal
+            paypal: {
+                //can be checkout(single payment) of vault(storing the card and customer info)
+                flow: 'checkout',
                 amount:<%=total%>,
                 currency: 'EUR',
-                commit:true,
-                buttonStyle:{
-                colour:'blue',
-                        shape:'rect',
-                        size:'medium',
-                        label:'pay'
+                //commit true - pay straight away, false would finish the payment later
+                commit: true,
+                buttonStyle: {
+                    colour: 'blue',
+                    shape: 'rect',
+                    size: 'medium',
+                    label: 'pay'
                 }
 
-        },
-                
-        threeDSecure: {
-        amount:<%=total%>
+            },
+             
+            //present security question challenege from bank provider
+            threeDSecure: {
+                amount:<%=total%>
 
-        }
+            }
 
-        }, function(createErr, instance){
-    
-                if (createErr){
-                    console.error(createErr);
-                    //location.reload(true);
-                    return;
-                }
-
-            button1.addEventListener('click', function (e){
+        }, function (createErr, instance) {
+            // if any errors  occur , log them to the console
+            if (createErr) {
+                console.error(createErr);
+                //location.reload(true);
+                return;
+            }
+         
+//            button listens for click 
+            button1.addEventListener('click', function (e) {
+                //stops button from submitting form 
                 e.preventDefault();
-                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload){
-                if (requestPaymentMethodErr){
-                    console.error(requestPaymentMethodErr)
-                    return;
-                }
-                
-                
-                if (payload.liabilityShifted || payload.type !== 'CreditCard'){
-
-                    document.getElementById("nonce").value = payload.nonce;
-                    console.log(payload.nonce);
-                    document.getElementById("paymentMethod").value = payload.type;
-                    document.getElementById("total").value= <%=total%>;
-                    if(!document.getElementById("nonce").value === "")
-                    {
-                        //must enter card details properly
+//                submit payment information and get a payload representing this 
+                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+                    if (requestPaymentMethodErr) {
+//                        print any errors to the console
+                        console.error(requestPaymentMethodErr)
+                        return;
                     }
-                    else
-                    {
+
+//                    if bank has accepted transaction 
+                    if (payload.liabilityShifted) {
+//                        get nonce from the payload and populate into form 
+                        document.getElementById("nonce").value = payload.nonce;
+                       // console.log(payload.nonce);
+                       //populate total into the form field before making the request 
+                        document.getElementById("total").value = <%=total%>;
+                        
+//                        submit the form 
                         document.getElementById("TheServlet").submit();
-                        document.getElementById("submit_button").disabled = true;
+                        
+                        //document.getElementById("submit_button").disabled = true;
 
+                    } else {
+                        dropinInstance.clearSelectedPaymentMethod();
                     }
-                
-                }
-        else{
-            dropinInstance.clearSelectedPaymentMethod();
-        }
-
-
-
 
                 });
+            });
+        });
 
 
-               
-                });
-                
-               
-                });
-                
-                
 
     </script>
+    <%@include file="chatwindow.jsp" %>
+    <br><br>
+    <div class="container">
+        <%@ include file = "footer.jsp" %>
+    </div>
 </html>
