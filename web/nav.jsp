@@ -29,13 +29,13 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.jsp">Home</a> </li>
-                <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
-                <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
-                <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
-                <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
-                <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
-                <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
+                <li class="active"><a href="index.jsp"><%=dataBundle.getString("navbar_home")%></a> </li>
+                <li><a href="displayItems.jsp?cID=1&name=Bedroom"> <%=dataBundle.getString("navbar_bedroom")%></a>  </li>
+                <li><a href="displayItems.jsp?cID=2&name=Living Room"><%=dataBundle.getString("navbar_living_room")%></a></li>
+                <li><a href="displayItems.jsp?cID=3&name=Home Office"><%=dataBundle.getString("navbar_home_office")%></a></li>
+                <li><a href="displayItems.jsp?cID=4&name=Game And Bar"><%=dataBundle.getString("navbar_game&bar")%></a></li>
+                <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining"><%=dataBundle.getString("navbar_kitchen&dining")%></a></li>
+                <li><a href="displayItems.jsp?cID=6&name=Home Entertainment"><%=dataBundle.getString("navbar_home_entertainment")%></a></li>
 
 
 

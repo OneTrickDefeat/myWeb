@@ -32,9 +32,9 @@
         <link rel="stylesheet" href="css/topnav.css">
 
 
-        //import the jQuery library
+<!--        //import the jQuery library-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        //import the braintree library
+<!--        //import the braintree library-->
         <script src="https://js.braintreegateway.com/web/dropin/1.9.1/js/dropin.min.js"></script>
         <script src="js/quantitySelector.js"></script>
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>

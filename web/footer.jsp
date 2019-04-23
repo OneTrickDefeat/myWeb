@@ -18,28 +18,28 @@
                 <p id="copyright">© 2019 Furniture Depot, All Rights Reserved</p>
             </div>
             <div class="col-md-4 footer-nav animated fadeInUp">
-                <h4>Menu</h4>
+                <h4> <%=dataBundle.getString("footer_menu")%>  </h4>
                 <div class="col-md-6">
                     <ul class="pages">
-                        <li><a href="displayItems.jsp?cID=1&name=Bedroom"> Bedroom</a>  </li>
-                        <li><a href="displayItems.jsp?cID=2&name=Living Room">Living Room</a></li>
-                        <li><a href="displayItems.jsp?cID=3&name=Home Office">Home Office</a></li>
-                        <li><a href="displayItems.jsp?cID=4&name=Game And Bar">Game & Bar</a></li>
-                        <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining">Kitchen & Dining</a></li>
-                        <li><a href="displayItems.jsp?cID=6&name=Home Entertainment">Home Entertainment</a></li>
+                        <li><a href="displayItems.jsp?cID=1&name=Bedroom"> <%=dataBundle.getString("navbar_bedroom")%></a>  </li>
+                        <li><a href="displayItems.jsp?cID=2&name=Living Room"><%=dataBundle.getString("navbar_living_room")%></a></li>
+                        <li><a href="displayItems.jsp?cID=3&name=Home Office"><%=dataBundle.getString("navbar_home_office")%></a></li>
+                        <li><a href="displayItems.jsp?cID=4&name=Game And Bar"><%=dataBundle.getString("navbar_game&bar")%></a></li>
+                        <li><a href="displayItems.jsp?cID=5&name=Kitchen And Dining"><%=dataBundle.getString("navbar_kitchen&dining")%></a></li>
+                        <li><a href="displayItems.jsp?cID=6&name=Home Entertainment"><%=dataBundle.getString("navbar_home_entertainment")%></a></li>
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <ul class="list">
-                        <li><a href="aboutUs.jsp">About Us</a></li>
-                        <li><a href="contact.jsp">Contacts</a></li>
-                        <li><a href="#">Terms & Condition</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="aboutUs.jsp"><%=dataBundle.getString("footer_aboutUs")%></a></li>
+                        <li><a href="contact.jsp"><%=dataBundle.getString("footer_Contact")%></a></li>
+                        <li><a href="#"><%=dataBundle.getString("footer_Terms")%></a></li>
+                        <li><a href="#"><%=dataBundle.getString("footer_privacy")%></a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-2 footer-social animated fadeInDown">
-                <h4>Follow Us</h4>
+                <h4> <%=dataBundle.getString("footer_followUs")%>  </h4>
                 <ul>
                     <li><a target="_blank" href="https://www.facebook.com/Onestopfurnitureshop246/">Facebook</a></li>
                     <li><a target="_blank" href="https://twitter.com/furnituredepot2">Twitter</a></li>
@@ -48,8 +48,8 @@
                 </ul>
             </div>
             <div class="col-md-3 footer-ns animated fadeInRight">
-                <h4>Newsletter</h4>
-                <p>Sign up for our newsletter</p>
+                <h4> <%=dataBundle.getString("footer_newsletter")%> </h4>
+                <p><%=dataBundle.getString("footer_newsletter_signup")%></p>
 
                 <form action="TheServlet" method="post">
                     <div class="input-group">
@@ -58,19 +58,19 @@
                             <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-envelope"></span></button>
                         </span>
                         <input type="hidden" name ="action" value="addNewsletter" />
-                        
+
                     </div>
                     <%
-                            Object msg2 = session.getAttribute("newsletter");
-                            String success = (String) msg2;
-                            if (success != null) {
-                        %>
+                        Object msg2 = session.getAttribute("newsletter");
+                        String success = (String) msg2;
+                        if (success != null) {
+                    %>
 
-                        <div> <%=success%> </div>
-                        <%
-                            }
-                            session.removeAttribute("newsletter");
-                        %> 
+                    <div> <%=success%> </div>
+                    <%
+                        }
+                        session.removeAttribute("newsletter");
+                    %> 
                 </form>
 
             </div>

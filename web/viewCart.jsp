@@ -88,14 +88,14 @@
                                     <input type="number" name="productQuantity" class="form-control text-center" value="<%=p.getQuantity()%>">
                                     <input type="hidden" name="productID" value="<%=p.getProductId()%>">
                                     <input type="hidden" name="action" value="updateCartQuantity">
-                                    <input class="btn btn-info btn-sm" type="submit" value="Update Quantity" > 
+                                    <input class="btn btn-info btn-sm" type="submit" value="<%=dataBundle.getString("cart_update")%>"> 
                                 </form>
 
                                 <!--  remove button -->
                                 <form action="TheServlet" method="post">
                                     <input type="hidden" name="productID" value="<%=p.getProductId()%>">
                                     <input type="hidden" name="action" value="removeFromCart">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Remove from Cart" > 
+                                    <input class="btn btn-danger btn-sm" type="submit" value="<%=dataBundle.getString("cart_remove")%>"> 
                                 </form>
                             </td>
 
@@ -110,10 +110,10 @@
                     <tfoot>
 
                         <tr>
-                            <td><a href="displayItems.jsp?cID=<%=idForContinue%>" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                            <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
+                            <td><a href="index.jsp" class="btn btn-warning"><i class="fa fa-angle-left"></i> <%=dataBundle.getString("cart_continue")%></a></td>
+                            <td colspan="1" class="hidden-xs"><strong><%=dataBundle.getString("cart_total")%></strong></td>
                             <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
-                            <td><a href="displayCheckout.jsp" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                            <td><a href="displayCheckout.jsp" class="btn btn-success btn-block"><%=dataBundle.getString("cart_continue")%> <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
                 </table>
