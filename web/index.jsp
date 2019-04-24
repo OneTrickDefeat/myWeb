@@ -9,8 +9,9 @@
 <html>
     
     <%@ include file="internationalisationHeader.jsp" %>
-    <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
+    <%@ include file = "header.jsp" %>
+    
     <%@ include file = "nav4.jsp" %>
     
     

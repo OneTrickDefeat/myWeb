@@ -15,8 +15,9 @@
 <!DOCTYPE html>
 <html>
     <%@include file="internationalisationHeader.jsp" %>
-    <%@ include file = "header.jsp" %>
     <%@ include file = "head.jsp" %>
+    <%@ include file = "header.jsp" %>
+
     <%@ include file = "nav4.jsp" %>  
 
     <body>
@@ -92,7 +93,7 @@
                 <tfoot>
 
                     <tr>
-                        
+
                         <td colspan="1" class="hidden-xs"><strong>Total</strong></td>
                         <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
                     </tr>
@@ -148,7 +149,7 @@
                 </form>
 
 
-                 <!-- this will drop in the options for payment , paypal or card-->
+                <!-- this will drop in the options for payment , paypal or card-->
                 <div id="dropin-container">
 
                 </div>
@@ -167,7 +168,7 @@
     <script>
 //      Reference to submit button
         var button1 = document.querySelector('#submit_button');
-        
+
 //        initiates the drop in flow
         braintree.dropin.create({
 //            gives authorisation to access the braintree API using the client token generated earlier in the head.jsp
@@ -213,7 +214,7 @@
                 }
 
             },
-             
+
             //present security question challenege from bank provider
             threeDSecure: {
                 amount:<%=total%>
@@ -227,7 +228,7 @@
                 //location.reload(true);
                 return;
             }
-         
+
 //            button listens for click 
             button1.addEventListener('click', function (e) {
                 //stops button from submitting form 
@@ -236,22 +237,22 @@
                 instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
                     if (requestPaymentMethodErr) {
 //                        print any errors to the console
-                        console.error(requestPaymentMethodErr)
+                        console.error(requestPaymentMethodErr);
                         return;
                     }
 
 //                    if bank has accepted transaction 
-                    if (payload.liabilityShifted) {
+                    if (payload.liabilityShifted || payload.type !== "CreditCard") {
 //                        get nonce from the payload and populate into form 
                         document.getElementById("nonce").value = payload.nonce;
-                       // console.log(payload.nonce);
-                       //populate total into the form field before making the request 
+                        // console.log(payload.nonce);
+                        //populate total into the form field before making the request 
                         document.getElementById("total").value = <%=total%>;
-                        
+
 //                        submit the form 
                         document.getElementById("TheServlet").submit();
-                        
-                        //document.getElementById("submit_button").disabled = true;
+
+                        document.getElementById("submit_button").disabled = true;
 
                     } else {
                         dropinInstance.clearSelectedPaymentMethod();
