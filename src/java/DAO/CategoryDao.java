@@ -22,6 +22,43 @@ public class CategoryDao extends Dao implements CategoryDaoInterface {
         super(databaseName);
     }
 
+    public String findCategoryNameByCategoryID(int cID){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String catName = null;
+        try {
+            con = this.getConnection();
+
+            String query = "SELECT * FROM category WHERE catID = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, cID);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                catName = rs.getString("catName");
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findCategoryByCategoryID method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findCategoryByCategoryID method:\n" + e.getMessage());
+            }
+        }
+        return catName;
+    }
+    
     @Override
     public boolean addCategory(Category c) {
     Connection con = null;

@@ -28,7 +28,9 @@
                 cID = 1;
             }
             ProductDao catDao2 = new ProductDao("furniturestore");
+            CategoryDao categoryDao = new CategoryDao("furniturestore");
             List<Product> prods = catDao2.findProductsByCategoryId(cID);
+            String categoryName = categoryDao.findCategoryNameByCategoryID(cID); 
             //Product p = catDao.findProductsByCategoryId(cID);
 
             if (prods != null) {
@@ -37,7 +39,7 @@
         <div class="container">
             <%int prodCount = prods.size();%>
             <%String name = request.getParameter("name");%>
-            <center><h1 id="catTitle"><%=name%></h1></center>
+            <center><h1 id="catTitle"><%=categoryName%></h1></center>
             <hr class="style">
             
             <hgroup class="mb20">
