@@ -50,7 +50,7 @@ public class ChangeLanguageCommand implements Command{
         try
         {
             // Find the page path that sent us here
-            String refererPage = new URI(request.getHeader("referer")).getPath();
+            String refererPage = new URI(request.getHeader("referer")).getRawPath();
             // Break the page path up into pieces based on /
             String[] pathPieces = refererPage.split("/");
             // Get the actual page name (this will always be the last part)

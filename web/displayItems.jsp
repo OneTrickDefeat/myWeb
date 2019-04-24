@@ -18,11 +18,15 @@
     
 
     <body>
-        <%            
-            Integer cID = Integer.parseInt(request.getParameter("cID"));
+        <%  Integer cID = 1;
+            try {
+                
+            cID = Integer.parseInt(request.getParameter("cID"));
             //String name = request.getParameter("name");
 
-
+            } catch(NumberFormatException c){
+                cID = 1;
+            }
             ProductDao catDao2 = new ProductDao("furniturestore");
             List<Product> prods = catDao2.findProductsByCategoryId(cID);
             //Product p = catDao.findProductsByCategoryId(cID);
