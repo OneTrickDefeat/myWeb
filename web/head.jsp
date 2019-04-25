@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="css/cart.css">
         <link rel="stylesheet" href="css/sidebar.css">
         <link rel="stylesheet" href="css/topnav.css">
+        <link rel="stylesheet" href="css/userProfile.css">
 
 
 <!--        //import the jQuery library-->

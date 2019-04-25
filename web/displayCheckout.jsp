@@ -176,27 +176,27 @@
             container: '#dropin-container',
 
             //STYLING
-            //            card: {
-            //        overrides: {
-            //          styles: {
-            //            input: {
-            //              color: 'blue',
-            //              'font-size': '18px'
-            //            },
-            //            '.number': {
-            //              'font-family': 'monospace',
-            //               placeholder: 'Card Number'
-            //            },
-            //            '.invalid': {
-            //              color: 'red'
-            //            },
-            //            '.expirationDate': {
-            //                color:'blue',
-            //                'font-size': '18px'
-            //            }
-            //          }
-            //        }
-            //      },
+                        card: {
+                    overrides: {
+                      styles: {
+                        input: {
+                          color: 'blue',
+                          'font-size': '18px'
+                        },
+                        '.number': {
+                          'font-family': 'monospace',
+                           placeholder: 'Card Number'
+                        },
+                        '.invalid': {
+                          color: 'red'
+                        },
+                        '.expirationDate': {
+                            color:'blue',
+                            'font-size': '18px'
+                        }
+                      }
+                    }
+                  },
             //      
 //            set up paypal
             paypal: {
