@@ -13,8 +13,8 @@ import Business.Address;
  */
 public interface AddressDaoInterface {
     
-    public Address findAddressByNoLineTown(int houseNumber, String line1, String town);
-    
+    public Address findAddressByNoLineTown(int houseNumber, String line1, String town);  
     public boolean addNewAddress(Address newAddress);
+    public boolean deleteAddress(int houseNo, String town, String county);
     
 }

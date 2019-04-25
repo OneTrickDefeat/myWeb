@@ -72,19 +72,19 @@ public class CartDao extends Dao implements CartDaoInterface {
         boolean confirmation = false;
         
         //check does cart already exist with related email
-        if (findCartByEmail(email) == null) {
+        if (findCartByEmail(email) == null && email != null && email.equals("")) {
             try {
                 con = this.getConnection();
                 String query = "INSERT INTO cart (email) VALUES (?)";
                 ps = con.prepareStatement(query);
                 ps.setString(1, email);
                 // Because this is CHANGING the database, use the executeUpdate method
-                ps.executeUpdate();
+                int rowsInserted = ps.executeUpdate();
 
                 // Find out what the id generated for this entry was
-                ResultSet generatedKeys = ps.getGeneratedKeys();
+                //ResultSet generatedKeys = ps.getGeneratedKeys();
 
-                if (generatedKeys.next()) {
+                if (rowsInserted == 1) {
                     confirmation = true;
                 }
             } catch (SQLException e) {
@@ -104,6 +104,41 @@ public class CartDao extends Dao implements CartDaoInterface {
             }
         }
         return confirmation;
+    }
+    
+    @Override
+    public boolean deleteCart(String email){
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean removed = false;
+        try {
+            con = this.getConnection();
+            
+            String query = "DELETE FROM cart WHERE email = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            
+            int rowsAffected = ps.executeUpdate();
+            if(rowsAffected != 0){
+                removed = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the deleteCart method:");
+            System.err.println("\t" + e.getMessage());
+            removed = false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the deleteCart method:\n" + e.getMessage());
+            }
+        }
+        return removed;
     }
     
     public static void main(String[] args) {

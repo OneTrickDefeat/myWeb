@@ -29,6 +29,12 @@ public class Address {
         this.postcode = postcode;
     }
 
+    public Address(int houseNo, String streetLine1, String town) {
+        this.houseNo = houseNo;
+        this.streetLine1 = streetLine1;
+        this.town = town;
+    }
+    
     public int getAddressId() {
         return addressId;
     }

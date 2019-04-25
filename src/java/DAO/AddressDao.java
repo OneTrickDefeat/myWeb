@@ -206,4 +206,42 @@ public class AddressDao extends Dao implements AddressDaoInterface {
         return foundAddress;
     }
 
+    @Override
+    public boolean deleteAddress(int houseNo, String town, String county) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean removed = false;
+        try {
+            con = this.getConnection();
+
+            String query = "DELETE FROM address WHERE houseNo = ? AND town = ? "
+                    + "AND county = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, houseNo);
+            ps.setString(2, town);
+            ps.setString(3, county);
+            
+            int rowAffected = ps.executeUpdate();
+            if (rowAffected == 1){
+                removed = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the deleteAddress method:");
+            System.err.println("\t" + e.getMessage());
+            removed = false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the deleteAddress method:\n" + e.getMessage());
+            }
+        }
+        return removed;
+    }
+      
 }

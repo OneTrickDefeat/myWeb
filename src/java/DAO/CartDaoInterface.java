@@ -15,5 +15,5 @@ public interface CartDaoInterface {
     
     public Cart findCartByEmail(String email);
     public boolean createNewCart(String email);
-    
+    public boolean deleteCart(String email);
 }
