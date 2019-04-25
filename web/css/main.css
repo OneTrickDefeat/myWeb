@@ -24,6 +24,11 @@
 nav {
     font-family: 'open sans';
 }
+
+#descripArea {
+    height: auto;
+}
+
 #descrip{
     text-align: justify;
 }

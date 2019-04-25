@@ -79,7 +79,9 @@ public class CommandFactory {
                 case "completeTransaction":
                     c = new completeTransaction();
                     break;
-                    
+                case "changeCategory":
+                    c = new ChangeCategoryCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

@@ -83,7 +83,7 @@
                                 <li><a href="addCategory.jsp"><%=dataBundle.getString("admin_addCategory")%></a></li>
                                 <li><a href="deleteCategory.jsp"><%=dataBundle.getString("admin_deleteCategory")%></a></li>
                                 <li><a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a></li>
-                                <li><a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a></li>
+                                <li><a href="updateProducts.jsp"><%=dataBundle.getString("admin_updateProduct")%></a></li>
                                     <% }
 
                                     %>
