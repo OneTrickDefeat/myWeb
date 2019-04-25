@@ -114,7 +114,7 @@
                             <td><a href="index.jsp" class="btn btn-warning"><i class="fa fa-angle-left"></i> <%=dataBundle.getString("cart_continue")%></a></td>
                             <td colspan="1" class="hidden-xs"><strong><%=dataBundle.getString("cart_total")%></strong></td>
                             <td class="hidden-xs text-center"><strong><%=(formatter.format(total))%></strong></td>
-                            <td><a href="displayCheckout.jsp" class="btn btn-success btn-block"><%=dataBundle.getString("cart_continue")%> <i class="fa fa-angle-right"></i></a></td>
+                            <td><a href="displayCheckout.jsp" class="btn btn-success btn-block"><%=dataBundle.getString("cart_checkout")%> <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot>
                 </table>

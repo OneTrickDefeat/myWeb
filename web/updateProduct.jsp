@@ -44,9 +44,15 @@
                             <label for="colour">Quantity</label>
                             <input  class="form-control" name="quantity" placeholder="<%=product.getStockQuantity()%>" required size=6 type="number" >
                         </div>
+                        <div class="form-group">
+                            <label for="Image">Image</label>
+                            <input  class="form-control" name="Image"  type="file" >
+                        </div>
+                        <!--delete between these lines-->
                         <tr>
                             <td> Product Image  : </td><td>  </td> 
                         </tr>
+                        <!--delete between these lines-->
                         <div class="form-group">
                             <label for="colour">Description</label><br>
                             <textarea id="descripArea" type="text"  class="form-control" name="description" placeholder="<%=product.getDescription()%>"></textarea> 
