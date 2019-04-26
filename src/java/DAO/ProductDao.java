@@ -262,4 +262,58 @@ public class ProductDao extends Dao implements ProductDaoInterface {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean updateProductDetails(int pId, String pName, String pColour, double price, int pQuantity, String pDescription) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean confirmation = false;
+        
+        try {
+            con = this.getConnection();
+            
+            String query = "SELECT * FROM product WHERE productId = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, pId);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                String queryUpdate = "UPDATE product SET "
+                        + "name = ? "
+                        + "colour = ? "
+                        + "price = ? "
+                        + "stockQuantity = ? "
+                        + "description = ? "
+                        + "WHERE productId = ?";
+                ps = con.prepareStatement(queryUpdate);
+                ps.setString(1, pName);
+                ps.setString(2, pColour);
+                ps.setDouble(3, price);
+                ps.setInt(4, pQuantity);
+                ps.setString(5, pDescription);
+                ps.setInt(6, pId);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 0) {
+                        confirmation = true;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the updateProductDetails method:");
+            System.err.println("\t" + e.getMessage());
+            confirmation = false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the updateProductDetails method:\n" + e.getMessage());
+            }
+        }
+        return confirmation;
+    }
+
 }

@@ -82,6 +82,9 @@ public class CommandFactory {
                 case "changeCategory":
                     c = new ChangeCategoryCommand();
                     break;
+                case "updateProduct":
+                    c = new UpdateProductCommand();
+                    break;
                 default:
                     // Do all logic for incorrect action processing 
                     c = new NoActionSuppliedCommand();

@@ -33,6 +33,7 @@ public interface ProductDaoInterface {
     public void increaseProductQuantity();
     
     public List<Product> findProductsByCategoryId(int cID);
-
+    public boolean updateProductDetails(int pId, String pName, String pColour, double price, 
+        int pQuantity, String pDescription);
     
 }

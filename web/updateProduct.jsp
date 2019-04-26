@@ -27,7 +27,10 @@
                 </div>
                 <form action="TheServlet" method="post">
                     <table>
-
+                        <div class="form-group">
+                            <label for="productName">Product ID</label>
+                            <input type="number" class="form-control" value="<%=product.getProductId()%>" name="productId" placeholder="<%=product.getProductId()%>" readonly>
+                        </div>
                         <div class="form-group">
                             <label for="productName">Product Name</label>
                             <input type="text" class="form-control" name="productName" placeholder="<%=product.getName()%>" required size=40>
@@ -38,21 +41,16 @@
                         </div>
                         <div class="form-group">
                             <label for="colour">Product Price</label>
-                            <input type="number" class="form-control" name="price" placeholder="<%=product.getPrice()%>" required step="0.01" min="0">
+                            <input type="number" class="form-control" name="price" placeholder="<%=product.getPrice()%> Have to be a number" required step="0.01" min="0">
                         </div>
                         <div class="form-group">
                             <label for="colour">Quantity</label>
-                            <input  class="form-control" name="quantity" placeholder="<%=product.getStockQuantity()%>" required size=6 type="number" >
+                            <input  class="form-control" name="quantity" placeholder="<%=product.getStockQuantity()%> Have to be a whole" required size=6 type="number" >
                         </div>
                         <div class="form-group">
                             <label for="Image">Image</label>
                             <input  class="form-control" name="Image"  type="file" >
                         </div>
-                        <!--delete between these lines-->
-                        <tr>
-                            <td> Product Image  : </td><td>  </td> 
-                        </tr>
-                        <!--delete between these lines-->
                         <div class="form-group">
                             <label for="colour">Description</label><br>
                             <textarea id="descripArea" type="text"  class="form-control" name="description" placeholder="<%=product.getDescription()%>"></textarea> 
@@ -60,11 +58,12 @@
                         
                     </table>
                     <div class="col-md-12 text-center"> 
-                        <button  type="submit" class="btn btn-primary" value="Add product">Add product</button><br><br>
+                        <button  type="submit" class="btn btn-primary" value="Update product">Add product</button><br><br>
                     </div>
 
                     <!-- Include a hidden field to identify what the user wants to do -->
-                    <input type="hidden" name ="action" value="addProduct" />
+                    
+                    <input type="hidden" name ="action" value="updateProduct" />
                 </form>
             </div>
 

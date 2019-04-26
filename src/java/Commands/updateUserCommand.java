@@ -28,7 +28,8 @@ public class updateUserCommand implements Command {
         String first = request.getParameter("firstname");
         String last = request.getParameter("lastname");
 
-        if (email != null && !email.equals("") && password != null && !password.equals("") && first != null && !first.equals("")) {
+        if (email != null && !email.equals("") && password != null && 
+                !password.equals("") && first != null && !first.equals("")) {
             UserDao uDao = new UserDao("furniturestore");
             User toUpdate = new User(email, password, first, last);
             boolean updated = uDao.updateUser(toUpdate);
