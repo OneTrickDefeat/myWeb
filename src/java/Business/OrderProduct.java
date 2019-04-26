@@ -5,29 +5,32 @@
  */
 package Business;
 
+import java.util.Objects;
+
 /**
  *
  * @author D00197085
  */
 public class OrderProduct {
 
-    private int productId, orderId, quantity;
+    String transactionId;
+    private int orderId, quantity;
 
     public OrderProduct() {
     }
 
-    public OrderProduct(int productId, int orderId, int quantity) {
-        this.productId = productId;
+    public OrderProduct(String transactionId, int orderId, int quantity) {
+        this.transactionId = transactionId;
         this.orderId = orderId;
         this.quantity = quantity;
     }
 
-    public int getProductId() {
-        return productId;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public int getOrderId() {
@@ -48,9 +51,9 @@ public class OrderProduct {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.productId;
-        hash = 79 * hash + this.orderId;
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.transactionId);
+        hash = 97 * hash + this.orderId;
         return hash;
     }
 
@@ -66,10 +69,10 @@ public class OrderProduct {
             return false;
         }
         final OrderProduct other = (OrderProduct) obj;
-        if (this.productId != other.productId) {
+        if (this.orderId != other.orderId) {
             return false;
         }
-        if (this.orderId != other.orderId) {
+        if (!Objects.equals(this.transactionId, other.transactionId)) {
             return false;
         }
         return true;
@@ -77,6 +80,8 @@ public class OrderProduct {
 
     @Override
     public String toString() {
-        return "OrderProduct{" + "productId=" + productId + ", orderId=" + orderId + ", quantity=" + quantity + '}';
-    }    
+        return "OrderProduct{" + "transactionId=" + transactionId + ", orderId=" + orderId + ", quantity=" + quantity + '}';
+    }
+
+    
 }

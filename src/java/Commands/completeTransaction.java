@@ -5,11 +5,19 @@
  */
 package Commands;
 
+import Business.Cart;
+import Business.ProductCart;
+import Business.User;
+import DAO.OrderProductDao;
+import DAO.OrdersDao;
+import DAO.ProductCartDao;
+import DAO.ProductDao;
 import com.braintreegateway.BraintreeGateway;
 import com.braintreegateway.Result;
 import com.braintreegateway.Transaction;
 import com.braintreegateway.TransactionRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author Tom
  */
 public class completeTransaction implements Command {
+
     String forwardToJsp = null;
 
     private BraintreeGateway btGateway;
@@ -32,7 +41,7 @@ public class completeTransaction implements Command {
         String nonceFromTheClient = request.getParameter("nonce");
         //get price from client
         String price = request.getParameter("total");
- //     make a new transaction passing the price and nonce, submit for settlement so money is taken straight away
+        //     make a new transaction passing the price and nonce, submit for settlement so money is taken straight away
         TransactionRequest transaction = new TransactionRequest()
                 .amount(new BigDecimal(price))
                 .paymentMethodNonce(nonceFromTheClient)
@@ -50,16 +59,65 @@ public class completeTransaction implements Command {
         Transaction trans = result.getTarget();
         //if it was a success
         if (result.isSuccess()) {
+
+            //establish all required dao connections
+            ProductCartDao pCartDao = new ProductCartDao("furniturestore");
+            OrdersDao orderDao = new OrdersDao("furniturestore");
+            OrderProductDao orderProductDao = new OrderProductDao("furniturestore");
+            Cart loggedInUserCart = (Cart) session.getAttribute("loggedInUserCart");
             
-            String firstName= request.getParameter("firstName");
-            //put transaction information into the session , in this case the id 
-            session.setAttribute("name", firstName);
-            session.setAttribute("transactionID", trans.getId());
-            forwardToJsp = "success.jsp";
-         //if it fails   
+            //extract user cardID
+            int cartID = loggedInUserCart.getCartID();
+
+            //get user email address
+            User loggedInUser = (User) session.getAttribute("loggedInUser");
+            String userEmailAddress = loggedInUser.getUsername();
+
+            //getting list of products in user cart
+            ArrayList<ProductCart> cartProducts = (ArrayList<ProductCart>) pCartDao.getItemsByCartId(cartID);
+
+            //check does order exist for this transaction number and email
+            boolean doesOrderExist = orderDao.doesOrderExist(userEmailAddress,
+                    trans.getId());
+
+            //if record does not exist
+            if (!doesOrderExist) {
+                //create a new record inside orders table, with email and            
+                //transactionId number
+                boolean confirmation = orderDao.createNewOrder(userEmailAddress,
+                        trans.getId());
+                if (confirmation) {
+                    //store it to orders and orderproduct table
+                    for (int i = 0; i < cartProducts.size(); i++) {
+                        int productID = cartProducts.get(i).getProductId();
+                        int productQuantity = cartProducts.get(i).getQuantity();
+                        orderProductDao.addNewRecord(productID, trans.getId(), productQuantity);
+                        
+                    }
+                    pCartDao.removeProductCartByCartId(cartID);
+                    forwardToJsp = "success.jsp";
+                } else {
+                    // The OrderProduct couldn't be added to the database
+                    // Send the user to the error page and inform them of this
+                    String errorMessage = "ProductOrder couldn't be added to the database at this time"
+                            + "Please try again.<br/>";
+                    session = request.getSession();
+                    session.setAttribute("errorMessage", errorMessage);
+                    forwardToJsp = "error.jsp";
+                }
+                //if record does exist for this order inside Orders table
+            } else {
+                //store it to orders and orderproduct table
+                for (int i = 0; i < cartProducts.size(); i++) {
+                    int productID = cartProducts.get(i).getProductId();
+                    int productQuantity = cartProducts.get(i).getQuantity();
+                    orderProductDao.addNewRecord(productID, trans.getId(), productQuantity);
+                }
+                pCartDao.removeProductCartByCartId(cartID);
+                forwardToJsp = "success.jsp";
+            }
         } else {
             forwardToJsp = "error.jsp";
-           
         }
         return forwardToJsp;
     }

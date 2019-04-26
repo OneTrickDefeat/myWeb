@@ -14,30 +14,24 @@ import java.util.Objects;
  */
 public class Orders {
     
-    private int orderId;
+    private String transactionId;
     private Date date;
     private String email;
 
     public Orders() {
     }
 
-    public Orders(int orderId, Date date, String email) {
-        this.orderId = orderId;
-        this.date = date;
+    public Orders(String transactionId, String email) {
+        this.transactionId = transactionId;
         this.email = email;
     }
 
-    public Orders(Date date, String email) {
-        this.date = date;
-        this.email = email;
+    public String getTransactionId() {
+        return transactionId;
     }
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     public Date getDate() {
@@ -59,8 +53,7 @@ public class Orders {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.orderId;
-        hash = 67 * hash + Objects.hashCode(this.email);
+        hash = 59 * hash + Objects.hashCode(this.transactionId);
         return hash;
     }
 
@@ -76,10 +69,7 @@ public class Orders {
             return false;
         }
         final Orders other = (Orders) obj;
-        if (this.orderId != other.orderId) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
+        if (!Objects.equals(this.transactionId, other.transactionId)) {
             return false;
         }
         return true;
@@ -87,8 +77,6 @@ public class Orders {
 
     @Override
     public String toString() {
-        return "Orders{" + "orderId=" + orderId + ", date=" + date + ", email=" + email + '}';
-    }
-    
-    
+        return "Orders{" + "transactionId=" + transactionId + ", date=" + date + ", email=" + email + '}';
+    } 
 }

@@ -6,6 +6,7 @@
 package Commands;
 
 import Business.User;
+import DAO.CartDao;
 import DAO.UserDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,9 @@ public class RegisterCommand implements Command{
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("loggedInUser", u);
+                //create cart here
+                CartDao cDao = new CartDao("furniturestore");
+                cDao.createNewCart(email);
                 
                 forwardToJsp = "index.jsp";
                 

@@ -25,5 +25,7 @@ public interface ProductCartDaoInterface {
     public boolean updateQuantity(int cartID, int productID, int quantity);
     
     public ProductCart getProductByCartIdAndProductId(int productID, int cartID);
+    
+    public void removeProductCartByCartId(int cartId);
 }
  

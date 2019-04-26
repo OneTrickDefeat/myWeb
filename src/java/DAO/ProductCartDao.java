@@ -340,4 +340,36 @@ public class ProductCartDao extends Dao implements ProductCartDaoInterface {
         return updated;
     }
 
+    @Override
+    public void removeProductCartByCartId(int cartId) {
+        
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+
+            con = this.getConnection();
+            String query = "DELETE FROM productcart "
+                    + "WHERE cartID = ? ";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, cartId);
+            ps.executeUpdate();
+            
+
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the removeProductCartByCartId method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the removeProductCartByCartId method:\n" + e.getMessage());
+            }
+        }
+    }
+
 }
