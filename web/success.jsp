@@ -21,12 +21,15 @@
         <%
             // Get the error message variable out of the session
             String transId = (String) session.getAttribute("transactionID");
+            String name = (String)session.getAttribute("name");
 
             if (transId != null) {
                 // Display the message
         %>
 
         <div><h3>your transaction ID is :  <%=transId%> </h3></div>
+        <h3>the name is : <%=name%> </h3>
+        
         <% } else {
 
         %>

@@ -50,7 +50,10 @@ public class completeTransaction implements Command {
         Transaction trans = result.getTarget();
         //if it was a success
         if (result.isSuccess()) {
+            
+            String firstName= request.getParameter("firstName");
             //put transaction information into the session , in this case the id 
+            session.setAttribute("name", firstName);
             session.setAttribute("transactionID", trans.getId());
             forwardToJsp = "success.jsp";
          //if it fails   
