@@ -25,31 +25,33 @@
             } catch (NumberFormatException c) {
                 cID = 1;
             }
-            
+
             List<Product> foundProducts = (List<Product>) session.getAttribute("foundProducts");
-            
+
             ProductDao catDao2 = new ProductDao("furniturestore");
             CategoryDao categoryDao = new CategoryDao("furniturestore");
             List<Product> prods = catDao2.findProductsByCategoryId(cID);
             String categoryName = "";
-            if(foundProducts != null){
-                categoryName = categoryDao.findCategoryNameByCategoryID 
-                    (foundProducts.get(1).getCatId());
+            if (foundProducts != null) {
+                categoryName = categoryDao.findCategoryNameByCategoryID(foundProducts.get(1).getCatId());
             } else {
                 categoryName = categoryDao.findCategoryNameByCategoryID(cID);
             }
         %>
+        <div class="container">
+            <form action="TheServlet" method="post">
+                <div class="form-group">
+                    <select class="col-md-12 text-center" name="categoryOption" onchange="this.form.submit()">
+                        <%                        for (int i = 0; i < catList.size(); i++) {%>
+                        <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
+                            }
+                        %>
 
-        <form action="TheServlet" method="post">
-            <select name="categoryOption" onchange="this.form.submit()">
-                <%                        for (int i = 0; i < catList.size(); i++) {%>
-                <option value="<%=catList.get(i).getCatId()%>"><%=catList.get(i).getCatName()%></option> <%
-                    }
-                %>
-            </select>
-            <input type="hidden" name="action" value="changeCategory"/>
-        </form>
-            
+                    </select>
+                </div>
+                <input type="hidden" name="action" value="changeCategory"/>
+            </form>
+        </div>           
         <%if (foundProducts != null) {
 
         %>
@@ -100,9 +102,15 @@
 
 
         <% } else {%>
+        <div class="col-md-12 text-center"> 
         <h2>Please select category, from drop down list above</h2>
+        </div>
         <%}%>
-        
-        <%@ include file = "footer.jsp" %>
+
+        <%@include file="chatwindow.jsp" %>
+            <br><br>
+            <div class="container">
+                <%@ include file = "footer.jsp" %>
+            </div>
     </body>
 </html>
