@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="css/sidebar.css">
         <link rel="stylesheet" href="css/topnav.css">
         <link rel="stylesheet" href="css/userProfile.css">
+        <link rel="stylesheet" href="css/contactAbout.css">
 
 
 <!--        //import the jQuery library-->

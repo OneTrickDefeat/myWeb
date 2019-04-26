@@ -33,7 +33,7 @@
                     <ul class="list">
                         <li><a href="aboutUs.jsp"><%=dataBundle.getString("footer_aboutUs")%></a></li>
                         <li><a href="contact.jsp"><%=dataBundle.getString("footer_Contact")%></a></li>
-                        <li><a href="#"><%=dataBundle.getString("footer_Terms")%></a></li>
+                        <li><a href="termsandconditions.jsp"><%=dataBundle.getString("footer_Terms")%></a></li>
                         <li><a href="#"><%=dataBundle.getString("footer_privacy")%></a></li>
                     </ul>
                 </div>
