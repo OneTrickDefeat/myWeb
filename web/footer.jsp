@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-3 footer-brand animated fadeInLeft">
                 <h2 id="logoFooter">Furniture Depot</h2>
-                <a href="index.jsp"><img src="img/logofooter.png" alt="logo"/><br><br></a>
+                <a href="index.jsp"><img src="img/newlogo.png" alt="logo"/><br><br></a>
                 <p id="copyright">© 2019 Furniture Depot, All Rights Reserved</p>
             </div>
             <div class="col-md-4 footer-nav animated fadeInUp">
