@@ -71,8 +71,6 @@ public class CartDao extends Dao implements CartDaoInterface {
         PreparedStatement ps = null;
         boolean confirmation = false;
         
-        //check does cart already exist with related email
-        if (findCartByEmail(email) == null && email != null && email.equals("")) {
             try {
                 con = this.getConnection();
                 String query = "INSERT INTO cart (email) VALUES (?)";
@@ -102,7 +100,7 @@ public class CartDao extends Dao implements CartDaoInterface {
                     System.err.println("A problem occurred when closing down the createNewCart method:\n" + e.getMessage());
                 }
             }
-        }
+//        }
         return confirmation;
     }
     
