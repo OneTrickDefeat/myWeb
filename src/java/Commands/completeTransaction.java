@@ -6,6 +6,7 @@
 package Commands;
 
 import Business.Cart;
+import Business.OrderProduct;
 import Business.ProductCart;
 import Business.User;
 import DAO.OrderProductDao;
@@ -18,6 +19,7 @@ import com.braintreegateway.Transaction;
 import com.braintreegateway.TransactionRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,8 +86,8 @@ public class completeTransaction implements Command {
             if (!doesOrderExist) {
                 //create a new record inside orders table, with email and            
                 //transactionId number
-                boolean confirmation = orderDao.createNewOrder(userEmailAddress,
-                        trans.getId());
+                boolean confirmation = orderDao.createNewOrder(trans.getId(), 
+                        userEmailAddress);
                 if (confirmation) {
                     //store it to orders and orderproduct table
                     for (int i = 0; i < cartProducts.size(); i++) {
@@ -95,6 +97,10 @@ public class completeTransaction implements Command {
                         
                     }
                     pCartDao.removeProductCartByCartId(cartID);
+                    List<OrderProduct> currentOrder = orderProductDao.getAllOrdersMacthingTransactionId(trans.getId());
+                    session = request.getSession();
+                    session.setAttribute("transactionID", trans.getId());
+                    session.setAttribute("currentOrder", currentOrder);
                     forwardToJsp = "success.jsp";
                 } else {
                     // The OrderProduct couldn't be added to the database
@@ -114,6 +120,8 @@ public class completeTransaction implements Command {
                     orderProductDao.addNewRecord(productID, trans.getId(), productQuantity);
                 }
                 pCartDao.removeProductCartByCartId(cartID);
+                session = request.getSession();
+                session.setAttribute("transactionID", trans.getId());
                 forwardToJsp = "success.jsp";
             }
         } else {

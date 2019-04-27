@@ -5,6 +5,9 @@
  */
 package DAO;
 
+import Business.OrderProduct;
+import java.util.List;
+
 /**
  *
  * @author Audrius
@@ -18,4 +21,7 @@ public interface OrderProductDaoInterface {
     //check does order exist inside OrderProduct table matching productId and 
     //transactionId
     public boolean findOrderByProductIdAndTransactionId(int productId, String transactionId);
+    
+    //get order list matching transactionId
+    public List<OrderProduct> getAllOrdersMacthingTransactionId(String transactionId);
 }

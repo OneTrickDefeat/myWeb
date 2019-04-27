@@ -14,14 +14,14 @@ import java.util.Objects;
 public class OrderProduct {
 
     String transactionId;
-    private int orderId, quantity;
+    private int productId, quantity;
 
     public OrderProduct() {
     }
 
-    public OrderProduct(String transactionId, int orderId, int quantity) {
+    public OrderProduct(String transactionId, int productId, int quantity) {
         this.transactionId = transactionId;
-        this.orderId = orderId;
+        this.productId = productId;
         this.quantity = quantity;
     }
 
@@ -33,12 +33,12 @@ public class OrderProduct {
         this.transactionId = transactionId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getproductId() {
+        return productId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setproductId(int orderId) {
+        this.productId = orderId;
     }
 
     public int getQuantity() {
@@ -53,7 +53,7 @@ public class OrderProduct {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.transactionId);
-        hash = 97 * hash + this.orderId;
+        hash = 97 * hash + this.productId;
         return hash;
     }
 
@@ -69,7 +69,7 @@ public class OrderProduct {
             return false;
         }
         final OrderProduct other = (OrderProduct) obj;
-        if (this.orderId != other.orderId) {
+        if (this.productId != other.productId) {
             return false;
         }
         if (!Objects.equals(this.transactionId, other.transactionId)) {
@@ -80,7 +80,7 @@ public class OrderProduct {
 
     @Override
     public String toString() {
-        return "OrderProduct{" + "transactionId=" + transactionId + ", orderId=" + orderId + ", quantity=" + quantity + '}';
+        return "OrderProduct{" + "transactionId=" + transactionId + ", orderId=" + productId + ", quantity=" + quantity + '}';
     }
 
     
