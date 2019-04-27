@@ -29,7 +29,28 @@
                     <input name="firstName" required size=20 type="text"  placeholder="First Name"/>
                     </tr>
                     <tr>
-                    <input name="lastName" size=40 type="text"  placeholder="Last Name"/> 
+                    <input name="lastName" required size=40 type="text"  placeholder="Last Name"/> 
+                    </tr>
+                    <tr>
+                    <input name="houseNo" required size=40 type="number" placeholder="House Number"/> 
+                    </tr>
+                    <tr>
+                    <input name="streetLine1" required size=40 type="text"  placeholder="Address Line 1"/> 
+                    </tr>
+                    <tr>
+                    <input name="streetLine2" required size=40 type="text"  placeholder="Address Line 2"/> 
+                    </tr>
+                    <tr>
+                    <input name="town" required size=40 type="text"  placeholder="Town/City"/> 
+                    </tr>
+                    <tr>
+                    <input name="county" required size=40 type="text"  placeholder="County"/> 
+                    </tr>
+                    <tr>
+                    <input name="postCode" required size=40 type="text"  placeholder="Post Code"/> 
+                    </tr>
+                    <tr>
+                    <input name="country" required size=40 type="text"  placeholder="Country"/> 
                     </tr>
 
                 </table>
