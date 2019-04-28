@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="DAO.ProductDao"%>
 <%@page import="Business.OrderProduct"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Business.Product"%>
@@ -20,6 +21,9 @@
     <body>
         <div class="container">
             <%ArrayList<OrderProduct> foundOrders = (ArrayList<OrderProduct>) session.getAttribute("foundOrders");
+            ProductDao productDao = new ProductDao("furniturestore");
+            Product prod = new Product();
+            
                 if (foundOrders != null) {
                     //deal with displaying
             %>
@@ -50,7 +54,7 @@
                         <tbody>
                             <tr>
                                 <th scope="row"><%=p.getTransactionId()%></th>
-                                <th scope="row"><%=p.getproductId()%></th>
+                                <th scope="row"><%=(%></th>
                                 <th scope="row"><%=p.getQuantity()%></th>
 
                             </tr>

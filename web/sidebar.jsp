@@ -23,7 +23,8 @@
             <a href="addProduct.jsp"><%=dataBundle.getString("admin_addProduct")%></a>
             <a href="updateProduct.jsp"><%=dataBundle.getString("admin_updateProduct")%></a>
             <a href="transactionSearch.jsp"><%=dataBundle.getString("admin_searchTransaction")%></a>
-            <% }%>
+            
+            <% } %>
             <a href="TheServlet?action=logout"><%=dataBundle.getString("index_LogOutMsg")%></a>
 
         </div>
