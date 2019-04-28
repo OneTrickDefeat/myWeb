@@ -6,6 +6,7 @@
 package DAO;
 
 import Business.Orders;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -102,6 +103,48 @@ public class OrdersDao extends Dao implements OrdersDaoInterface{
             }
         }
         return confirmation;
+    }
+
+    @Override
+    public Orders findOrdersByTransactionId(String trans) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Orders o = null;
+        try {
+            con = this.getConnection();
+
+            String query = "SELECT * FROM orders WHERE transactionId = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, trans);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                date productId = rs.getInt("productId");
+                String name = rs.getString("email");
+                
+
+                o = new Orders(productId, catId, quantity, name, colour, image, description, price);
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the findProductByProductName method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the findProductByProductName method:\n" + e.getMessage());
+            }
+        }
+        return p;     // p may be null   
     }
     
 }

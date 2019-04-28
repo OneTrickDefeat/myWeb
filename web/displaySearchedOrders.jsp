@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="Business.Orders"%>
+<%@page import="DAO.OrdersDao"%>
 <%@page import="DAO.ProductDao"%>
 <%@page import="Business.OrderProduct"%>
 <%@page import="java.util.ArrayList"%>
@@ -21,9 +23,11 @@
     <body>
         <div class="container">
             <%ArrayList<OrderProduct> foundOrders = (ArrayList<OrderProduct>) session.getAttribute("foundOrders");
-            ProductDao productDao = new ProductDao("furniturestore");
-            Product prod = new Product();
-            
+                ProductDao productDao = new ProductDao("furniturestore");
+                Product prod = new Product();
+                OrdersDao ordDao = new OrdersDao("furniturestore");
+                Orders ord = new Orders();
+
                 if (foundOrders != null) {
                     //deal with displaying
             %>
@@ -33,43 +37,51 @@
 
                 <hgroup class="mb20">
                     <h1><strong class="text-danger lead2">Search Results</strong></h1>
-                    <h2 class="lead"><strong class="text-danger"> <%=orderCount%> </strong> orders were found based on   <strong class="text-danger">Your transaction Id</strong></h2>								
+                    <h2 class="lead"><strong class="text-danger"> <%=orderCount%> </strong> results were found based on   <strong class="text-danger">Your transaction Id</strong></h2>								
                 </hgroup>
 
 
-                <section class="col-xs-12 col-sm-6 col-md-12">
-                    <%                // Loop to print out all of the rows
-                        for (OrderProduct p : foundOrders) {
-                    %>
+                <div class="col-xs-12 col-sm-6 col-md-12">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
+                    <div class="container">          
+                        <table class="table table-hover">
 
-                                <th scope="col">Transaction Id</th>
-                                <th scope="col">Product Id</th>
-                                <th scope="col">Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><%=p.getTransactionId()%></th>
-                                <th scope="row"><%=(%></th>
-                                <th scope="row"><%=p.getQuantity()%></th>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Transaction Id</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Product Id</th>
+                                    <th scope="col">Colour</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <%                // Loop to print out all of the rows
+                                for (OrderProduct p : foundOrders) {
+                                    prod = productDao.findProductByProductId(p.getproductId());
+                                    ord = 
+                            %>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><%=p.getTransactionId()%></th>
+                                    <th scope="row"><%=prod.getName()%></th>
+                                    <th scope="row"><%=prod.getProductId()%></th>
+                                    <th scope="row"><%=prod.getColour()%></th>
+                                    <th scope="row"><%=p.getQuantity()%></th>
+                                </tr>
 
-                            </tr>
+                            </tbody>
+                            <%
+                                    // Close the loop
+                                }
+                                // We have finished with the list of found products 
+                                // so now we can remove the value from the session
+                                //session.removeAttribute("foundProducts");
+                            %>
+                        </table>
+                    </div>
 
-                        </tbody>
-                    </table>
 
-                    <%
-                            // Close the loop
-                        }
-                        // We have finished with the list of found products 
-                        // so now we can remove the value from the session
-                        //session.removeAttribute("foundProducts");
-                    %>
-                </section>
+                </div>
             </div>
 
 

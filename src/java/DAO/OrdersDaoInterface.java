@@ -5,6 +5,8 @@
  */
 package DAO;
 
+import Business.Orders;
+
 /**
  *
  * @author Audrius
@@ -16,5 +18,8 @@ public interface OrdersDaoInterface {
     
     //create a new record with transactionId and email
     public boolean createNewOrder(String transactionId, String userEmailAddress);
+    
+    //find all orders by trans id
+    public Orders findOrdersByTransactionId(String trans);
     
 }
