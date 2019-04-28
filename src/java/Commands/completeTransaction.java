@@ -125,6 +125,10 @@ public class completeTransaction implements Command {
                 forwardToJsp = "success.jsp";
             }
         } else {
+            String errorMessage = "Transaction unsuccessful "
+                            + "Please try again.<br/>";
+                    session = request.getSession();
+                    session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";
         }
         return forwardToJsp;
