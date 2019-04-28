@@ -53,12 +53,14 @@
                                     <th scope="col">Product Id</th>
                                     <th scope="col">Colour</th>
                                     <th scope="col">Quantity</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Date</th>
                                 </tr>
                             </thead>
                             <%                // Loop to print out all of the rows
                                 for (OrderProduct p : foundOrders) {
                                     prod = productDao.findProductByProductId(p.getproductId());
-                                    ord = 
+                                    ord =  ordDao.findOrdersByTransactionId(p.getTransactionId());
                             %>
                             <tbody>
                                 <tr>
@@ -67,15 +69,14 @@
                                     <th scope="row"><%=prod.getProductId()%></th>
                                     <th scope="row"><%=prod.getColour()%></th>
                                     <th scope="row"><%=p.getQuantity()%></th>
+                                    <th scope="row"><%=ord.getEmail()%></th>
+                                    <th scope="row"><%=ord.getDate()%></th>
                                 </tr>
 
                             </tbody>
                             <%
                                     // Close the loop
                                 }
-                                // We have finished with the list of found products 
-                                // so now we can remove the value from the session
-                                //session.removeAttribute("foundProducts");
                             %>
                         </table>
                     </div>

@@ -8,6 +8,7 @@ package DAO;
 import Business.Orders;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -120,14 +121,14 @@ public class OrdersDao extends Dao implements OrdersDaoInterface{
 
             rs = ps.executeQuery();
             if (rs.next()) {
-                date productId = rs.getInt("productId");
+                Date date = rs.getDate("date");
                 String name = rs.getString("email");
                 
 
-                o = new Orders(productId, catId, quantity, name, colour, image, description, price);
+                o = new Orders(date, name);
             }
         } catch (SQLException e) {
-            System.err.println("\tA problem occurred during the findProductByProductName method:");
+            System.err.println("\tA problem occurred during the findOrdersByTransactionId method:");
             System.err.println("\t" + e.getMessage());
         } finally {
             try {
@@ -141,10 +142,10 @@ public class OrdersDao extends Dao implements OrdersDaoInterface{
                     freeConnection(con);
                 }
             } catch (SQLException e) {
-                System.err.println("A problem occurred when closing down the findProductByProductName method:\n" + e.getMessage());
+                System.err.println("A problem occurred when closing down the findOrdersByTransactionId method:\n" + e.getMessage());
             }
         }
-        return p;     // p may be null   
+        return o;     // o may be null   
     }
     
 }

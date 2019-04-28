@@ -21,6 +21,13 @@ public class Orders {
     public Orders() {
     }
 
+    public Orders(Date date, String email) {
+        this.date = date;
+        this.email = email;
+    }
+    
+    
+
     public Orders(String transactionId, String email) {
         this.transactionId = transactionId;
         this.email = email;
