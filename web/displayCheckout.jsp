@@ -73,6 +73,7 @@
                             //after comma, formats that to have number no longer
                             //that two decimal places and parses back to double
                             double sub = Double.parseDouble(formatter.format(product.getPrice() * p.getQuantity()));
+                            //some text
                         %>
                         <td data-th="Subtotal" class="text-center"><%=sub%></td>
                         <td data-th="Subtotal" class="text-center"><%=p.getQuantity()%></td>
