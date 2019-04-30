@@ -168,6 +168,7 @@
     <script>
 //      Reference to submit button
         var button1 = document.querySelector('#submit_button');
+        
 
 //        initiates the drop in flow
         braintree.dropin.create({
@@ -255,7 +256,7 @@
                         document.getElementById("submit_button").disabled = true;
 
                     } else {
-                        dropinInstance.clearSelectedPaymentMethod();
+                        alert("Payment failed, please try again");
                     }
 
                 });

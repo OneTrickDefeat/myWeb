@@ -41,7 +41,7 @@
                 </hgroup>
 
 
-                <div class="col-xs-12 col-sm-6 col-md-12">
+             
 
                     <div class="container">          
                         <table class="table table-hover">
@@ -82,7 +82,7 @@
                     </div>
 
 
-                </div>
+               
             </div>
 
 

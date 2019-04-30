@@ -26,6 +26,7 @@
                 int cartID = loggedInUserCart.getCartID();
                 //getting list of products in user cart
                 ArrayList<ProductCart> cartProducts = (ArrayList<ProductCart>) pCartDao.getItemsByCartId(cartID);
+                
 
                 NumberFormat formatter = new DecimalFormat("#0.00");
                 

@@ -44,12 +44,28 @@ public class completeTransaction implements Command {
         //get price from client
         String price = request.getParameter("total");
         //     make a new transaction passing the price and nonce, submit for settlement so money is taken straight away
+        
+        //Nonces to ue for testing ; replace nonceFromTheClient with one of these values.
+        //valid :
+        //fake-valid-nonce : A valid nonce that can be used to create a transaction
+        //fake-valid-visa-nonce : A nonce representing a valid Visa card request
+        //fake-valid-mastercard-nonce : A nonce representing a valid Mastercard request
+        //fake-valid-amex-nonce : A nonce representing a valid American Express card request
+        
+        //invalid :
+        //fake-processor-declined-visa-nonce : A nonce representing a request for a Visa card that was declined by the processor
+        //fake-processor-declined-mastercard-nonce : A nonce representing a request for a Mastercard that was declined by the processor
+        //fake-processor-declined-amex-nonce : A nonce representing a request for a American Express card that was declined by the processor
+        //fake-processor-declined-discover-nonce : A nonce representing a request for a Discover card that was declined by the processor
+        
+        
         TransactionRequest transaction = new TransactionRequest()
                 .amount(new BigDecimal(price))
                 .paymentMethodNonce(nonceFromTheClient)
                 .options()
                 .submitForSettlement(true)
                 .done();
+
         //varify the 3dsecure(security question posed by bank ) was done 
         transaction.options().threeDSecure().required(true).done();
 
