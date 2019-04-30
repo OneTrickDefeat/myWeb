@@ -55,6 +55,8 @@
                         <%  double total = 0;
                             int idForContinue = 0;
 
+                                DecimalFormat df = new DecimalFormat();
+                                df.setMaximumFractionDigits(2);
                             //going through the list of user product cart                      
                             for (ProductCart p : cartProducts) {
 
@@ -78,7 +80,7 @@
                             <%
                                 double sub = product.getPrice() * p.getQuantity();
                             %>
-                            <td data-th="Subtotal" class="text-center"><%=sub%></td>
+                            <td data-th="Subtotal" class="text-center"><%=formatter.format(sub)%></td>
                             <%
                                 total = total + sub;
                             %>
