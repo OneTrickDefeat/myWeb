@@ -34,7 +34,7 @@ public class CommandFactory {
                     break;
                 // Deal with where the client wants to change account details   
                 case "updateUser":
-                    c = new updateUserCommand();
+                    c = new UpdateUserCommand();
                     break;
                 case "searchProduct":
                     c = new SearchProductCommand();
@@ -56,7 +56,7 @@ public class CommandFactory {
                     c = new AddProductCommand();
                     break;
                 case "updatePassword":
-                    c = new updatePasswordCommand();
+                    c = new UpdatePasswordCommand();
                     break;
                 case "addToCart":
                     c = new AddToCartCommand();
@@ -77,7 +77,7 @@ public class CommandFactory {
                     c = new GenerateClientToken();
                     break;
                 case "completeTransaction":
-                    c = new completeTransaction();
+                    c = new CompleteTransaction();
                     break;
                 case "changeCategory":
                     c = new ChangeCategoryCommand();
