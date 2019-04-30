@@ -16,5 +16,6 @@ public interface UserAddressDaoInterface {
     public UserAddress retrieveDefaultUseraddress(String email);
     public boolean addNewAddress(int addressID, String email);
     public UserAddress findAddressByEmailAndID(int addressID, String email);
+    public boolean changeDefaultAddress(int addressID, String email);
     
 }

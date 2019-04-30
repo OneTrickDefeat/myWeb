@@ -5,7 +5,10 @@
  */
 package Commands;
 
+import Business.Address;
 import Business.User;
+import DAO.AddressDao;
+import DAO.UserAddressDao;
 import DAO.UserDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +28,17 @@ public class updateUserCommand implements Command {
         
         String email = loggedInUser.getUsername();
         String password = request.getParameter("password");
-        String first = request.getParameter("firstname");
-        String last = request.getParameter("lastname");
+        String first = request.getParameter("firstName");
+        String last = request.getParameter("lastName");
+        int houseNo = Integer.parseInt(request.getParameter("houseNo"));
+        String streetLine1 = request.getParameter("streetLine1");
+        String streetLine2 = request.getParameter("streetLine2");
+        String town = request.getParameter("town");
+        String county = request.getParameter("county");
+        String postCode = request.getParameter("postCode");
+        String country = request.getParameter("country");
+        Address newAddress = new Address(houseNo, streetLine1, streetLine2, 
+            town, county, country, postCode);
 
         if (email != null && !email.equals("") && password != null && 
                 !password.equals("") && first != null && !first.equals("")) {
@@ -34,6 +46,41 @@ public class updateUserCommand implements Command {
             User toUpdate = new User(email, password, first, last);
             boolean updated = uDao.updateUser(toUpdate);
 
+            //1.check does new addres exist inside address table
+            //establish connection to AddressDao and create refference to Address class
+            AddressDao aDao = new AddressDao("furniturestore");
+            Address oldAddress = aDao.findAddressByNoLineTown(houseNo, streetLine1, town);
+            //establish connection to UserAddress table
+            UserAddressDao uAddressDao = new UserAddressDao("furniturestore");
+            //2.if it does not exist create new record inside address table
+            //check is oldAddress null or not           
+            if(oldAddress == null){
+                boolean addAddressConfirmation = aDao.addNewAddress(newAddress);
+                //if new record was created
+                if(addAddressConfirmation){
+                    //3.change default address for current user to false
+                    uAddressDao.updateDefaultUserAddress(email);
+                    //get new added address id
+                    int newAddressId = aDao.findAddressId(houseNo, streetLine1, town);
+                    Address updatedAddress = aDao.findAddressByID(newAddressId);
+                    //4.bind new address to the user
+                    uAddressDao.addNewAddress(newAddressId, email);
+                    //store updated address to session
+                    session = request.getSession();
+                    session.setAttribute("loggedInUserAddress", updatedAddress);
+                }
+            } else {
+                //5.if address exist change deafult address for current user to false
+                uAddressDao.updateDefaultUserAddress(email);
+                //get new added address id
+                int oldAddressId = aDao.findAddressId(houseNo, streetLine1, town);               
+                //6.bind address to the user
+                uAddressDao.changeDefaultAddress(oldAddressId, email);
+                //store updated address to session
+                session = request.getSession();
+                session.setAttribute("loggedInUserAddress", oldAddress);
+            }
+ 
             if (updated != false) {
                 // Registration was successful, log the user in!
                 User u = uDao.findUserByEmailPassword(email, password);

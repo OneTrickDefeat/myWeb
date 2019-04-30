@@ -167,6 +167,40 @@ public class UserAddressDao extends Dao implements UserAddressDaoInterface{
             }
         }
         return confirmation;
+    }   
+
+    @Override
+    public boolean changeDefaultAddress(int addressID, String email) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean confirmation = false;
+        
+        try {
+            con = this.getConnection();
+            String query = "UPDATE useraddress SET defaultAddress = true "
+                    + "WHERE email = ? AND addressId = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setInt(2, addressID);
+            int updateCount = ps.executeUpdate();
+            if(updateCount == 1){
+                confirmation = true;
+            }
+        } catch (SQLException e) {
+            System.err.println("\tA problem occurred during the updatedefaultUserAddress method:");
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    freeConnection(con);
+                }
+            } catch (SQLException e) {
+                System.err.println("A problem occurred when closing down the updatedefaultUserAddress method:\n" + e.getMessage());
+            }
+        }
+        return confirmation;
     }
-    
 }
