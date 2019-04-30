@@ -49,7 +49,7 @@
 
                     <%
                         int idForContinue = 0;
-
+                        formatter = new DecimalFormat("#0.00");
                         //going through the list of user product cart                      
                         for (ProductCart p : cartProducts) {
 
@@ -69,7 +69,10 @@
                         <td data-th="Price" id = "Price">€<%=product.getPrice()%></td>
 
                         <%
-                            double sub = product.getPrice() * p.getQuantity();
+                            //it takes value wich have multiple decimal places 
+                            //after comma, formats that to have number no longer
+                            //that two decimal places and parses back to double
+                            double sub = Double.parseDouble(formatter.format(product.getPrice() * p.getQuantity()));
                         %>
                         <td data-th="Subtotal" class="text-center"><%=sub%></td>
                         <td data-th="Subtotal" class="text-center"><%=p.getQuantity()%></td>
