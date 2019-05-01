@@ -82,7 +82,7 @@
                             %>
                             <td data-th="Subtotal" class="text-center"><%=formatter.format(sub)%></td>
                             <%
-                                formatter.format(total = total + sub);
+                               total = formatter.format(total = total + sub);
                             %>
 
                             <td class="actions" data-th="">
